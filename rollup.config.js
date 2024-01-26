@@ -1,8 +1,19 @@
+/** @type {import('rollup').RollupOptions} */
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import packageJson from './package.json' assert { type: 'json' };
+import alias from '@rollup/plugin-alias';
+import cleaner from 'rollup-plugin-cleaner';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { babel } from '@rollup/plugin-babel';
+import { terser } from 'rollup-plugin-terser';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default [
   {
@@ -19,7 +30,28 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' })],
+    plugins: [
+      peerDepsExternal(),
+      alias({
+        entries: [{ find: 'src', replacement: path.resolve(__dirname, './src') }],
+      }),
+      resolve(),
+      cleaner({
+        targets: ['./dist/'],
+      }),
+      commonjs(),
+      babel({ babelHelpers: 'bundled' }),
+      typescript({
+        tsconfig: './tsconfig.json',
+        exclude: ['./**/*.stories.*', './**/*.test.*'],
+        compilerOptions: {
+          declaration: true,
+          declarationDir: 'types',
+          declarationMap: true,
+        },
+      }),
+      terser(),
+    ],
   },
   {
     input: 'dist/esm/types/index.d.ts',

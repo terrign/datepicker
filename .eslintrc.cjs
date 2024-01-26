@@ -32,5 +32,13 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ['/*.css', '*.eslintrc.cjs', '*.config.cjs', '*.config.ts', '*.config.js', '/dist'],
+  ignorePatterns: [
+    '/*.css',
+    '*.eslintrc.cjs',
+    '*.config.cjs',
+    '*.config.ts',
+    '*.config.js',
+    '/dist',
+    '/src/**/*.stories.tsx',
+  ],
 };
