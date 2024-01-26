@@ -9,6 +9,9 @@
     "name": "terrign",
     "email": "vajipi@gmail.com"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/terrign"
+  },
   "license": "UNLICENSED",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,jsx,tsx}\" --fix",

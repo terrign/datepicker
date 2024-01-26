@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - develop
+  workflow_run:
+    workflows: [Lint, Unit Tests]
+    types:
+      - completed
 
 jobs:
   deploy:
