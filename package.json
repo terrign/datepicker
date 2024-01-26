@@ -1,8 +1,14 @@
 {
   "name": "@terrign/datepicker",
   "version": "0.0.1",
-  "repository": "https://github.com/terrign/datepicker.git",
-  "author": "terrign <vajipi@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terrign/datepicker.git"
+  },
+  "author": {
+    "name": "terrign",
+    "email": "vajipi@gmail.com"
+  },
   "license": "UNLICENSED",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,jsx,tsx}\" --fix",
@@ -11,7 +17,8 @@
     "rollup": "rollup -c",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "jest --coverage.enabled --coverage.all"
+    "test": "jest --coverage.enabled --coverage.all",
+    "chromatic": "npx chromatic --project-token=chpt_938e4ef02414f05"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -97,5 +104,9 @@
     "react": "^17.0.2",
     "react-dom": "^18.2.0",
     "styled-components": "^6.1.8"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/terrign/datepicker/issues"
+  },
+  "homepage": "https://github.com/terrign/datepicker#readme"
 }
