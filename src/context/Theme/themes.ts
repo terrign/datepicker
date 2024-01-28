@@ -2,12 +2,12 @@ import { Color } from '@constants';
 
 import { ThemeObject } from './types';
 
-export const lightTheme: ThemeObject = {
+const defaultTheme: ThemeObject = {
   bgColor: Color.WHITE,
   fontColor: Color.BLACK,
   hoverBgColor: Color.LIGHT_GRAY_2,
+  borderColor: Color.LIGHT_GRAY_4,
 
-  disabledDayBgColor: Color.WHITE,
   disabledDayFontColor: Color.LIGHT_GRAY_1,
 
   selectedDayBgColor: Color.BLUE,
@@ -21,4 +21,16 @@ export const lightTheme: ThemeObject = {
 
   selectionRangeEndDayBgColor: Color.BLUE,
   selectionRangeEndDayFontColor: Color.WHITE,
+};
+
+export const lightTheme: ThemeObject = {
+  ...defaultTheme,
+};
+
+export const darkTheme: ThemeObject = {
+  ...defaultTheme,
+  bgColor: Color.BLACK,
+  fontColor: Color.WHITE,
+  hoverBgColor: Color.LIGHT_GRAY_1,
+  borderColor: Color.LIGHT_GRAY_3,
 };

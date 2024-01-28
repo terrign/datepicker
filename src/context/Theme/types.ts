@@ -6,8 +6,10 @@ export enum PredefinedTheme {
 export interface ThemeObject {
   bgColor: string;
   fontColor: string;
+  borderColor: string;
+  hoverBgColor: string;
+  hoverTextColor?: string;
 
-  disabledDayBgColor: string;
   disabledDayFontColor: string;
 
   selectedDayBgColor: string;
@@ -21,9 +23,4 @@ export interface ThemeObject {
 
   selectionRangeEndDayBgColor: string;
   selectionRangeEndDayFontColor: string;
-
-  hoverBgColor?: string;
-  hoverTextColor?: string;
 }
-
-export type Theme = ThemeObject | PredefinedTheme;

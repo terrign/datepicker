@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Day } from '.';
 import { CustomThemeProvider } from 'context/Theme/Theme.provider';
-import { DayType } from 'components/Day/types';
+import { DayType } from './types';
 
 const meta = {
   title: 'UI/Day',

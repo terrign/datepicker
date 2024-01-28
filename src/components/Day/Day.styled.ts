@@ -1,19 +1,9 @@
+import { defaultBlock, font } from '@css';
 import styled from 'styled-components';
 
 const Day = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  height: 32px;
-  width: 32px;
-  box-sizing: border-box;
-  user-select: none;
+  ${defaultBlock}
+  ${font}
   cursor: pointer;
 `;
 
@@ -41,7 +31,6 @@ export const SelectionStartDay = styled(Day)`
   color: ${({ theme }) => theme.selectionRangeStartDayFontColor};
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
-  cursor: pointer;
 `;
 
 export const SelectionEndDay = styled(Day)`
@@ -49,7 +38,6 @@ export const SelectionEndDay = styled(Day)`
   color: ${({ theme }) => theme.selectionRangeEndDayFontColor};
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
-  cursor: pointer;
 `;
 
 export const SelectionInRangeDay = styled(Day)`
@@ -57,5 +45,4 @@ export const SelectionInRangeDay = styled(Day)`
   color: ${({ theme }) => theme.selectionRangeDayFontColor};
   border-radius: 0px;
   border: none;
-  cursor: pointer;
 `;

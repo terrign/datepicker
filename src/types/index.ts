@@ -10,6 +10,11 @@ enum Day {
   SUNDAY = 'Su',
 }
 
+export enum WeekStart {
+  SUNDAY = 'Sunday',
+  MONDAY = 'Monday',
+}
+
 interface HolidaysConfig {
   weekEnds: Day[];
   holidays: Date | string[];

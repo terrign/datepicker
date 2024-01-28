@@ -1,12 +1,11 @@
 import { PropsWithChildren } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { darkTheme } from './theme.dark';
-import { lightTheme } from './theme.light';
-import { PredefinedTheme, Theme, ThemeObject } from './types';
+import { darkTheme, lightTheme } from './themes';
+import { PredefinedTheme, ThemeObject } from './types';
 
 export interface ThemeProps extends PropsWithChildren {
-  theme?: Theme;
+  theme?: PredefinedTheme;
   customStyles?: Partial<ThemeObject>;
 }
 

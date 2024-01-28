@@ -16,6 +16,11 @@ module.exports = {
     '\\.(css|less)$': 'identity-obj-proxy',
     '^components/(.*)$': '<rootDir>/src/components/$1',
     '^assets/(.*)$': '<rootDir>/src/assets/$1',
+    '^context/(.*)$': '<rootDir>/src/context/$1',
+    '^@types$': '<rootDir>/src/types/index',
+    '^@utils': '<rootDir>/src/utils/index',
+    '^@constants': '<rootDir>/src/constants/index',
+    '^@css': '<rootDir>/src/css/index',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',

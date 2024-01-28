@@ -20,7 +20,7 @@
     "rollup": "rollup -c",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "jest --coverage.enabled --coverage.all",
+    "test": "jest --coverage.enabled --coverage.all --passWithNoTests",
     "chromatic": "npx chromatic --project-token=chpt_938e4ef02414f05"
   },
   "main": "dist/cjs/index.js",
@@ -31,7 +31,7 @@
   ],
   "types": "dist/index.d.ts",
   "lint-staged": {
-    "src/**/*!{stories}.{js,mjs,cjs,ts,mts,jsx,tsx}": [
+    "src/**/*!(stories).{js,mjs,cjs,ts,mts,jsx,tsx}": [
       "yarn run lint"
     ],
     "*.{js,ts,tsx,jsx,css}": [
@@ -50,12 +50,12 @@
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
     "@storybook/addon-essentials": "^7.6.10",
     "@storybook/addon-interactions": "^7.6.10",
     "@storybook/addon-links": "^7.6.10",
-    "@storybook/addon-onboarding": "1.0.10",
     "@storybook/blocks": "^7.6.10",
     "@storybook/react": "^7.6.10",
     "@storybook/react-vite": "^7.6.10",

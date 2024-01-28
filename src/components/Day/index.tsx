@@ -1,5 +1,3 @@
-import { DayType } from 'components/Day/types';
-
 import {
   DefaultDay,
   DisabledDay,
@@ -8,6 +6,7 @@ import {
   SelectionInRangeDay,
   SelectionStartDay,
 } from './Day.styled';
+import { DayType } from './types';
 
 interface DayProps {
   type: DayType;

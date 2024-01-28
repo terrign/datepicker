@@ -12,6 +12,8 @@ import { babel } from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
+import image from '@rollup/plugin-image';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -31,16 +33,19 @@ export default [
       },
     ],
     plugins: [
-      peerDepsExternal(),
       alias({
         entries: [
           { find: 'components', replacement: path.resolve(__dirname, './src/components') },
           { find: 'context', replacement: path.resolve(__dirname, './src/context') },
           { find: 'assets', replacement: path.resolve(__dirname, './src/assets') },
           { find: '@constants', replacement: path.resolve(__dirname, './src/constants/index') },
+          { find: '@utils', replacement: path.resolve(__dirname, './src/utils/index') },
+          { find: '@css', replacement: path.resolve(__dirname, './src/css/index') },
+          { find: '@types', replacement: path.resolve(__dirname, './src/types/index') },
         ],
       }),
       resolve(),
+      peerDepsExternal(),
       cleaner({
         targets: ['./dist/'],
       }),
@@ -53,14 +58,29 @@ export default [
           declaration: true,
           declarationDir: 'types',
           declarationMap: true,
+          emitDeclarationOnly: true,
         },
       }),
       terser(),
+      image(),
     ],
   },
   {
     input: 'dist/esm/types/index.d.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-    plugins: [dts()],
+    plugins: [
+      alias({
+        entries: [
+          { find: 'components', replacement: path.resolve(__dirname, './dist/esm/types/components') },
+          { find: 'context', replacement: path.resolve(__dirname, './dist/esm/types/context') },
+          { find: 'assets', replacement: path.resolve(__dirname, './dist/esm/types/assets') },
+          { find: '@constants', replacement: path.resolve(__dirname, './dist/esm/types/constants/index') },
+          { find: '@utils', replacement: path.resolve(__dirname, './dist/esm/types/utils/index') },
+          { find: '@css', replacement: path.resolve(__dirname, './dist/esm/types/css/index') },
+          { find: '@types', replacement: path.resolve(__dirname, './dist/esm/types/types/index') },
+        ],
+      }),
+      dts(),
+    ],
   },
 ];
