@@ -33,7 +33,12 @@ export default [
     plugins: [
       peerDepsExternal(),
       alias({
-        entries: [{ find: 'src', replacement: path.resolve(__dirname, './src') }],
+        entries: [
+          { find: 'components', replacement: path.resolve(__dirname, './src/components') },
+          { find: 'context', replacement: path.resolve(__dirname, './src/context') },
+          { find: 'assets', replacement: path.resolve(__dirname, './src/assets') },
+          { find: '@constants', replacement: path.resolve(__dirname, './src/constants/index') },
+        ],
       }),
       resolve(),
       cleaner({

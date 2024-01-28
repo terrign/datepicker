@@ -7,7 +7,10 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "paths": {
-      "src/*": ["./src/*"],
+      "assets/*": ["./src/assets/*"],
+      "components/*": ["./src/components/*"],
+      "context/*": ["./src/context/*"],
+      "@constants": ["./src/constants/index"],
     },
     "baseUrl": ".",
     "jsx": "react-jsx",

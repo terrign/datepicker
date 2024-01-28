@@ -31,7 +31,7 @@
   ],
   "types": "dist/index.d.ts",
   "lint-staged": {
-    "src/**/*.{js,mjs,cjs,ts,mts,jsx,tsx}": [
+    "src/**/*!{stories}.{js,mjs,cjs,ts,mts,jsx,tsx}": [
       "yarn run lint"
     ],
     "*.{js,ts,tsx,jsx,css}": [

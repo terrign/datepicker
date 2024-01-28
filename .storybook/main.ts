@@ -20,7 +20,12 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     return mergeConfig(config, {
       resolve: {
-        alias: [{ find: 'src', replacement: path.resolve(__dirname, '../src') }],
+        alias: [
+          { find: 'assets', replacement: path.resolve(__dirname, '../src/assets') },
+          { find: 'components', replacement: path.resolve(__dirname, '../src/components') },
+          { find: 'context', replacement: path.resolve(__dirname, '../src/context') },
+          { find: '@constants', replacement: path.resolve(__dirname, '../src/constants/index') },
+        ],
       },
     });
   },

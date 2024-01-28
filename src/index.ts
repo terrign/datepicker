@@ -1,3 +1,3 @@
-import { Button } from './components/Button';
+import { Day } from 'components/Day';
 
-export { Button };
+export { Day };
