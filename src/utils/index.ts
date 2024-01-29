@@ -1,3 +1,3 @@
-import { createMonthCalendar, daysInMonth, getCurrentDateObject, getMonthName } from './date';
+import { changeDate, createCalendarMonthView, daysInMonth, getFirstDayOfTheMonth, getMonthName } from './date';
 
-export { createMonthCalendar, daysInMonth, getCurrentDateObject, getMonthName };
+export { changeDate, createCalendarMonthView, daysInMonth, getFirstDayOfTheMonth, getMonthName };

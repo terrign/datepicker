@@ -7,22 +7,22 @@ import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
 
 export const Controls = () => {
-  const { dispatch, currentMonth, currentYear } = useApp();
+  const { dispatch, currentDate } = useApp();
 
   const nextYearHandler = () => {
-    dispatch({ type: ActionType.YEAR, payload: 1 });
+    dispatch({ type: ActionType.CHANGE_YEAR, payload: 1 });
   };
 
   const prevYearHandler = () => {
-    dispatch({ type: ActionType.YEAR, payload: -1 });
+    dispatch({ type: ActionType.CHANGE_YEAR, payload: -1 });
   };
 
   const nextMonthHandler = () => {
-    dispatch({ type: ActionType.MONTH, payload: 1 });
+    dispatch({ type: ActionType.CHANGE_MONTH, payload: 1 });
   };
 
   const prevMonthHandler = () => {
-    dispatch({ type: ActionType.MONTH, payload: -1 });
+    dispatch({ type: ActionType.CHANGE_MONTH, payload: -1 });
   };
   return (
     <Flex>
@@ -35,7 +35,7 @@ export const Controls = () => {
         </Button>
       </Flex>
       <Paragraph>
-        {getMonthName(currentMonth)} {currentYear}
+        {getMonthName(currentDate.getMonth())} {currentDate.getFullYear()}
       </Paragraph>
       <Flex>
         <Button onClick={nextMonthHandler}>

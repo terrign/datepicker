@@ -1,39 +1,29 @@
+import { changeDate } from '@utils';
+
 import { ActionType, AppReducerType } from './types';
 
-export const appReducer: AppReducerType = (state, action) => {
-  switch (action.type) {
+export const appReducer: AppReducerType = (state, { type, payload }) => {
+  const { currentDate } = state;
+  switch (type) {
     case ActionType.SELECT_START:
       return {
         ...state,
-        selectionStart: action.payload,
+        selectionStart: payload,
       };
     case ActionType.SELECT_END:
       return {
         ...state,
-        selectionEnd: action.payload,
+        selectionEnd: payload,
       };
-    case ActionType.MONTH:
-      const { currentMonth, currentYear } = state;
-      let newMonth = currentMonth + action.payload;
-      let newYear = currentYear;
-
-      if (newMonth === 12) {
-        newMonth = 0;
-        newYear++;
-      }
-      if (newMonth === -1) {
-        newMonth = 11;
-        newYear--;
-      }
+    case ActionType.CHANGE_MONTH:
       return {
         ...state,
-        currentMonth: newMonth,
-        currentYear: newYear,
+        currentDate: changeDate(currentDate, 'month', payload),
       };
-    case ActionType.YEAR:
+    case ActionType.CHANGE_YEAR:
       return {
         ...state,
-        currentYear: state.currentYear + action.payload,
+        currentDate: changeDate(currentDate, 'year', payload),
       };
   }
 };

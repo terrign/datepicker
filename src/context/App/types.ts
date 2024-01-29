@@ -4,16 +4,15 @@ import { Dispatch } from 'react';
 export enum ActionType {
   SELECT_START,
   SELECT_END,
-  MONTH,
-  YEAR,
+  CHANGE_YEAR,
+  CHANGE_MONTH,
 }
 
 export interface AppContextType {
   weekStart: WeekStart;
   selectionStart: Date | null;
   selectionEnd: Date | null;
-  currentMonth: number;
-  currentYear: number;
+  currentDate: Date;
   dispatch: Dispatch<Action>;
 }
 
@@ -27,12 +26,16 @@ export interface SelectEndAction {
   payload: Date | null;
 }
 
-export interface NavAction {
-  type: ActionType.MONTH | ActionType.YEAR;
-  payload: 1 | -1;
+export interface ChangeYearAction {
+  type: ActionType.CHANGE_YEAR;
+  payload: number;
+}
+export interface ChangeMonthAction {
+  type: ActionType.CHANGE_MONTH;
+  payload: number;
 }
 
-export type Action = NavAction | SelectStartAction | SelectEndAction;
+export type Action = ChangeYearAction | ChangeMonthAction | SelectStartAction | SelectEndAction;
 
 export type ReducerState = Omit<AppContextType, 'dispatch'>;
 
