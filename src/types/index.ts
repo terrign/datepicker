@@ -17,7 +17,7 @@ export enum WeekStart {
 
 interface HolidaysConfig {
   weekEnds: Day[];
-  holidays: Date | string[];
+  holidays: DateOrString[];
 }
 
 type DatePickerTheme = 'light' | 'dark';
@@ -26,8 +26,8 @@ type DatePickerCustomStyle = Record<string, string>;
 
 export interface BaseDatePickerConfig {
   type?: DatePickerType;
-  maxDate?: Date | string;
-  minDate?: Date | string;
+  maxDate?: DateOrString;
+  minDate?: DateOrString;
   theme?: DatePickerTheme;
   style?: DatePickerCustomStyle;
   weekStart?: Day.MONDAY | Day.SUNDAY;
@@ -35,3 +35,5 @@ export interface BaseDatePickerConfig {
   onSelect?: () => void;
   holidays: HolidaysConfig;
 }
+
+export type DateOrString = Date | string;

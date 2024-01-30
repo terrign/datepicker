@@ -5,4 +5,5 @@ export enum DayType {
   SELECTION_START,
   SELECTION_END,
   SELECTION_IN_RANGE,
+  HOLIDAY,
 }

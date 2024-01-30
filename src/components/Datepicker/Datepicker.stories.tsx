@@ -2,13 +2,17 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { DatePicker } from '.';
 import { PredefinedTheme } from 'context/Theme/types';
+import { WeekStart } from '@types';
 
 const meta = {
   title: 'DatePicker',
   component: DatePicker,
-  parameters: {
-    layout: 'centered',
-  },
+
+  decorators: (Story) => (
+    <div style={{ margin: '10vh auto', width: 300 }}>
+      <Story />
+    </div>
+  ),
   tags: ['autodocs'],
   argTypes: {
     theme: {
@@ -31,5 +35,6 @@ export const Light: Story = {
 export const Dark: Story = {
   args: {
     theme: PredefinedTheme.DARK,
+    weekStart: WeekStart.SUNDAY,
   },
 };

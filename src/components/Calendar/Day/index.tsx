@@ -1,6 +1,9 @@
+import { DateOrString } from '@types';
+
 import {
   DefaultDay,
   DisabledDay,
+  Holiday,
   SelectedDay,
   SelectionEndDay,
   SelectionInRangeDay,
@@ -10,7 +13,7 @@ import { DayType } from './types';
 
 interface DayProps {
   type: DayType;
-  date: Date | string;
+  date: DateOrString;
 }
 
 export const Day = ({ date, type }: DayProps) => {
@@ -35,6 +38,10 @@ export const Day = ({ date, type }: DayProps) => {
 
   if (type === DayType.DISABLED) {
     return <DisabledDay>{day}</DisabledDay>;
+  }
+
+  if (type === DayType.HOLIDAY) {
+    return <Holiday>{day}</Holiday>;
   }
 
   return <DefaultDay>{day}</DefaultDay>;

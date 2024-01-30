@@ -56,10 +56,10 @@ export const createCalendarMonthView = (firstDayOfTheMonth: Date, weekStart: Wee
       currentDate = new Date(firstDayOfTheMonth.valueOf());
     }
     while (week.length < 7) {
-      currentDate = changeDate(currentDate, 'day', 1);
       week.push({
         date: toStringDate(currentDate),
       });
+      currentDate = changeDate(currentDate, 'day', 1);
     }
 
     result.push(week);

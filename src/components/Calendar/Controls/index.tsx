@@ -27,10 +27,10 @@ export const Controls = () => {
   return (
     <Flex>
       <Flex>
-        <Button onClick={prevYearHandler}>
+        <Button onClick={prevYearHandler} $control>
           <DoublePrevIcon />
         </Button>
-        <Button onClick={prevMonthHandler}>
+        <Button onClick={prevMonthHandler} $control>
           <PrevIcon />
         </Button>
       </Flex>
@@ -38,10 +38,10 @@ export const Controls = () => {
         {getMonthName(currentDate.getMonth())} {currentDate.getFullYear()}
       </Paragraph>
       <Flex>
-        <Button onClick={nextMonthHandler}>
+        <Button onClick={nextMonthHandler} $control>
           <NextIcon />
         </Button>
-        <Button onClick={nextYearHandler}>
+        <Button onClick={nextYearHandler} $control>
           <DoubleNextIcon />
         </Button>
       </Flex>

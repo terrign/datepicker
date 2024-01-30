@@ -1,7 +1,7 @@
 import { defaultBlock, font } from '@css';
 import styled from 'styled-components';
 
-const Day = styled.div`
+const Day = styled.button`
   ${defaultBlock}
   ${font}
   cursor: pointer;
@@ -45,4 +45,8 @@ export const SelectionInRangeDay = styled(Day)`
   color: ${({ theme }) => theme.selectionRangeDayFontColor};
   border-radius: 0px;
   border: none;
+`;
+
+export const Holiday = styled(Day)`
+  border: 1px solid ${({ theme }) => theme.holidayBorderColor};
 `;

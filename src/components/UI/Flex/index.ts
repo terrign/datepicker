@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface FlexProps {
+export interface FlexProps {
   $dir?: 'col' | 'row';
   $gap?: number;
 }

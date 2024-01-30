@@ -7,6 +7,7 @@ const defaultTheme: ThemeObject = {
   fontColor: Color.BLACK,
   hoverBgColor: Color.LIGHT_GRAY_2,
   borderColor: Color.LIGHT_GRAY_4,
+  holidayBorderColor: Color.RED,
 
   disabledDayFontColor: Color.LIGHT_GRAY_1,
 

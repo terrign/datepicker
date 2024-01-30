@@ -9,7 +9,10 @@ export const Icon = styled.img`
 
 export const TextIcon = styled.span`
   ${font}
+  font-size: 20px;
+  line-height: 16px;
   height: 16px;
   width: 16px;
   display: block;
+  transform: scaleY(0.5);
 `;

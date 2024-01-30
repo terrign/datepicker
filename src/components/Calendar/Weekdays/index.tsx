@@ -1,4 +1,4 @@
-import { StyledWeek } from 'components/Weekdays/styled';
+import { StyledWeek } from 'components/Calendar/Weekdays/styled';
 import { useApp } from 'context/App';
 
 import { getWeekDays } from './constants';

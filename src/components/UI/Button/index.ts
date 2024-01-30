@@ -1,14 +1,23 @@
 import { defaultBlock } from '@css';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Button = styled.button`
+const buttonHover = css`
+  &:hover {
+    background: ${({ theme }) => theme.hoverBgColor};
+  }
+`;
+
+const controlButton = css`
+  height: 24px;
+  width: 24px;
+`;
+
+export const Button = styled.button<{ $nohover?: boolean; $control?: boolean }>`
   ${defaultBlock}
   background: none;
 
   margin: 0px;
-
   cursor: pointer;
-  &:hover {
-    background: ${({ theme }) => theme.hoverBgColor};
-  }
+  ${({ $nohover }) => !$nohover && buttonHover}
+  ${({ $control }) => $control && controlButton}
 `;

@@ -65,3 +65,9 @@ export const SelectionInRange: Story = {
     type: DayType.SELECTION_IN_RANGE,
   },
 };
+
+export const Holiday: Story = {
+  args: {
+    type: DayType.HOLIDAY,
+  },
+};

@@ -9,6 +9,7 @@ export interface ThemeObject {
   borderColor: string;
   hoverBgColor: string;
   hoverTextColor?: string;
+  holidayBorderColor: string;
 
   disabledDayFontColor: string;
 
