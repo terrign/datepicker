@@ -1,11 +1,11 @@
 import { withValidation } from 'components/DateInput/withValidation';
 import { Button } from 'components/UI/Button';
 import { CalendarIcon, ClearIcon } from 'components/UI/Icons';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useImperativeHandle, useRef } from 'react';
 
 import { StyledDateInput } from './styled';
 
-export interface DateInputProps {
+export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   clearHandler?: () => void;
   calendarIconHandler?: () => void;
   errorMessage?: string;
@@ -13,7 +13,7 @@ export interface DateInputProps {
 }
 
 export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(function DateInput(
-  { clearHandler, calendarIconHandler, errorMessage, removeError },
+  { clearHandler, calendarIconHandler, errorMessage, removeError, ...rest },
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
@@ -44,7 +44,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
       <Button $nohover type="button" onClick={handleCalendar}>
         <CalendarIcon />
       </Button>
-      <input placeholder="Choose Date" ref={innerRef} onChange={removeError} />
+      <input placeholder="Choose Date" ref={innerRef} onChange={removeError} {...rest} />
       <Button $nohover type="button" onClick={handleClear}>
         <ClearIcon />
       </Button>

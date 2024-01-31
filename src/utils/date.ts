@@ -34,7 +34,7 @@ export const getMonthName = (month: number, locale: Intl.LocalesArgument = 'en-U
 
 export const createCalendarMonthView = (firstDayOfTheMonth: Date, weekStart: WeekStart) => {
   const firstDayOfTheMonthWeekIndex = firstDayOfTheMonth.getDay();
-  const weekStartIndex = weekStart === WeekStart.SUNDAY ? 0 : 1;
+  const weekStartIndex = weekStart === 'Sunday' ? 0 : 1;
   let daysFromTheLastMonthToPrepend = firstDayOfTheMonthWeekIndex - weekStartIndex;
 
   if (daysFromTheLastMonthToPrepend < 0) {

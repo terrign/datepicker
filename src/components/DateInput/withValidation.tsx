@@ -48,7 +48,7 @@ export const withValidation: WithValidationType = (Component) => {
           }
 
           if (value.length != 10 && value.length !== 0) {
-            setErrorMessage('Required date format is YYYY-MM-DD');
+            setErrorMessage('Format is yyyy-mm-dd or mm/dd/yyyy');
             return;
           }
 

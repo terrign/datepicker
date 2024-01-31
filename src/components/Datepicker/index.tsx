@@ -22,7 +22,7 @@ export interface DatePickerProps {
 export const DatePicker = ({
   type = 'default',
   theme = PredefinedTheme.DARK,
-  weekStart = WeekStart.SUNDAY,
+  weekStart = 'Sunday',
   maxDate,
   minDate,
   customStyles,
