@@ -2,11 +2,21 @@ import { WeekStart } from '@types';
 
 export const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
 
-export const toStringDate = (date: Date) => date.toISOString().split('T')[0];
+export const toStringDate = (date: Date) => {
+  try {
+    date.toISOString();
+  } catch (e) {
+    return '';
+  }
+  date.toUTCString();
+  return date.toISOString().split('T')[0];
+};
 
 export const getFirstDayOfTheMonth = (date: Date) => {
   const newDate = new Date(date.valueOf());
   newDate.setDate(1);
+  newDate.setHours(10);
+
   return newDate;
 };
 
@@ -42,6 +52,7 @@ export const createCalendarMonthView = (firstDayOfTheMonth: Date, weekStart: Wee
   }
   const result = [];
   let currentDate = new Date(firstDayOfTheMonth.valueOf());
+
   for (let w = 0; result.length < 6; w++) {
     const week = [];
     if (w === 0) {
@@ -49,6 +60,7 @@ export const createCalendarMonthView = (firstDayOfTheMonth: Date, weekStart: Wee
         currentDate = changeDate(currentDate, 'day', -1);
         week.unshift({
           date: toStringDate(currentDate),
+          types: [],
         });
 
         daysFromTheLastMonthToPrepend -= 1;
@@ -58,6 +70,7 @@ export const createCalendarMonthView = (firstDayOfTheMonth: Date, weekStart: Wee
     while (week.length < 7) {
       week.push({
         date: toStringDate(currentDate),
+        types: [],
       });
       currentDate = changeDate(currentDate, 'day', 1);
     }

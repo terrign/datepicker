@@ -5,6 +5,7 @@ export enum ActionType {
   SET_DATE,
   CHANGE_YEAR,
   CHANGE_MONTH,
+  SET_VIEW_DATE,
   HIDE_SHOW_CALENDAR,
 }
 
@@ -13,6 +14,9 @@ export interface AppContextType {
   selectedDate: Date | null;
   firstDayOfTheViewMonth: Date;
   calendarVisible: boolean;
+  minDate?: string;
+  maxDate?: string;
+  // clientOnSelectHandler?: (date: string) => void;
   dispatch: Dispatch<Action>;
 }
 
@@ -35,7 +39,17 @@ export type HideShowCalendarAction = {
   payload: boolean;
 };
 
-export type Action = ChangeYearAction | ChangeMonthAction | SetDateAction | HideShowCalendarAction;
+export type ChangeViewDateAction = {
+  type: ActionType.SET_VIEW_DATE;
+  payload: { month: number; year: number };
+};
+
+export type Action =
+  | ChangeYearAction
+  | ChangeMonthAction
+  | SetDateAction
+  | HideShowCalendarAction
+  | ChangeViewDateAction;
 
 export type ReducerState = Omit<AppContextType, 'dispatch'>;
 

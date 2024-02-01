@@ -13,9 +13,9 @@ export const StyledDateInput = styled.div<{ $errorMessage?: string; $hideBottomB
   background-color: ${({ theme }) => theme.bgColor};
   border: 1px solid ${({ theme }) => theme.borderColor};
   padding: 8px 7px;
-  min-height: 26px;
+  max-height: 24px;
   border-radius: 8px;
-  width: calc(100%-16px);
+
   ${({ $hideBottomBorder }) => $hideBottomBorder && noBottomBorder}
 
   input {

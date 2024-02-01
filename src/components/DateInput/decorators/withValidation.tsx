@@ -1,10 +1,9 @@
 import { DateInputProps } from 'components/DateInput';
+import { DateInputError } from 'components/DateInput/types';
+import { useApp } from 'context/App';
 import { ChangeEventHandler, forwardRef, ForwardRefExoticComponent, RefAttributes, useCallback, useState } from 'react';
 
-export interface WithValidationHOCProps extends Omit<DateInputProps, 'removeError'> {
-  maxDate?: string;
-  minDate?: string;
-}
+export interface WithValidationHOCProps extends Omit<DateInputProps, 'removeError'> {}
 
 export interface WithValidationType {
   (
@@ -16,8 +15,9 @@ export const withValidation: WithValidationType = (Component) => {
   const Wrapper: ForwardRefExoticComponent<WithValidationHOCProps & RefAttributes<HTMLInputElement>> = forwardRef<
     HTMLInputElement,
     WithValidationHOCProps
-  >(({ maxDate, minDate, onDateSelect, onChange, clearHandler, ...rest }, ref) => {
+  >(({ onDateSelect, onChange, clearHandler, ...rest }, ref) => {
     const [errorMessage, setErrorMessage] = useState('');
+    const { minDate, maxDate } = useApp();
 
     const removeError = () => {
       setErrorMessage('');
@@ -27,32 +27,32 @@ export const withValidation: WithValidationType = (Component) => {
         const date = new Date(value);
 
         if (isNaN(date.valueOf())) {
-          setErrorMessage('Invalid date');
-          return;
+          setErrorMessage(DateInputError.INVALID);
+          throw new Error(DateInputError.INVALID);
         }
 
         if (value.length != 10 && value.length !== 0) {
-          setErrorMessage('Format: yyyy-mm-dd or mm/dd/yyyy');
-          return;
+          setErrorMessage(DateInputError.FORMAT);
+          throw new Error(DateInputError.FORMAT);
         }
 
         if (minDate) {
           if (date < new Date(minDate)) {
-            setErrorMessage('Date is out of available range');
-            return;
+            setErrorMessage(DateInputError.RANGE);
+            throw new Error(DateInputError.RANGE);
           }
         }
 
         if (maxDate) {
           if (date > new Date(maxDate)) {
-            setErrorMessage('Date is out of available range');
-            return;
+            setErrorMessage(DateInputError.RANGE);
+            throw new Error(DateInputError.RANGE);
           }
         }
-
         removeError();
-
-        onDateSelect(value);
+        if (onDateSelect) {
+          onDateSelect(value);
+        }
       },
       [maxDate, minDate, onDateSelect],
     );

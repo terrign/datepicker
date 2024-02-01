@@ -1,18 +1,18 @@
-import { createCalendarMonthView } from '@utils';
-import { Day } from 'components/Calendar/Day';
-import { DayType } from 'components/Calendar/Day/types';
+import { Day, DayProps } from 'components/Calendar/Day';
 import { Flex } from 'components/UI/Flex';
-import { useApp } from 'context/App';
 
-export const Month = () => {
-  const { firstDayOfTheViewMonth, weekStart } = useApp();
-  const data = createCalendarMonthView(firstDayOfTheViewMonth, weekStart);
+export interface DaysOfTheMonthData {
+  days: DayProps[][];
+  disableWeekends?: boolean;
+}
+
+export const Month = ({ days, disableWeekends }: DaysOfTheMonthData) => {
   return (
     <Flex $dir="col">
-      {data.map((week) => (
+      {days.map((week) => (
         <Flex key={week[0].date} style={{ width: '100%' }}>
-          {week.map(({ date }) => {
-            return <Day date={new Date(date)} key={date} type={DayType.DEFAULT} />;
+          {week.map(({ date, types }) => {
+            return <Day date={date} key={date} types={types} disableWeekends={disableWeekends} />;
           })}
         </Flex>
       ))}

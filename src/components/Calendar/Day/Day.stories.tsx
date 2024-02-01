@@ -19,7 +19,7 @@ const meta = {
   ],
   tags: ['autodocs'],
   args: {
-    date: new Date(Date.now()),
+    date: '2024-01-24',
   },
   argTypes: {
     date: { control: { type: 'date' } },
@@ -30,44 +30,44 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    type: DayType.DEFAULT,
-  },
-};
+// export const Default: Story = {
+//   args: {
+//     type: DayType.DEFAULT,
+//   },
+// };
 
-export const Selected: Story = {
-  args: {
-    type: DayType.SELECTED,
-  },
-};
+// export const Selected: Story = {
+//   args: {
+//     type: DayType.SELECTED,
+//   },
+// };
 
-export const Disabled: Story = {
-  args: {
-    type: DayType.DISABLED,
-  },
-};
+// export const Disabled: Story = {
+//   args: {
+//     type: DayType.DISABLED,
+//   },
+// };
 
-export const SelectionStart: Story = {
-  args: {
-    type: DayType.SELECTION_START,
-  },
-};
+// export const SelectionStart: Story = {
+//   args: {
+//     type: DayType.SELECTION_START,
+//   },
+// };
 
-export const SelectionEnd: Story = {
-  args: {
-    type: DayType.SELECTION_END,
-  },
-};
+// export const SelectionEnd: Story = {
+//   args: {
+//     type: DayType.SELECTION_END,
+//   },
+// };
 
-export const SelectionInRange: Story = {
-  args: {
-    type: DayType.SELECTION_IN_RANGE,
-  },
-};
+// export const SelectionInRange: Story = {
+//   args: {
+//     type: DayType.SELECTION_IN_RANGE,
+//   },
+// };
 
-export const Holiday: Story = {
-  args: {
-    type: DayType.HOLIDAY,
-  },
-};
+// export const Holiday: Story = {
+//   args: {
+//     type: DayType.HOLIDAY,
+//   },
+// };

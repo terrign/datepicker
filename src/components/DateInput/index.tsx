@@ -1,3 +1,4 @@
+import { toStringDate } from '@utils';
 import { withValidation } from 'components/DateInput/decorators/withValidation';
 import { Button } from 'components/UI/Button';
 import { CalendarIcon, ClearIcon } from 'components/UI/Icons';
@@ -9,7 +10,7 @@ import { StyledDateInput } from './styled';
 
 export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   errorMessage?: string;
-  onDateSelect: (value: string) => void;
+  onDateSelect?: (value: string) => void;
   clearHandler?: () => void;
 }
 
@@ -18,7 +19,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
-  const { calendarVisible, dispatch } = useApp();
+  const { calendarVisible, dispatch, selectedDate } = useApp();
 
   useImperativeHandle(ref, () => innerRef.current as HTMLInputElement);
 
@@ -28,6 +29,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
       input.value = '';
       if (clearHandler) {
         clearHandler();
+        dispatch({ type: ActionType.SET_DATE, payload: null });
       }
     }
   };
@@ -35,15 +37,32 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
   useEffect(() => {
     const input = innerRef.current;
     if (input) {
-      const listener = (event: Event) => {
+      const onDateSelectHandler = (event: Event) => {
         const value = (event.target as HTMLInputElement).value;
-        onDateSelect(value);
-        dispatch({ type: ActionType.SET_DATE, payload: new Date(value) });
+        try {
+          if (onDateSelect) {
+            onDateSelect(value);
+          }
+          const newDateObj = new Date(value);
+
+          dispatch({ type: ActionType.SET_DATE, payload: newDateObj });
+          // dispatch({
+          //   type: ActionType.SET_VIEW_DATE,
+          //   payload: { year: newDateObj.getFullYear(), month: newDateObj.getMonth() },
+          // });
+        } catch {}
       };
-      input.addEventListener('change', listener);
-      return () => input.removeEventListener('change', listener);
+      input.addEventListener('change', onDateSelectHandler);
+      return () => input.removeEventListener('change', onDateSelectHandler);
     }
   }, [innerRef, onDateSelect, dispatch]);
+
+  useEffect(() => {
+    const input = innerRef.current;
+    if (input && selectedDate) {
+      input.value = toStringDate(selectedDate);
+    }
+  }, [selectedDate]);
 
   const handleCalendar = () => {
     dispatch({ type: ActionType.HIDE_SHOW_CALENDAR, payload: !calendarVisible });

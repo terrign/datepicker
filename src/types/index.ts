@@ -15,6 +15,7 @@ export type WeekStart = 'Sunday' | 'Monday';
 interface HolidaysConfig {
   weekEnds: Day[];
   holidays: DateOrString[];
+  hideHolidays: boolean;
 }
 
 type DatePickerTheme = 'light' | 'dark';

@@ -25,5 +25,10 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
         ...state,
         calendarVisible: payload,
       };
+    case ActionType.SET_VIEW_DATE:
+      return {
+        ...state,
+        firstDayOfTheViewMonth: new Date(payload.year, payload.month, 1),
+      };
   }
 };

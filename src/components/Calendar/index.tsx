@@ -1,13 +1,37 @@
+import { DayType } from 'components/Calendar/Day/types';
+import { withDefaultDays } from 'components/Calendar/decorators/withDefaultDays';
+import { withHolidays } from 'components/Calendar/decorators/withHolidays';
 import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 
 import { Controls } from './Controls';
-import { Month } from './Month';
+import { DaysOfTheMonthData, Month } from './Month';
 import { Container } from './styled';
 import { WeekDays } from './Weekdays';
 
-export const Calendar = () => {
+export interface CalendarConfig {
+  /**
+   * An array of dates in yyyy-mm-dd, which should be marked as holidays
+   */
+  holidays?: string[];
+  /**
+   * Whether to disable weekends
+   */
+  disableWeekends?: boolean;
+  /**
+   * Left click modal options
+   * default: []
+   */
+  modalOptions?: {
+    label: string;
+    onClick: (date: string, dayType: DayType) => void;
+  }[];
+}
+
+export type CalendarProps = DaysOfTheMonthData & CalendarConfig;
+
+const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends }) => {
   const { calendarVisible, dispatch } = useApp();
 
   useEffect(() => {
@@ -20,11 +44,14 @@ export const Calendar = () => {
     body.addEventListener('keydown', escapePressHandler);
     return () => body.removeEventListener('keypress', escapePressHandler);
   }, [dispatch]);
+
   return (
     <Container $hidden={!calendarVisible}>
       <Controls />
       <WeekDays />
-      <Month />
+      <Month days={days} disableWeekends={disableWeekends} />
     </Container>
   );
 };
+
+export const Calendar = withDefaultDays(withHolidays(BaseCalendar));

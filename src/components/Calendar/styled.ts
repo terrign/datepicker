@@ -14,8 +14,7 @@ export const Container = styled.div<{ $hidden: boolean }>`
   display: ${({ $hidden }) => ($hidden ? 'none' : 'flex')};
   position: absolute;
   box-sizing: border-box;
-  top: 57px;
-  top: 42px;
+  top: 41px;
   border-top: none;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;

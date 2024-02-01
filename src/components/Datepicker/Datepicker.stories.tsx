@@ -35,5 +35,9 @@ export const Dark: Story = {
   args: {
     theme: PredefinedTheme.DARK,
     weekStart: 'Sunday',
+    calendarConfig: {
+      disableWeekends: true,
+      holidays: ['2024-02-02'],
+    },
   },
 };
