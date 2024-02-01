@@ -5,8 +5,8 @@ import { Flex } from 'components/UI/Flex';
 import { useApp } from 'context/App';
 
 export const Month = () => {
-  const { currentDate, weekStart } = useApp();
-  const data = createCalendarMonthView(currentDate, weekStart);
+  const { firstDayOfTheViewMonth, weekStart } = useApp();
+  const data = createCalendarMonthView(firstDayOfTheViewMonth, weekStart);
   return (
     <Flex $dir="col">
       {data.map((week) => (

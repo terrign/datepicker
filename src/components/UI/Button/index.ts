@@ -16,7 +16,6 @@ export const Button = styled.button<{ $nohover?: boolean; $control?: boolean }>`
   ${defaultBlock}
   background: none;
 
-  margin: 0px;
   cursor: pointer;
   ${({ $nohover }) => !$nohover && buttonHover}
   ${({ $control }) => $control && controlButton}

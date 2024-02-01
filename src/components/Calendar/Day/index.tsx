@@ -14,6 +14,8 @@ import { DayType } from './types';
 interface DayProps {
   type: DayType;
   date: DateOrString;
+  onClickHandler?: () => void;
+  onContextHandler?: () => void;
 }
 
 export const Day = ({ date, type }: DayProps) => {

@@ -1,16 +1,22 @@
 import { flex, font } from '@css';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const StyledDateInput = styled.div<{ $errorMessage?: string }>`
+const noBottomBorder = css`
+  border-bottom: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+`;
+
+export const StyledDateInput = styled.div<{ $errorMessage?: string; $hideBottomBorder?: boolean }>`
   ${flex}
   position: relative;
   background-color: ${({ theme }) => theme.bgColor};
   border: 1px solid ${({ theme }) => theme.borderColor};
   padding: 8px 7px;
-  height: 42px;
-  box-sizing: border-box;
+  min-height: 26px;
   border-radius: 8px;
-  width: 250px;
+  width: calc(100%-16px);
+  ${({ $hideBottomBorder }) => $hideBottomBorder && noBottomBorder}
 
   input {
     ${font}
@@ -39,11 +45,11 @@ export const StyledDateInput = styled.div<{ $errorMessage?: string }>`
     position: absolute;
     top: 42px;
     left: 15px;
-
     color: red;
     font-size: 12px;
     font-weight: 300;
     height: 15px;
     width: 100%;
+    z-index: 10;
   }
 `;
