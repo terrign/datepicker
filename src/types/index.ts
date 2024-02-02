@@ -10,14 +10,12 @@ enum Day {
   SUNDAY = 'Su',
 }
 
-export enum WeekStart {
-  SUNDAY = 'Sunday',
-  MONDAY = 'Monday',
-}
+export type WeekStart = 'Sunday' | 'Monday';
 
 interface HolidaysConfig {
   weekEnds: Day[];
   holidays: DateOrString[];
+  hideHolidays: boolean;
 }
 
 type DatePickerTheme = 'light' | 'dark';

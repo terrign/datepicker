@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { DatePicker } from '.';
 import { PredefinedTheme } from 'context/Theme/types';
-import { WeekStart } from '@types';
 
 const meta = {
   title: 'DatePicker',
@@ -35,6 +34,10 @@ export const Light: Story = {
 export const Dark: Story = {
   args: {
     theme: PredefinedTheme.DARK,
-    weekStart: WeekStart.SUNDAY,
+    weekStart: 'Sunday',
+    calendarConfig: {
+      disableWeekends: true,
+      holidays: ['2024-02-02'],
+    },
   },
 };

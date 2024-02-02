@@ -2,40 +2,54 @@ import { WeekStart } from '@types';
 import { Dispatch } from 'react';
 
 export enum ActionType {
-  SELECT_START,
-  SELECT_END,
+  SET_DATE,
   CHANGE_YEAR,
   CHANGE_MONTH,
+  SET_VIEW_DATE,
+  HIDE_SHOW_CALENDAR,
 }
 
 export interface AppContextType {
   weekStart: WeekStart;
-  selectionStart: Date | null;
-  selectionEnd: Date | null;
-  currentDate: Date;
+  selectedDate: Date | null;
+  firstDayOfTheViewMonth: Date;
+  calendarVisible: boolean;
+  minDate?: string;
+  maxDate?: string;
+  // clientOnSelectHandler?: (date: string) => void;
   dispatch: Dispatch<Action>;
 }
 
-export interface SelectStartAction {
-  type: ActionType.SELECT_START;
+export type SetDateAction = {
+  type: ActionType.SET_DATE;
   payload: Date | null;
-}
+};
 
-export interface SelectEndAction {
-  type: ActionType.SELECT_END;
-  payload: Date | null;
-}
-
-export interface ChangeYearAction {
+export type ChangeYearAction = {
   type: ActionType.CHANGE_YEAR;
   payload: number;
-}
-export interface ChangeMonthAction {
+};
+export type ChangeMonthAction = {
   type: ActionType.CHANGE_MONTH;
   payload: number;
-}
+};
 
-export type Action = ChangeYearAction | ChangeMonthAction | SelectStartAction | SelectEndAction;
+export type HideShowCalendarAction = {
+  type: ActionType.HIDE_SHOW_CALENDAR;
+  payload: boolean;
+};
+
+export type ChangeViewDateAction = {
+  type: ActionType.SET_VIEW_DATE;
+  payload: Date;
+};
+
+export type Action =
+  | ChangeYearAction
+  | ChangeMonthAction
+  | SetDateAction
+  | HideShowCalendarAction
+  | ChangeViewDateAction;
 
 export type ReducerState = Omit<AppContextType, 'dispatch'>;
 

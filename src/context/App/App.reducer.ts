@@ -1,29 +1,34 @@
-import { changeDate } from '@utils';
+import { changeDate, getFirstDayOfTheMonth } from '@utils';
 
 import { ActionType, AppReducerType } from './types';
 
 export const appReducer: AppReducerType = (state, { type, payload }) => {
-  const { currentDate } = state;
+  const { firstDayOfTheViewMonth } = state;
   switch (type) {
-    case ActionType.SELECT_START:
+    case ActionType.SET_DATE:
       return {
         ...state,
-        selectionStart: payload,
-      };
-    case ActionType.SELECT_END:
-      return {
-        ...state,
-        selectionEnd: payload,
+        selectedDate: payload,
       };
     case ActionType.CHANGE_MONTH:
       return {
         ...state,
-        currentDate: changeDate(currentDate, 'month', payload),
+        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, 'month', payload),
       };
     case ActionType.CHANGE_YEAR:
       return {
         ...state,
-        currentDate: changeDate(currentDate, 'year', payload),
+        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, 'year', payload),
+      };
+    case ActionType.HIDE_SHOW_CALENDAR:
+      return {
+        ...state,
+        calendarVisible: payload,
+      };
+    case ActionType.SET_VIEW_DATE:
+      return {
+        ...state,
+        firstDayOfTheViewMonth: getFirstDayOfTheMonth(new Date(payload)),
       };
   }
 };

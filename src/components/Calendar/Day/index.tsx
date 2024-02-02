@@ -1,48 +1,83 @@
-import { DateOrString } from '@types';
+import { toStringDate } from '@utils';
+import { useApp } from 'context/App';
+import { ActionType } from 'context/App/types';
 
-import {
-  DefaultDay,
-  DisabledDay,
-  Holiday,
-  SelectedDay,
-  SelectionEndDay,
-  SelectionInRangeDay,
-  SelectionStartDay,
-} from './Day.styled';
+import { StyledDay } from './Day.styled';
 import { DayType } from './types';
 
-interface DayProps {
-  type: DayType;
-  date: DateOrString;
+export interface DayProps {
+  types: DayType[];
+  date: string;
+  disableWeekends?: boolean;
+  dayClickHandler?: (date: string, type: DayType) => void;
+  dayContextMenuHandler?: (date: string, type: DayType) => void;
 }
 
-export const Day = ({ date, type }: DayProps) => {
-  const dateObj = date instanceof Date ? date : new Date(date);
+export const Day = ({ date, types, disableWeekends, dayClickHandler, dayContextMenuHandler }: DayProps) => {
+  const { firstDayOfTheViewMonth, selectedDate, maxDate, minDate, dispatch } = useApp();
+  const dateObj = new Date(date);
+  dateObj.setHours(0);
+
   const day = dateObj.getDate();
 
-  if (type === DayType.SELECTED) {
-    return <SelectedDay>{day}</SelectedDay>;
-  }
+  const dayWeekIndex = dateObj.getDay();
 
-  if (type === DayType.SELECTION_START) {
-    return <SelectionStartDay>{day}</SelectionStartDay>;
-  }
+  const isDisabled = () => {
+    if (disableWeekends && (dayWeekIndex === 0 || dayWeekIndex === 6)) {
+      return true;
+    }
 
-  if (type === DayType.SELECTION_END) {
-    return <SelectionEndDay>{day}</SelectionEndDay>;
-  }
+    if (firstDayOfTheViewMonth.getMonth() !== dateObj.getMonth()) {
+      return true;
+    }
 
-  if (type === DayType.SELECTION_IN_RANGE) {
-    return <SelectionInRangeDay>{day}</SelectionInRangeDay>;
-  }
+    let disabled: boolean = false;
 
-  if (type === DayType.DISABLED) {
-    return <DisabledDay>{day}</DisabledDay>;
-  }
+    if (maxDate) {
+      const maxDateObj = new Date(maxDate);
+      disabled = dateObj > maxDateObj;
+    }
 
-  if (type === DayType.HOLIDAY) {
-    return <Holiday>{day}</Holiday>;
-  }
+    if (minDate && !disabled) {
+      const minDateObj = new Date(minDate);
+      disabled = dateObj < minDateObj;
+    }
 
-  return <DefaultDay>{day}</DefaultDay>;
+    return disabled;
+  };
+
+  const defineType = () => {
+    if (isDisabled()) {
+      return DayType.DISABLED;
+    }
+    if (selectedDate && toStringDate(selectedDate) === date) {
+      return DayType.SELECTED;
+    }
+    if (types.includes(DayType.HOLIDAY)) {
+      return DayType.HOLIDAY;
+    }
+
+    return DayType.DEFAULT;
+  };
+
+  const clickHandler = () => {
+    if (dayClickHandler) {
+      dayClickHandler(date, types[0]);
+    }
+    if (!isDisabled()) {
+      dispatch({ type: ActionType.SET_DATE, payload: new Date(date) });
+    }
+  };
+
+  const contextMenuHandler = () => {
+    if (dayContextMenuHandler) {
+      dayContextMenuHandler(date, types[0]);
+    }
+  };
+
+  return (
+    <StyledDay $type={defineType()} onClick={clickHandler} onContextMenu={contextMenuHandler}>
+      {day}
+    </StyledDay>
+  );
 };

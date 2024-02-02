@@ -1,3 +1,10 @@
-import { changeDate, createCalendarMonthView, daysInMonth, getFirstDayOfTheMonth, getMonthName } from './date';
+import {
+  changeDate,
+  createCalendarMonthView,
+  daysInMonth,
+  getFirstDayOfTheMonth,
+  getMonthName,
+  toStringDate,
+} from './date';
 
-export { changeDate, createCalendarMonthView, daysInMonth, getFirstDayOfTheMonth, getMonthName };
+export { changeDate, createCalendarMonthView, daysInMonth, getFirstDayOfTheMonth, getMonthName, toStringDate };

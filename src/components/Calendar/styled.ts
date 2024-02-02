@@ -10,11 +10,14 @@ export const Container = styled.div<{ $hidden: boolean }>`
   border-radius: 8px;
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.borderColor};
-  width: 250px;
+  width: 100%;
   display: ${({ $hidden }) => ($hidden ? 'none' : 'flex')};
   position: absolute;
   box-sizing: border-box;
-  top: 57px;
+  top: 41px;
+  border-top: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   left: 0px;
-  z-index: 100;
+  min-width: 250px;
 `;

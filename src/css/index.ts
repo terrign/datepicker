@@ -12,6 +12,7 @@ export const defaultBlock = css`
   width: 32px;
   box-sizing: border-box;
   user-select: none;
+  transition: background 0.2s ease-in-out;
 `;
 
 export const font = css`

@@ -1,45 +1,45 @@
 import { WeekStart } from '@types';
-import { Calendar } from 'components/Calendar';
+import { Calendar, CalendarConfig } from 'components/Calendar';
 import { DateInput } from 'components/DateInput';
 import { DatepickerContainer } from 'components/Datepicker/styled';
 import { AppProvider } from 'context/App/App.provider';
 import { CustomThemeProvider } from 'context/Theme/Theme.provider';
 import { PredefinedTheme, ThemeObject } from 'context/Theme/types';
-import { useState } from 'react';
 
 export interface DatePickerProps {
   type?: 'default' | 'range';
   weekStart?: WeekStart;
   theme?: PredefinedTheme;
+  onDateSelect?: (date: string) => void;
+  defaultSelectedDate?: string;
   customStyles?: Partial<ThemeObject>;
   maxDate?: string;
   minDate?: string;
   defaultSelectionStart?: Date;
   defaultSelectionEnd?: Date;
+  calendarConfig?: CalendarConfig;
   locale?: string;
 }
 
 export const DatePicker = ({
   type = 'default',
   theme = PredefinedTheme.DARK,
-  weekStart = WeekStart.SUNDAY,
+  weekStart = 'Sunday',
   maxDate,
   minDate,
   customStyles,
+  calendarConfig,
+  defaultSelectedDate,
+  onDateSelect,
 }: DatePickerProps) => {
   type;
-  const [isCalendarVisible, setIsCalendarVisible] = useState<boolean>(false);
-
-  const toggleCalendar = () => {
-    setIsCalendarVisible((prev) => !prev);
-  };
 
   return (
-    <AppProvider weekStart={weekStart}>
+    <AppProvider weekStart={weekStart} defaultSelectedDate={defaultSelectedDate} minDate={minDate} maxDate={maxDate}>
       <CustomThemeProvider theme={theme} customStyles={customStyles}>
         <DatepickerContainer>
-          <DateInput maxDate={maxDate} minDate={minDate} onDateInput={(v) => v} calendarIconHandler={toggleCalendar} />
-          <Calendar hidden={!isCalendarVisible} />
+          <DateInput onDateSelect={onDateSelect} />
+          <Calendar {...calendarConfig} />
         </DatepickerContainer>
       </CustomThemeProvider>
     </AppProvider>

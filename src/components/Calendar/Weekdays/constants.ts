@@ -4,7 +4,7 @@ export const WEEKDAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 export const getWeekDays = (weekStart: WeekStart) => {
   const result = [...WEEKDAYS];
-  if (weekStart === WeekStart.MONDAY) {
+  if (weekStart === 'Monday') {
     result.push(result.shift() as string);
   }
   return result;
