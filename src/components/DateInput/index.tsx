@@ -46,10 +46,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
           const newDateObj = new Date(value);
 
           dispatch({ type: ActionType.SET_DATE, payload: newDateObj });
-          // dispatch({
-          //   type: ActionType.SET_VIEW_DATE,
-          //   payload: { year: newDateObj.getFullYear(), month: newDateObj.getMonth() },
-          // });
+          dispatch({ type: ActionType.SET_VIEW_DATE, payload: newDateObj });
         } catch {}
       };
       input.addEventListener('change', onDateSelectHandler);

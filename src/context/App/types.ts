@@ -41,7 +41,7 @@ export type HideShowCalendarAction = {
 
 export type ChangeViewDateAction = {
   type: ActionType.SET_VIEW_DATE;
-  payload: { month: number; year: number };
+  payload: Date;
 };
 
 export type Action =

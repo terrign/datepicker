@@ -16,26 +16,34 @@ export interface DayProps {
 export const Day = ({ date, types, disableWeekends, dayClickHandler, dayContextMenuHandler }: DayProps) => {
   const { firstDayOfTheViewMonth, selectedDate, maxDate, minDate, dispatch } = useApp();
   const dateObj = new Date(date);
+  dateObj.setHours(0);
+
   const day = dateObj.getDate();
+
   const dayWeekIndex = dateObj.getDay();
 
   const isDisabled = () => {
     if (disableWeekends && (dayWeekIndex === 0 || dayWeekIndex === 6)) {
       return true;
     }
+
     if (firstDayOfTheViewMonth.getMonth() !== dateObj.getMonth()) {
       return true;
     }
 
-    if (maxDate && dateObj > new Date(maxDate)) {
-      return true;
+    let disabled: boolean = false;
+
+    if (maxDate) {
+      const maxDateObj = new Date(maxDate);
+      disabled = dateObj > maxDateObj;
     }
 
-    if (minDate && dateObj < new Date(minDate)) {
-      return true;
+    if (minDate && !disabled) {
+      const minDateObj = new Date(minDate);
+      disabled = dateObj < minDateObj;
     }
 
-    return false;
+    return disabled;
   };
 
   const defineType = () => {

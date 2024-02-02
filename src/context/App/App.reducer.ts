@@ -1,4 +1,4 @@
-import { changeDate } from '@utils';
+import { changeDate, getFirstDayOfTheMonth } from '@utils';
 
 import { ActionType, AppReducerType } from './types';
 
@@ -28,7 +28,7 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
     case ActionType.SET_VIEW_DATE:
       return {
         ...state,
-        firstDayOfTheViewMonth: new Date(payload.year, payload.month, 1),
+        firstDayOfTheViewMonth: getFirstDayOfTheMonth(new Date(payload)),
       };
   }
 };
