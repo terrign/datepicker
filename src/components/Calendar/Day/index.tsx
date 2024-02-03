@@ -1,83 +1,45 @@
-import { toStringDate } from '@utils';
+import { withDefinedDayType } from 'components/Calendar/Day/decorators/withDefinedDayType';
 import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
+import { MouseEventHandler } from 'react';
 
 import { StyledDay } from './Day.styled';
 import { DayType } from './types';
 
 export interface DayProps {
-  types: DayType[];
+  type: DayType;
   date: string;
-  disableWeekends?: boolean;
   dayClickHandler?: (date: string, type: DayType) => void;
-  dayContextMenuHandler?: (date: string, type: DayType) => void;
+  dayContextMenuHandler?: (date: string, x: number, y: number) => void;
 }
 
-export const Day = ({ date, types, disableWeekends, dayClickHandler, dayContextMenuHandler }: DayProps) => {
-  const { firstDayOfTheViewMonth, selectedDate, maxDate, minDate, dispatch } = useApp();
-  const dateObj = new Date(date);
-  dateObj.setHours(0);
+export const BaseDay = ({ date, type, dayClickHandler, dayContextMenuHandler }: DayProps) => {
+  const { dispatch } = useApp();
 
-  const day = dateObj.getDate();
-
-  const dayWeekIndex = dateObj.getDay();
-
-  const isDisabled = () => {
-    if (disableWeekends && (dayWeekIndex === 0 || dayWeekIndex === 6)) {
-      return true;
-    }
-
-    if (firstDayOfTheViewMonth.getMonth() !== dateObj.getMonth()) {
-      return true;
-    }
-
-    let disabled: boolean = false;
-
-    if (maxDate) {
-      const maxDateObj = new Date(maxDate);
-      disabled = dateObj > maxDateObj;
-    }
-
-    if (minDate && !disabled) {
-      const minDateObj = new Date(minDate);
-      disabled = dateObj < minDateObj;
-    }
-
-    return disabled;
-  };
-
-  const defineType = () => {
-    if (isDisabled()) {
-      return DayType.DISABLED;
-    }
-    if (selectedDate && toStringDate(selectedDate) === date) {
-      return DayType.SELECTED;
-    }
-    if (types.includes(DayType.HOLIDAY)) {
-      return DayType.HOLIDAY;
-    }
-
-    return DayType.DEFAULT;
-  };
+  const [, , day] = date.split('-').map((datePart) => Number(datePart));
 
   const clickHandler = () => {
     if (dayClickHandler) {
-      dayClickHandler(date, types[0]);
+      dayClickHandler(date, type);
     }
-    if (!isDisabled()) {
+    if (type !== DayType.DISABLED) {
       dispatch({ type: ActionType.SET_DATE, payload: new Date(date) });
     }
   };
 
-  const contextMenuHandler = () => {
-    if (dayContextMenuHandler) {
-      dayContextMenuHandler(date, types[0]);
+  const contextMenuHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
+    if (dayContextMenuHandler && type !== DayType.DISABLED) {
+      event.preventDefault();
+      const { pageX, pageY } = event;
+      dayContextMenuHandler(date, pageX, pageY);
     }
   };
 
   return (
-    <StyledDay $type={defineType()} onClick={clickHandler} onContextMenu={contextMenuHandler}>
+    <StyledDay $type={type} onClick={clickHandler} onContextMenu={contextMenuHandler}>
       {day}
     </StyledDay>
   );
 };
+
+export const Day = withDefinedDayType(BaseDay);

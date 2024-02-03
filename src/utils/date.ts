@@ -1,14 +1,33 @@
 import { WeekStart } from '@types';
 
-export const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+const VALID_DATE_STRING_REGEXP = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/; // yyyy-mm-dd
 
-export const toStringDate = (date: Date) => {
+export const validateDateString = (dateString: string): string => {
+  const str = dateString.match(VALID_DATE_STRING_REGEXP);
+  if (str) {
+    return str[0];
+  } else {
+    throw new TypeError(`Incorrect string format: ${dateString}. Date string must be yyyy-mm-dd`);
+  }
+};
+
+export function getUTCDatefromDateString(date: undefined): undefined;
+export function getUTCDatefromDateString(date: string): Date;
+export function getUTCDatefromDateString(date?: string) {
+  if (!date) {
+    return;
+  }
+  const validatedDate = validateDateString(date);
+  const [year, month, day] = validatedDate.split('-').map((datePart) => Number(datePart));
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+export const toStringDate = (date: Date): string => {
   try {
     date.toISOString();
   } catch (e) {
     return '';
   }
-  date.toUTCString();
   return date.toISOString().split('T')[0];
 };
 

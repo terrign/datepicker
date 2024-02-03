@@ -1,10 +1,19 @@
 import {
   changeDate,
   createCalendarMonthView,
-  daysInMonth,
   getFirstDayOfTheMonth,
   getMonthName,
+  getUTCDatefromDateString,
   toStringDate,
+  validateDateString,
 } from './date';
 
-export { changeDate, createCalendarMonthView, daysInMonth, getFirstDayOfTheMonth, getMonthName, toStringDate };
+export {
+  changeDate,
+  createCalendarMonthView,
+  getFirstDayOfTheMonth,
+  getMonthName,
+  getUTCDatefromDateString,
+  toStringDate,
+  validateDateString,
+};

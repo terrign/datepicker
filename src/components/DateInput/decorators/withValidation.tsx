@@ -1,3 +1,4 @@
+import { getUTCDatefromDateString, validateDateString } from '@utils';
 import { DateInputProps } from 'components/DateInput';
 import { DateInputError } from 'components/DateInput/types';
 import { useApp } from 'context/App';
@@ -23,35 +24,34 @@ export const withValidation: WithValidationType = (Component) => {
       setErrorMessage('');
     };
     const withValidationDateSelectHandler = useCallback(
-      (value: string) => {
-        const date = new Date(value);
+      (dateString: string) => {
+        const date = getUTCDatefromDateString(dateString);
 
-        if (isNaN(date.valueOf())) {
-          setErrorMessage(DateInputError.INVALID);
-          throw new Error(DateInputError.INVALID);
-        }
-
-        if (value.length != 10 && value.length !== 0) {
-          setErrorMessage(DateInputError.FORMAT);
-          throw new Error(DateInputError.FORMAT);
+        try {
+          validateDateString(dateString);
+        } catch (e) {
+          if (e instanceof Error) {
+            setErrorMessage(DateInputError.FORMAT);
+          }
+          throw e;
         }
 
         if (minDate) {
-          if (date < new Date(minDate)) {
+          if (date < getUTCDatefromDateString(minDate)) {
             setErrorMessage(DateInputError.RANGE);
             throw new Error(DateInputError.RANGE);
           }
         }
 
         if (maxDate) {
-          if (date > new Date(maxDate)) {
+          if (date > getUTCDatefromDateString(maxDate)) {
             setErrorMessage(DateInputError.RANGE);
             throw new Error(DateInputError.RANGE);
           }
         }
         removeError();
         if (onDateSelect) {
-          onDateSelect(value);
+          onDateSelect(dateString);
         }
       },
       [maxDate, minDate, onDateSelect],

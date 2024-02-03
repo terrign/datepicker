@@ -1,4 +1,4 @@
-import { toStringDate } from '@utils';
+import { getUTCDatefromDateString, toStringDate } from '@utils';
 import { withValidation } from 'components/DateInput/decorators/withValidation';
 import { Button } from 'components/UI/Button';
 import { CalendarIcon, ClearIcon } from 'components/UI/Icons';
@@ -38,15 +38,13 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
     const input = innerRef.current;
     if (input) {
       const onDateSelectHandler = (event: Event) => {
-        const value = (event.target as HTMLInputElement).value;
+        const dateString = (event.target as HTMLInputElement).value;
         try {
           if (onDateSelect) {
-            onDateSelect(value);
+            onDateSelect(dateString);
           }
-          const newDateObj = new Date(value);
-
+          const newDateObj = getUTCDatefromDateString(dateString);
           dispatch({ type: ActionType.SET_DATE, payload: newDateObj });
-          dispatch({ type: ActionType.SET_VIEW_DATE, payload: newDateObj });
         } catch {}
       };
       input.addEventListener('change', onDateSelectHandler);

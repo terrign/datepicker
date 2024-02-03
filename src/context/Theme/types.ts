@@ -1,7 +1,4 @@
-export enum PredefinedTheme {
-  LIGHT = 'light',
-  DARK = 'dark',
-}
+export type PredefinedTheme = 'light' | 'dark';
 
 export interface ThemeObject {
   bgColor: string;
@@ -24,4 +21,9 @@ export interface ThemeObject {
 
   selectionRangeEndDayBgColor: string;
   selectionRangeEndDayFontColor: string;
+
+  modalButtonColor: string;
+  modalButtonHoverBgColor: string;
+  modalButtonHoverColor: string;
+  modalBg: string;
 }

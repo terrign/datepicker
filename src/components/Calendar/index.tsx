@@ -1,4 +1,4 @@
-import { DayType } from 'components/Calendar/Day/types';
+import { withDayContextMenu } from 'components/Calendar/decorators/withDayContextMenu';
 import { withDefaultDays } from 'components/Calendar/decorators/withDefaultDays';
 import { withHolidays } from 'components/Calendar/decorators/withHolidays';
 import { useApp } from 'context/App';
@@ -12,7 +12,7 @@ import { WeekDays } from './Weekdays';
 
 export interface CalendarConfig {
   /**
-   * An array of dates in yyyy-mm-dd, which should be marked as holidays
+   * An array of dates in yyyy-mm-dd format, which should be marked as holidays
    */
   holidays?: string[];
   /**
@@ -20,12 +20,12 @@ export interface CalendarConfig {
    */
   disableWeekends?: boolean;
   /**
-   * Left click modal options
+   * Day left click modal options
    * default: []
    */
   modalOptions?: {
     label: string;
-    onClick: (date: string, dayType: DayType) => void;
+    onClick: (date: string) => void;
   }[];
 }
 
@@ -54,4 +54,4 @@ const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends }) => {
   );
 };
 
-export const Calendar = withDefaultDays(withHolidays(BaseCalendar));
+export const Calendar = withDefaultDays(withDayContextMenu(withHolidays(BaseCalendar)));

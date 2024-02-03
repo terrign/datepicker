@@ -1,8 +1,9 @@
-import { Day, DayProps } from 'components/Calendar/Day';
+import { Day } from 'components/Calendar/Day';
+import { UndefinedTypeDayProps } from 'components/Calendar/Day/decorators/withDefinedDayType';
 import { Flex } from 'components/UI/Flex';
 
 export interface DaysOfTheMonthData {
-  days: DayProps[][];
+  days: UndefinedTypeDayProps[][];
   disableWeekends?: boolean;
 }
 
@@ -11,8 +12,8 @@ export const Month = ({ days, disableWeekends }: DaysOfTheMonthData) => {
     <Flex $dir="col">
       {days.map((week) => (
         <Flex key={week[0].date} style={{ width: '100%' }}>
-          {week.map(({ date, types }) => {
-            return <Day date={date} key={date} types={types} disableWeekends={disableWeekends} />;
+          {week.map((dayProps) => {
+            return <Day key={dayProps.date} disableWeekends={disableWeekends} {...dayProps} />;
           })}
         </Flex>
       ))}

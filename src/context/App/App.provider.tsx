@@ -1,7 +1,8 @@
 import { WeekStart } from '@types';
+import { getUTCDatefromDateString } from '@utils';
 import { AppContext } from 'context/App/App.context';
 import { useApp } from 'context/App/useApp';
-import { PropsWithChildren, useMemo, useReducer } from 'react';
+import { PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
 
 import { appReducer } from './App.reducer';
 import { ActionType, AppReducerType } from './types';
@@ -17,19 +18,22 @@ export const AppProvider = ({ children, weekStart, defaultSelectedDate, minDate,
   const initialValues = useApp();
   const [state, dispatch] = useReducer<AppReducerType>(appReducer, initialValues);
 
-  if (defaultSelectedDate) {
-    dispatch({ type: ActionType.SET_DATE, payload: new Date(defaultSelectedDate) });
-  }
+  useEffect(() => {
+    if (defaultSelectedDate) {
+      const initialDate = getUTCDatefromDateString(defaultSelectedDate);
+      dispatch({ type: ActionType.SET_DATE, payload: initialDate });
+    }
+  }, [defaultSelectedDate]);
 
-  const value = useMemo(
-    () => ({
+  const value = useMemo(() => {
+    return {
       ...state,
       weekStart,
       minDate,
       maxDate,
       dispatch,
-    }),
-    [state, weekStart, minDate, maxDate],
-  );
+    };
+  }, [state, weekStart, minDate, maxDate]);
+
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

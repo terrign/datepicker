@@ -24,6 +24,6 @@ export const withHolidays = (Component: FC<CalendarProps>) => {
     );
     return <Component days={newDays} {...rest} />;
   };
-  Wrapper.displayName = 'Calendar';
+  Wrapper.displayName = Component.name;
   return Wrapper;
 };

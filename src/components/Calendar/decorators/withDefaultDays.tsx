@@ -9,6 +9,6 @@ export const withDefaultDays = (Component: FC<CalendarProps>) => {
     const days = createCalendarMonthView(firstDayOfTheViewMonth, weekStart);
     return <Component {...props} days={days} />;
   };
-  Wrapper.displayName = 'Calendar';
+  Wrapper.displayName = Component.name;
   return Wrapper;
 };
