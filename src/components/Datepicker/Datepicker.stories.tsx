@@ -55,5 +55,8 @@ export const Dark: Story = {
         },
       ],
     },
+    onError(error) {
+      console.log(error.message);
+    },
   },
 };

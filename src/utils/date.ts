@@ -7,7 +7,7 @@ export const validateDateString = (dateString: string): string => {
   if (str) {
     return str[0];
   } else {
-    throw new TypeError(`Incorrect string format: ${dateString}. Date string must be yyyy-mm-dd`);
+    throw new TypeError(`Incorrect date string format: ${dateString}. Date string must be yyyy-mm-dd`);
   }
 };
 

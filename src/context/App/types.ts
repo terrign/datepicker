@@ -16,6 +16,7 @@ export interface AppContextType {
   calendarVisible: boolean;
   minDate?: string;
   maxDate?: string;
+  onError?: (error: Error) => void;
   // clientOnSelectHandler?: (date: string) => void;
   dispatch: Dispatch<Action>;
 }

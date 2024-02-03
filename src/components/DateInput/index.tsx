@@ -9,17 +9,16 @@ import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useEffect, useImper
 import { StyledDateInput } from './styled';
 
 export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  errorMessage?: string;
   onDateSelect?: (value: string) => void;
   clearHandler?: () => void;
 }
 
 export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(function DateInput(
-  { errorMessage, onDateSelect, clearHandler, ...rest },
+  { onDateSelect, clearHandler, ...rest },
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
-  const { calendarVisible, dispatch, selectedDate } = useApp();
+  const { calendarVisible, dispatch, selectedDate, onError } = useApp();
 
   useImperativeHandle(ref, () => innerRef.current as HTMLInputElement);
 
@@ -45,16 +44,20 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
           }
           const newDateObj = getUTCDatefromDateString(dateString);
           dispatch({ type: ActionType.SET_DATE, payload: newDateObj });
-        } catch {}
+        } catch (error) {
+          if (error instanceof Error && onError) {
+            onError(error);
+          }
+        }
       };
       input.addEventListener('change', onDateSelectHandler);
       return () => input.removeEventListener('change', onDateSelectHandler);
     }
-  }, [innerRef, onDateSelect, dispatch]);
+  }, [innerRef, onDateSelect, dispatch, onError]);
 
   useEffect(() => {
     const input = innerRef.current;
-    if (input && selectedDate) {
+    if (input && selectedDate && input.value !== toStringDate(selectedDate)) {
       input.value = toStringDate(selectedDate);
     }
   }, [selectedDate]);
@@ -64,7 +67,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
   };
 
   return (
-    <StyledDateInput $errorMessage={errorMessage} $hideBottomBorder={calendarVisible}>
+    <StyledDateInput>
       <Button $nohover type="button" onClick={handleCalendar}>
         <CalendarIcon />
       </Button>

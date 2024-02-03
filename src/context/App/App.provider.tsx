@@ -10,11 +10,19 @@ import { ActionType, AppReducerType } from './types';
 interface AppProviderProps extends PropsWithChildren {
   weekStart: WeekStart;
   defaultSelectedDate?: string;
+  onError?: (error: Error) => void;
   minDate?: string;
   maxDate?: string;
 }
 
-export const AppProvider = ({ children, weekStart, defaultSelectedDate, minDate, maxDate }: AppProviderProps) => {
+export const AppProvider = ({
+  children,
+  weekStart,
+  defaultSelectedDate,
+  minDate,
+  maxDate,
+  onError,
+}: AppProviderProps) => {
   const initialValues = useApp();
   const [state, dispatch] = useReducer<AppReducerType>(appReducer, initialValues);
 
@@ -31,9 +39,10 @@ export const AppProvider = ({ children, weekStart, defaultSelectedDate, minDate,
       weekStart,
       minDate,
       maxDate,
+      onError,
       dispatch,
     };
-  }, [state, weekStart, minDate, maxDate]);
+  }, [state, weekStart, minDate, maxDate, onError]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

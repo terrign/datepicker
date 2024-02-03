@@ -22,6 +22,10 @@ export interface DatePickerProps {
    */
   onDateSelect?: (date: string) => void;
   /**
+   * Callback to run on date input error;
+   */
+  onError: (error: Error) => void;
+  /**
    * Default selected date in yyyy-mm-dd format
    */
   defaultSelectedDate?: string;
@@ -53,12 +57,19 @@ export const DatePicker = ({
   calendarConfig,
   defaultSelectedDate,
   onDateSelect,
+  onError,
 }: DatePickerProps) => {
   type;
 
   return (
     <ErrorBoundary>
-      <AppProvider weekStart={weekStart} defaultSelectedDate={defaultSelectedDate} minDate={minDate} maxDate={maxDate}>
+      <AppProvider
+        weekStart={weekStart}
+        defaultSelectedDate={defaultSelectedDate}
+        minDate={minDate}
+        maxDate={maxDate}
+        onError={onError}
+      >
         <CustomThemeProvider theme={theme} customStyles={customStyles}>
           <DatepickerContainer>
             <DateInput onDateSelect={onDateSelect} />
