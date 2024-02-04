@@ -36,7 +36,7 @@ export const toStringDate = (date: Date): string => {
 };
 
 export const getFirstDayOfTheMonth = (dateString: string) => {
-  const newDate = getUTCDatefromDateString(dateString);
+  const newDate = getUTCDatefromDateString(validateDateString(dateString));
   newDate.setDate(1);
   return toStringDate(newDate);
 };

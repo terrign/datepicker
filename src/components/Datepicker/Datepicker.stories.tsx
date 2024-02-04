@@ -23,6 +23,9 @@ const meta = {
     minDate: {
       control: { type: 'text' },
     },
+    defaultSelectedDate: {
+      control: { type: 'text' },
+    },
   },
 } satisfies Meta<typeof DatePicker>;
 

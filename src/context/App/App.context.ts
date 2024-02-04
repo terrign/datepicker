@@ -8,6 +8,7 @@ export const initialValues: AppContextType = {
   selectedDate: null,
   firstDayOfTheViewMonth: getFirstDayOfTheMonth(toStringDate(new Date(Date.now()))),
   calendarVisible: false,
+  disableWeekends: false,
   dispatch: () => {},
 };
 

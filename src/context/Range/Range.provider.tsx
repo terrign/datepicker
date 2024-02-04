@@ -2,8 +2,8 @@ import { RangeContext } from 'context/Range/Range.context';
 import { PropsWithChildren, useMemo, useState } from 'react';
 
 export interface RangeProvider extends PropsWithChildren {
-  defaultSelectionStart?: string;
-  defaultSelectionEnd?: string;
+  defaultSelectionStart?: string | null;
+  defaultSelectionEnd?: string | null;
 }
 
 export const Range = ({ children, defaultSelectionStart, defaultSelectionEnd }: RangeProvider) => {

@@ -9,7 +9,7 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
       return {
         ...state,
         selectedDate: payload,
-        firstDayOfTheViewMonth: getFirstDayOfTheMonth(payload ?? firstDayOfTheViewMonth),
+        firstDayOfTheViewMonth: payload ? getFirstDayOfTheMonth(payload) : firstDayOfTheViewMonth,
       };
     case ActionType.CHANGE_MONTH:
       return {

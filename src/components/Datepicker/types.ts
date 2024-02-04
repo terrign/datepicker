@@ -15,7 +15,7 @@ export interface DatePickerProps {
   /**
    * Callback to run on date selection, selected date in yyyy-mm-dd is provided as first argument
    */
-  onDateSelect?: (date: string) => void;
+  onDateSelect?: (date: string | null) => void;
   /**
    * Callback to run on date input error;
    */
@@ -23,7 +23,7 @@ export interface DatePickerProps {
   /**
    * Default selected date in yyyy-mm-dd format
    */
-  defaultSelectedDate?: string;
+  defaultSelectedDate?: string | null;
   /**
    * Custom colors provided as ThemeObject
    */

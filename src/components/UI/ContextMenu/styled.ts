@@ -16,6 +16,7 @@ export const StyledContextMenu = styled.div<Props>`
   border: 1px solid ${({ theme }) => theme.borderColor};
   flex-direction: column;
   background: ${({ theme }) => theme.modalBg};
+  z-index: 201;
 
   button {
     ${font}

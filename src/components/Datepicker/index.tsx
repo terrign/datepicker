@@ -29,6 +29,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(fun
       <AppProvider
         weekStart={weekStart}
         defaultSelectedDate={defaultSelectedDate}
+        disableWeekends={Boolean(calendarConfig?.disableWeekends)}
         minDate={minDate}
         maxDate={maxDate}
         onError={onError}

@@ -24,9 +24,9 @@ export const withRange: WithRangePicker = (type: 'from' | 'to') => (Component) =
       return <Component {...rest} ref={ref} onDateSelect={onDateSelect} />;
     }
 
-    const onDateSelectWithRange = (selectedDate: string) => {
+    const onDateSelectWithRange = (selectedDate: string | null) => {
       if (type === 'from' && setSelectionStart) {
-        if (selectionEnd && selectedDate >= selectionEnd) {
+        if (selectionEnd && selectedDate && selectedDate >= selectionEnd) {
           throw new Error('Selection start >= selection end');
         } else {
           setSelectionStart(selectedDate);
@@ -37,7 +37,7 @@ export const withRange: WithRangePicker = (type: 'from' | 'to') => (Component) =
       }
 
       if (type === 'to') {
-        if (selectionStart && selectedDate <= selectionStart) {
+        if (selectionStart && selectedDate && selectedDate <= selectionStart) {
           throw new Error('Selection end <= selection start');
         } else {
           setSelectionEnd(selectedDate);
@@ -48,7 +48,7 @@ export const withRange: WithRangePicker = (type: 'from' | 'to') => (Component) =
       }
     };
 
-    const defaultDate = (type === 'from' ? selectionStart : selectionEnd) ?? undefined;
+    const defaultDate = type === 'from' ? selectionStart : selectionEnd;
 
     return <Component {...rest} ref={ref} onDateSelect={onDateSelectWithRange} defaultSelectedDate={defaultDate} />;
   });

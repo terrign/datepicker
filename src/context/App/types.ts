@@ -11,6 +11,7 @@ export enum ActionType {
 
 export interface AppContextType {
   weekStart: WeekStart;
+  disableWeekends: boolean;
   selectedDate: string | null;
   firstDayOfTheViewMonth: string;
   calendarVisible: boolean;

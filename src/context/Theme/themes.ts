@@ -23,10 +23,10 @@ const defaultTheme: ThemeObject = {
   selectionRangeEndDayBgColor: Color.BLUE,
   selectionRangeEndDayFontColor: Color.WHITE,
 
-  modalButtonColor: Color.BLUE,
-  modalButtonHoverBgColor: Color.LIGHT_GRAY_4,
-  modalButtonHoverColor: Color.PALE_BLUE_1,
-  modalBg: Color.BLACK,
+  modalButtonColor: Color.BLACK,
+  modalButtonHoverBgColor: Color.BLUE,
+  modalButtonHoverColor: Color.WHITE,
+  modalBg: Color.WHITE,
 };
 
 export const lightTheme: ThemeObject = {
@@ -39,4 +39,7 @@ export const darkTheme: ThemeObject = {
   fontColor: Color.WHITE,
   hoverBgColor: Color.LIGHT_GRAY_1,
   borderColor: Color.LIGHT_GRAY_3,
+
+  modalButtonColor: Color.WHITE,
+  modalBg: Color.BLACK,
 };

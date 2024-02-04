@@ -8,12 +8,11 @@ import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useEffect, useImper
 import { StyledDateInput } from './styled';
 
 export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  onDateSelect?: (value: string) => void;
-  clearHandler?: () => void;
+  onDateSelect?: (value: string | null) => void;
 }
 
 export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(function DateInput(
-  { onDateSelect, clearHandler, style, className, ...rest },
+  { onDateSelect, style, className, ...rest },
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
@@ -25,8 +24,8 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
     const input = innerRef.current;
     if (input) {
       input.value = '';
-      if (clearHandler) {
-        clearHandler();
+      if (onDateSelect) {
+        onDateSelect(null);
         dispatch({ type: ActionType.SET_DATE, payload: null });
       }
     }

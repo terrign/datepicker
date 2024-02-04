@@ -8,8 +8,9 @@ import { ActionType, AppReducerType } from './types';
 
 interface AppProviderProps extends PropsWithChildren {
   weekStart: WeekStart;
-  defaultSelectedDate?: string;
+  defaultSelectedDate?: string | null;
   onError?: (error: Error) => void;
+  disableWeekends: boolean;
   minDate?: string;
   maxDate?: string;
 }
@@ -17,6 +18,7 @@ interface AppProviderProps extends PropsWithChildren {
 export const AppProvider = ({
   children,
   weekStart,
+  disableWeekends,
   defaultSelectedDate,
   minDate,
   maxDate,
@@ -35,12 +37,13 @@ export const AppProvider = ({
     return {
       ...state,
       weekStart,
+      disableWeekends,
       minDate,
       maxDate,
       onError,
       dispatch,
     };
-  }, [state, weekStart, minDate, maxDate, onError]);
+  }, [state, weekStart, minDate, maxDate, disableWeekends, onError]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

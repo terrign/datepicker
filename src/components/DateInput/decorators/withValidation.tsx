@@ -13,14 +13,20 @@ export interface WithValidationType {
 export const withValidation: WithValidationType = (Component) => {
   const Wrapper: ForwardRefExoticComponent<WithValidationProps> = forwardRef<HTMLInputElement, WithValidationProps>(
     ({ onDateSelect, ...rest }, ref) => {
-      const { minDate, maxDate } = useApp();
+      const { minDate, maxDate, disableWeekends } = useApp();
 
       const withValidationDateSelectHandler = useCallback(
-        (dateString: string) => {
+        (dateString: string | null) => {
+          if (!dateString) {
+            if (onDateSelect) {
+              onDateSelect(dateString);
+            }
+            return;
+          }
           const date = getUTCDatefromDateString(dateString);
 
           if (minDate) {
-            if (date < getUTCDatefromDateString(minDate)) {
+            if (date && date < getUTCDatefromDateString(minDate)) {
               throw new Error(DateInputError.RANGE);
             }
           }
@@ -30,11 +36,16 @@ export const withValidation: WithValidationType = (Component) => {
               throw new Error(DateInputError.RANGE);
             }
           }
+
+          if (disableWeekends && date && (date.getDay() === 0 || date.getDay() === 6)) {
+            throw new Error(DateInputError.WEEKEND_DISABLED);
+          }
+
           if (onDateSelect) {
             onDateSelect(dateString);
           }
         },
-        [maxDate, minDate, onDateSelect],
+        [maxDate, minDate, disableWeekends, onDateSelect],
       );
 
       return <Component {...rest} ref={ref} onDateSelect={withValidationDateSelectHandler} />;
