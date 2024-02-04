@@ -6,7 +6,7 @@ export interface RangeProvider extends PropsWithChildren {
   defaultSelectionEnd?: string;
 }
 
-export const RangeProvider = ({ children, defaultSelectionStart, defaultSelectionEnd }: RangeProvider) => {
+export const Range = ({ children, defaultSelectionStart, defaultSelectionEnd }: RangeProvider) => {
   const [selectionStart, setSelectionStart] = useState<string | null>(defaultSelectionStart ?? null);
   const [selectionEnd, setSelectionEnd] = useState<string | null>(defaultSelectionEnd ?? null);
 

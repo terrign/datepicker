@@ -2,6 +2,7 @@ import { getDateParts, getUTCDatefromDateString } from '@utils';
 import { DayProps } from 'components/Calendar/Day';
 import { DayType } from 'components/Calendar/Day/types';
 import { useApp } from 'context/App';
+import { useRange } from 'context/Range/useRange';
 import { FC } from 'react';
 
 export interface UndefinedTypeDayProps extends Omit<DayProps, 'type'> {
@@ -12,6 +13,7 @@ export interface UndefinedTypeDayProps extends Omit<DayProps, 'type'> {
 export const withDefinedDayType = (Component: FC<DayProps>) => {
   const Wrapper = ({ types, disableWeekends, date, ...rest }: UndefinedTypeDayProps) => {
     const { firstDayOfTheViewMonth, selectedDate, maxDate, minDate } = useApp();
+    const { selectionStart, selectionEnd } = useRange();
 
     const dateObj = getUTCDatefromDateString(date);
 
@@ -44,9 +46,26 @@ export const withDefinedDayType = (Component: FC<DayProps>) => {
       if (isDisabled()) {
         return DayType.DISABLED;
       }
+
+      if (selectionStart === date) {
+        return DayType.SELECTION_START;
+      }
+      if (selectionEnd === date) {
+        return DayType.SELECTION_END;
+      }
+
       if (selectedDate && selectedDate === date) {
         return DayType.SELECTED;
       }
+
+      if (selectionStart && selectionEnd) {
+        const start = getUTCDatefromDateString(selectionStart);
+        const end = getUTCDatefromDateString(selectionEnd);
+        if (dateObj > start && dateObj < end) {
+          return DayType.SELECTION_IN_RANGE;
+        }
+      }
+
       if (types.includes(DayType.HOLIDAY)) {
         return DayType.HOLIDAY;
       }

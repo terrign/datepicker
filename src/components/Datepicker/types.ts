@@ -1,10 +1,9 @@
 import { WeekStart } from '@types';
 import { CalendarConfig } from 'components/Calendar';
 import { PredefinedTheme, ThemeObject } from 'context/Theme/types';
-import { DetailedHTMLProps, ForwardRefExoticComponent, InputHTMLAttributes } from 'react';
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
-export interface DatePickerProps
-  extends Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onError' | 'ref'> {
+export interface DatePickerProps {
   /**
    * First day of the week
    */
@@ -39,14 +38,8 @@ export interface DatePickerProps
   minDate?: string;
   calendarConfig?: CalendarConfig;
   locale?: string;
-  /**
-   * Used with RangePickerProvider
-   */
-  from?: boolean;
-  /**
-   * Used with RangePickerProvider
-   */
   to?: boolean;
 }
 
-export type DatePickerComponent = ForwardRefExoticComponent<DatePickerProps>;
+export type DatePickerInputProps = DatePickerProps &
+  Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onError'>;

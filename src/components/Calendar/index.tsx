@@ -23,6 +23,7 @@ export interface CalendarConfig {
    * Day left click modal options
    * default: []
    */
+  onDateSelect?: (date: string) => void;
   modalOptions?: {
     label: string;
     onClick: (date: string) => void;
@@ -31,7 +32,7 @@ export interface CalendarConfig {
 
 export type CalendarProps = DaysOfTheMonthData & CalendarConfig;
 
-const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends }) => {
+const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect }) => {
   const { calendarVisible, dispatch } = useApp();
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends }) => {
     <Container $hidden={!calendarVisible}>
       <Controls />
       <WeekDays />
-      <Month days={days} disableWeekends={disableWeekends} />
+      <Month days={days} disableWeekends={disableWeekends} onDateSelect={onDateSelect} />
     </Container>
   );
 };

@@ -9,21 +9,24 @@ import { DayType } from './types';
 export interface DayProps {
   type: DayType;
   date: string;
-  dayClickHandler?: (date: string, type: DayType) => void;
+  onDateSelect?: (date: string) => void;
   dayContextMenuHandler?: (date: string, x: number, y: number) => void;
 }
 
-export const BaseDay = ({ date, type, dayClickHandler, dayContextMenuHandler }: DayProps) => {
-  const { dispatch } = useApp();
-
+export const BaseDay = ({ date, type, onDateSelect, dayContextMenuHandler }: DayProps) => {
   const [, , day] = date.split('-').map((datePart) => Number(datePart));
+  const { dispatch, onError } = useApp();
 
   const clickHandler = () => {
-    if (dayClickHandler) {
-      dayClickHandler(date, type);
-    }
-    if (type !== DayType.DISABLED) {
-      dispatch({ type: ActionType.SET_DATE, payload: date });
+    try {
+      if (onDateSelect && type !== DayType.DISABLED) {
+        onDateSelect(date);
+        dispatch({ type: ActionType.SET_DATE, payload: date });
+      }
+    } catch (error) {
+      if (error instanceof Error && onError) {
+        onError(error);
+      }
     }
   };
 

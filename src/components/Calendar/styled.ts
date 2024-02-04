@@ -17,4 +17,5 @@ export const Container = styled.div<{ $hidden: boolean }>`
   top: 48px;
   left: 0px;
   max-width: 250px;
+  z-index: 999;
 `;
