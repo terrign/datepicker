@@ -16,5 +16,5 @@ export const Container = styled.div<{ $hidden: boolean }>`
   box-sizing: border-box;
   top: 48px;
   left: 0px;
-  min-width: 250px;
+  max-width: 250px;
 `;

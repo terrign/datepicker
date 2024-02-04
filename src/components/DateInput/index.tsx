@@ -14,7 +14,7 @@ export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HT
 }
 
 export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(function DateInput(
-  { onDateSelect, clearHandler, ...rest },
+  { onDateSelect, clearHandler, style, className, ...rest },
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
@@ -67,7 +67,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
   };
 
   return (
-    <StyledDateInput>
+    <StyledDateInput style={style} className={className}>
       <Button $nohover type="button" onClick={handleCalendar}>
         <CalendarIcon />
       </Button>

@@ -17,6 +17,8 @@ export interface AppContextType {
   minDate?: string;
   maxDate?: string;
   onError?: (error: Error) => void;
+  from?: boolean;
+  to?: boolean;
   // clientOnSelectHandler?: (date: string) => void;
   dispatch: Dispatch<Action>;
 }
