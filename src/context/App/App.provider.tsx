@@ -1,5 +1,4 @@
 import { WeekStart } from '@types';
-import { getUTCDatefromDateString } from '@utils';
 import { AppContext } from 'context/App/App.context';
 import { useApp } from 'context/App/useApp';
 import { PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
@@ -28,8 +27,7 @@ export const AppProvider = ({
 
   useEffect(() => {
     if (defaultSelectedDate) {
-      const initialDate = getUTCDatefromDateString(defaultSelectedDate);
-      dispatch({ type: ActionType.SET_DATE, payload: initialDate });
+      dispatch({ type: ActionType.SET_DATE, payload: defaultSelectedDate });
     }
   }, [defaultSelectedDate]);
 

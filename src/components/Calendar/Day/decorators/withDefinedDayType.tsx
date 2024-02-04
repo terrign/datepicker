@@ -1,4 +1,4 @@
-import { getUTCDatefromDateString, toStringDate } from '@utils';
+import { getDateParts, getUTCDatefromDateString } from '@utils';
 import { DayProps } from 'components/Calendar/Day';
 import { DayType } from 'components/Calendar/Day/types';
 import { useApp } from 'context/App';
@@ -21,7 +21,7 @@ export const withDefinedDayType = (Component: FC<DayProps>) => {
         return true;
       }
 
-      if (firstDayOfTheViewMonth.getMonth() !== dateObj.getMonth()) {
+      if (getDateParts(firstDayOfTheViewMonth).month !== getDateParts(date).month) {
         return true;
       }
 
@@ -44,7 +44,7 @@ export const withDefinedDayType = (Component: FC<DayProps>) => {
       if (isDisabled()) {
         return DayType.DISABLED;
       }
-      if (selectedDate && toStringDate(selectedDate) === date) {
+      if (selectedDate && selectedDate === date) {
         return DayType.SELECTED;
       }
       if (types.includes(DayType.HOLIDAY)) {

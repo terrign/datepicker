@@ -1,4 +1,3 @@
-import { getUTCDatefromDateString } from '@utils';
 import { withDefinedDayType } from 'components/Calendar/Day/decorators/withDefinedDayType';
 import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
@@ -24,7 +23,7 @@ export const BaseDay = ({ date, type, dayClickHandler, dayContextMenuHandler }: 
       dayClickHandler(date, type);
     }
     if (type !== DayType.DISABLED) {
-      dispatch({ type: ActionType.SET_DATE, payload: getUTCDatefromDateString(date) });
+      dispatch({ type: ActionType.SET_DATE, payload: date });
     }
   };
 

@@ -11,14 +11,18 @@ export const validateDateString = (dateString: string): string => {
   }
 };
 
+export const getDateParts = (date: string) => {
+  const [year, month, day] = date.split('-').map((part) => Number(part));
+  return { year, month, day };
+};
+
 export function getUTCDatefromDateString(date: undefined): undefined;
 export function getUTCDatefromDateString(date: string): Date;
 export function getUTCDatefromDateString(date?: string) {
   if (!date) {
     return;
   }
-  const validatedDate = validateDateString(date);
-  const [year, month, day] = validatedDate.split('-').map((datePart) => Number(datePart));
+  const { year, month, day } = getDateParts(validateDateString(date));
   return new Date(Date.UTC(year, month - 1, day));
 }
 
@@ -31,38 +35,37 @@ export const toStringDate = (date: Date): string => {
   return date.toISOString().split('T')[0];
 };
 
-export const getFirstDayOfTheMonth = (date: Date) => {
-  const newDate = new Date(date.valueOf());
+export const getFirstDayOfTheMonth = (dateString: string) => {
+  const newDate = getUTCDatefromDateString(dateString);
   newDate.setDate(1);
-  newDate.setHours(10);
-
-  return newDate;
+  return toStringDate(newDate);
 };
 
-export const changeDate = (date: Date, type: 'month' | 'year' | 'day', amount: number) => {
-  const prevValue = type === 'month' ? date.getMonth() : type === 'day' ? date.getDate() : date.getFullYear();
+export const changeDate = (dateString: string, type: 'month' | 'year' | 'day', amount: number) => {
+  const dateObj = getUTCDatefromDateString(dateString);
+  const prevValue = type === 'month' ? dateObj.getMonth() : type === 'day' ? dateObj.getDate() : dateObj.getFullYear();
   const newValue = prevValue + amount;
-  const newDate = new Date(date.valueOf());
   if (type === 'month') {
-    newDate.setMonth(newValue);
+    dateObj.setMonth(newValue);
   } else if (type === 'year') {
-    newDate.setFullYear(newValue);
+    dateObj.setFullYear(newValue);
   } else {
-    newDate.setDate(newValue);
+    dateObj.setDate(newValue);
   }
-  return newDate;
+  return toStringDate(dateObj);
 };
 
 const capitalizeFirstLetter = (str: string) => str[0].toUpperCase() + str.substring(1);
 
 export const getMonthName = (month: number, locale: Intl.LocalesArgument = 'en-US') => {
-  const date = new Date(2000, month, 1);
+  const date = new Date(2000, month - 1, 1);
   const monthName = capitalizeFirstLetter(date.toLocaleString(locale, { month: 'long' }));
   return monthName;
 };
 
-export const createCalendarMonthView = (firstDayOfTheMonth: Date, weekStart: WeekStart) => {
-  const firstDayOfTheMonthWeekIndex = firstDayOfTheMonth.getDay();
+export const createCalendarMonthView = (firstDayOfTheMonth: string, weekStart: WeekStart) => {
+  const dateObj = getUTCDatefromDateString(firstDayOfTheMonth);
+  const firstDayOfTheMonthWeekIndex = dateObj.getDay();
   const weekStartIndex = weekStart === 'Sunday' ? 0 : 1;
   let daysFromTheLastMonthToPrepend = firstDayOfTheMonthWeekIndex - weekStartIndex;
 
@@ -70,7 +73,7 @@ export const createCalendarMonthView = (firstDayOfTheMonth: Date, weekStart: Wee
     daysFromTheLastMonthToPrepend = 6;
   }
   const result = [];
-  let currentDate = new Date(firstDayOfTheMonth.valueOf());
+  let currentDate = firstDayOfTheMonth;
 
   for (let w = 0; result.length < 6; w++) {
     const week = [];
@@ -78,17 +81,17 @@ export const createCalendarMonthView = (firstDayOfTheMonth: Date, weekStart: Wee
       while (daysFromTheLastMonthToPrepend > 0) {
         currentDate = changeDate(currentDate, 'day', -1);
         week.unshift({
-          date: toStringDate(currentDate),
+          date: currentDate,
           types: [],
         });
 
         daysFromTheLastMonthToPrepend -= 1;
       }
-      currentDate = new Date(firstDayOfTheMonth.valueOf());
+      currentDate = firstDayOfTheMonth;
     }
     while (week.length < 7) {
       week.push({
-        date: toStringDate(currentDate),
+        date: currentDate,
         types: [],
       });
       currentDate = changeDate(currentDate, 'day', 1);

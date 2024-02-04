@@ -11,8 +11,8 @@ export enum ActionType {
 
 export interface AppContextType {
   weekStart: WeekStart;
-  selectedDate: Date | null;
-  firstDayOfTheViewMonth: Date;
+  selectedDate: string | null;
+  firstDayOfTheViewMonth: string;
   calendarVisible: boolean;
   minDate?: string;
   maxDate?: string;
@@ -25,7 +25,7 @@ export interface AppContextType {
 
 export type SetDateAction = {
   type: ActionType.SET_DATE;
-  payload: Date | null;
+  payload: string | null;
 };
 
 export type ChangeYearAction = {
@@ -44,7 +44,7 @@ export type HideShowCalendarAction = {
 
 export type ChangeViewDateAction = {
   type: ActionType.SET_VIEW_DATE;
-  payload: Date;
+  payload: string;
 };
 
 export type Action =

@@ -1,6 +1,7 @@
 import {
   changeDate,
   createCalendarMonthView,
+  getDateParts,
   getFirstDayOfTheMonth,
   getMonthName,
   getUTCDatefromDateString,
@@ -11,6 +12,7 @@ import {
 export {
   changeDate,
   createCalendarMonthView,
+  getDateParts,
   getFirstDayOfTheMonth,
   getMonthName,
   getUTCDatefromDateString,

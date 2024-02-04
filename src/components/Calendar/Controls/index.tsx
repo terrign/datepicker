@@ -1,4 +1,4 @@
-import { getMonthName } from '@utils';
+import { getDateParts, getMonthName } from '@utils';
 import { MonthYear } from 'components/Calendar/Controls/styled';
 import { Button } from 'components/UI/Button';
 import { Flex } from 'components/UI/Flex';
@@ -24,6 +24,8 @@ export const Controls = () => {
   const prevMonthHandler = () => {
     dispatch({ type: ActionType.CHANGE_MONTH, payload: -1 });
   };
+
+  const { year, month } = getDateParts(firstDayOfTheViewMonth);
   return (
     <Flex>
       <Flex>
@@ -35,7 +37,7 @@ export const Controls = () => {
         </Button>
       </Flex>
       <MonthYear>
-        {getMonthName(firstDayOfTheViewMonth.getMonth())} {firstDayOfTheViewMonth.getFullYear()}
+        {getMonthName(month)} {year}
       </MonthYear>
       <Flex>
         <Button onClick={nextMonthHandler} $control>
