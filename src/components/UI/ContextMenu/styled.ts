@@ -11,7 +11,7 @@ export const StyledContextMenu = styled.div<Props>`
   left: ${({ $x }) => $x}px;
   top: ${({ $y }) => $y}px;
   ${flex}
-  border-radius: 8px;
+
   gap: 5px;
   border: 1px solid ${({ theme }) => theme.borderColor};
   flex-direction: column;
@@ -25,6 +25,7 @@ export const StyledContextMenu = styled.div<Props>`
     padding: 5px;
     background: ${({ theme }) => theme.modalBg};
     color: ${({ theme }) => theme.modalButtonColor};
+    white-space: nowrap;
 
     &:hover {
       cursor: pointer;

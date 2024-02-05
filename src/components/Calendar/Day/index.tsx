@@ -33,8 +33,9 @@ export const BaseDay = ({ date, type, onDateSelect, dayContextMenuHandler }: Day
   const contextMenuHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
     if (dayContextMenuHandler && type !== DayType.DISABLED) {
       event.preventDefault();
-      const { pageX, pageY } = event;
-      dayContextMenuHandler(date, pageX, pageY);
+      const { offsetLeft, offsetTop, offsetHeight, offsetWidth } = event.currentTarget as HTMLElement;
+
+      dayContextMenuHandler(date, offsetLeft + offsetWidth, offsetTop + offsetHeight);
     }
   };
 

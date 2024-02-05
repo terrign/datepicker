@@ -5,6 +5,7 @@ import {
   getFirstDayOfTheMonth,
   getMonthName,
   getUTCDatefromDateString,
+  MONTH_NAMES,
   toStringDate,
   validateDateString,
 } from './date';
@@ -16,6 +17,7 @@ export {
   getFirstDayOfTheMonth,
   getMonthName,
   getUTCDatefromDateString,
+  MONTH_NAMES,
   toStringDate,
   validateDateString,
 };

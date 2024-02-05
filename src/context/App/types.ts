@@ -1,5 +1,5 @@
 import { WeekStart } from '@types';
-import { Dispatch } from 'react';
+import { Dispatch, RefObject } from 'react';
 
 export enum ActionType {
   SET_DATE,
@@ -7,6 +7,7 @@ export enum ActionType {
   CHANGE_MONTH,
   SET_VIEW_DATE,
   HIDE_SHOW_CALENDAR,
+  SET_CALENDAR_REF,
 }
 
 export interface AppContextType {
@@ -18,6 +19,7 @@ export interface AppContextType {
   minDate?: string;
   maxDate?: string;
   onError?: (error: Error) => void;
+  calendarContainerRef?: RefObject<HTMLDivElement>;
   from?: boolean;
   to?: boolean;
   // clientOnSelectHandler?: (date: string) => void;
@@ -47,13 +49,18 @@ export type ChangeViewDateAction = {
   type: ActionType.SET_VIEW_DATE;
   payload: string;
 };
+export type SetCalendarRef = {
+  type: ActionType.SET_CALENDAR_REF;
+  payload: RefObject<HTMLDivElement>;
+};
 
 export type Action =
   | ChangeYearAction
   | ChangeMonthAction
   | SetDateAction
   | HideShowCalendarAction
-  | ChangeViewDateAction;
+  | ChangeViewDateAction
+  | SetCalendarRef;
 
 export type ReducerState = Omit<AppContextType, 'dispatch'>;
 

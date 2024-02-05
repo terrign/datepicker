@@ -3,7 +3,15 @@ import { Button } from 'components/UI/Button';
 import { CalendarIcon, ClearIcon } from 'components/UI/Icons';
 import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
-import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useEffect, useImperativeHandle, useRef } from 'react';
+import {
+  DetailedHTMLProps,
+  FocusEvent,
+  forwardRef,
+  InputHTMLAttributes,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 
 import { StyledDateInput } from './styled';
 
@@ -12,7 +20,7 @@ export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HT
 }
 
 export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(function DateInput(
-  { onDateSelect, style, className, ...rest },
+  { onDateSelect, style, className, onBlur, ...rest },
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
@@ -64,12 +72,19 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
     dispatch({ type: ActionType.HIDE_SHOW_CALENDAR, payload: !calendarVisible });
   };
 
+  const blurHandler = (event: FocusEvent<HTMLInputElement, Element>) => {
+    if (onBlur) {
+      onBlur(event);
+    }
+    event.currentTarget.value = selectedDate ?? '';
+  };
+
   return (
     <StyledDateInput style={style} className={className}>
       <Button $nohover type="button" onClick={handleCalendar}>
         <CalendarIcon />
       </Button>
-      <input placeholder="Choose Date" ref={innerRef} {...rest} />
+      <input placeholder="Choose Date" ref={innerRef} {...rest} onBlur={blurHandler} />
       <Button $nohover type="button" onClick={handleClear}>
         <ClearIcon />
       </Button>

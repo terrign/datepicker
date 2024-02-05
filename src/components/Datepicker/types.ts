@@ -37,7 +37,6 @@ export interface DatePickerProps {
    */
   minDate?: string;
   calendarConfig?: CalendarConfig;
-  locale?: string;
   to?: boolean;
 }
 

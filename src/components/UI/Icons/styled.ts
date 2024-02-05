@@ -16,3 +16,7 @@ export const TextIcon = styled.span`
   display: block;
   transform: scaleY(0.5);
 `;
+
+export const CrossIcon = styled(TextIcon)`
+  transform: scale(0.7);
+`;

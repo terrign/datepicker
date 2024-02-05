@@ -31,5 +31,10 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
         ...state,
         firstDayOfTheViewMonth: getFirstDayOfTheMonth(payload),
       };
+    case ActionType.SET_CALENDAR_REF:
+      return {
+        ...state,
+        calendarContainerRef: payload,
+      };
   }
 };

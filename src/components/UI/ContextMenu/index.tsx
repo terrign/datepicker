@@ -1,4 +1,5 @@
 import { StyledContextMenu } from 'components/UI/ContextMenu/styled';
+import { useApp } from 'context/App';
 import { Dispatch, PropsWithChildren, SetStateAction, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -11,6 +12,7 @@ export interface ContextMenu extends PropsWithChildren {
 export const ContextMenu = ({ visible, position, children, setVisible }: ContextMenu) => {
   const [x, y] = position;
   const ref = useRef<HTMLDivElement>(null);
+  const { calendarContainerRef } = useApp();
 
   useEffect(() => {
     const outerClickHandler = (event: MouseEvent) => {
@@ -30,7 +32,7 @@ export const ContextMenu = ({ visible, position, children, setVisible }: Context
       <StyledContextMenu $x={x} $y={y} ref={ref}>
         {children}
       </StyledContextMenu>,
-      document.body,
+      calendarContainerRef?.current ?? document.body,
     )
   );
 };

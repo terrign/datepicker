@@ -1,7 +1,7 @@
 import { font } from '@css';
 import styled from 'styled-components';
 
-export const Container = styled.div<{ $hidden: boolean }>`
+export const Container = styled.section<{ $hidden: boolean }>`
   ${font}
   display: flex;
   flex-direction: column;
