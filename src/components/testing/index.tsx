@@ -1,6 +1,6 @@
 // import { DatePickerFrom, DatePickerTo } from 'components/Datepicker';
 // import { Range } from 'context/Range/Range.provider';
-// import { useState } from 'react';
+// import { useRef, useState } from 'react';
 
 // export const TestRangePicker = () => {
 //   const [dateFROM, setDateFROM] = useState<string | null>(null);
@@ -11,6 +11,7 @@
 //   const onSelectFROM = (date: string | null) => {
 //     setDateFROM(date);
 //   };
+//   const ref = useRef(null);
 //   return (
 //     <>
 //       {' '}
@@ -27,6 +28,7 @@
 //               onChange={(e) => console.log(`FROM:${e.target.value}`)}
 //               onDateSelect={onSelectFROM}
 //               calendarConfig={{ disableWeekends: true }}
+//               ref={ref}
 //             />
 //             <label htmlFor="to">To</label>
 //             <DatePickerTo

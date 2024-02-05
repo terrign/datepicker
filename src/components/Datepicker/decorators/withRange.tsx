@@ -3,7 +3,7 @@ import { DatePickerInputProps } from 'components/Datepicker/types';
 import { useRange } from 'context/Range/useRange';
 import { forwardRef, ForwardRefExoticComponent } from 'react';
 
-export interface DatePickerInputWithRangeProps extends Omit<DatePickerInputProps, 'to' | 'from'> {}
+type DatePickerInputWithRangeProps = Omit<DatePickerInputProps, 'to' | 'from'>;
 
 export interface WithRangePicker {
   (

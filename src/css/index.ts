@@ -16,7 +16,7 @@ export const defaultBlock = css`
 `;
 
 export const font = css`
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', Helvetica, sans-serif;
   color: ${({ theme }) => theme.fontColor};
   font-size: 14px;
   font-weight: 600;

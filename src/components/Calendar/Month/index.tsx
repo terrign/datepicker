@@ -1,5 +1,6 @@
 import { Day } from 'components/Calendar/Day';
 import { UndefinedTypeDayProps } from 'components/Calendar/Day/decorators/withDefinedDayType';
+import { Week } from 'components/Calendar/Month/styled';
 import { Flex } from 'components/UI/Flex';
 
 export interface DaysOfTheMonthData {
@@ -12,13 +13,13 @@ export const Month = ({ days, disableWeekends, onDateSelect }: DaysOfTheMonthDat
   return (
     <Flex $dir="col">
       {days.map((week) => (
-        <Flex key={week[0].date} style={{ width: '100%' }}>
+        <Week key={week[0].date}>
           {week.map((dayProps) => {
             return (
               <Day key={dayProps.date} disableWeekends={disableWeekends} {...dayProps} onDateSelect={onDateSelect} />
             );
           })}
-        </Flex>
+        </Week>
       ))}
     </Flex>
   );
