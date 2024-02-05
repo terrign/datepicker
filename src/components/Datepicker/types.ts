@@ -1,6 +1,5 @@
-import { WeekStart } from '@types';
+import { PredefinedTheme, ThemeObject, WeekStart } from '@types';
 import { CalendarConfig } from 'components/Calendar';
-import { PredefinedTheme, ThemeObject } from 'context/Theme/types';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
 export interface DatePickerProps {

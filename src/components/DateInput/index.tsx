@@ -81,11 +81,11 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
 
   return (
     <StyledDateInput style={style} className={className}>
-      <Button $nohover type="button" onClick={handleCalendar}>
+      <Button $nohover type="button" onClick={handleCalendar} data-testid="calendarButton">
         <CalendarIcon />
       </Button>
       <input placeholder="Choose Date" ref={innerRef} {...rest} onBlur={blurHandler} />
-      <Button $nohover type="button" onClick={handleClear}>
+      <Button $nohover type="button" onClick={handleClear} data-testid="clearButton">
         <ClearIcon />
       </Button>
     </StyledDateInput>

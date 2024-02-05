@@ -1,6 +1,5 @@
 import { Color } from '@constants';
-
-import { ThemeObject } from './types';
+import { ThemeObject } from '@types';
 
 const defaultTheme: ThemeObject = {
   bgColor: Color.WHITE,

@@ -21,7 +21,6 @@ const config: StorybookConfig = {
           { find: 'context', replacement: path.resolve(__dirname, '../src/context') },
           { find: '@constants', replacement: path.resolve(__dirname, '../src/constants/index') },
           { find: '@utils', replacement: path.resolve(__dirname, '../src/utils/index') },
-          { find: '@css', replacement: path.resolve(__dirname, '../src/css/index') },
           { find: '@types', replacement: path.resolve(__dirname, '../src/types/index') },
         ],
       },

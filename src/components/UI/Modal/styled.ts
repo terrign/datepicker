@@ -1,4 +1,4 @@
-import { flex, font } from '@css';
+import { flex, font } from '@constants';
 import { Button } from 'components/UI/Button';
 import styled from 'styled-components';
 

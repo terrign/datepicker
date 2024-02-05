@@ -1,4 +1,5 @@
-import { getDateParts, MONTH_NAMES, toStringDate } from '@utils';
+import { MONTH_NAMES } from '@constants';
+import { getDateParts, toStringDate } from '@utils';
 import { MonthPickerGrid } from 'components/Calendar/Controls/MonthYear/MonthPicker/styled';
 import { DatePartSelectButton } from 'components/Calendar/Controls/MonthYear/styled';
 import { PickerProps } from 'components/Calendar/Controls/MonthYear/types';

@@ -1,8 +1,8 @@
+import { PredefinedTheme, ThemeObject } from '@types';
 import { PropsWithChildren } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { darkTheme, lightTheme } from './themes';
-import { PredefinedTheme, ThemeObject } from './types';
+import { darkTheme, lightTheme } from './constants';
 
 export interface ThemeProps extends PropsWithChildren {
   theme?: PredefinedTheme;

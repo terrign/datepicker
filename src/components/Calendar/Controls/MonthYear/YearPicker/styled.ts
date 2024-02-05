@@ -1,4 +1,4 @@
-import { flex } from '@css';
+import { flex } from '@constants';
 import styled from 'styled-components';
 
 export const StyledControls = styled.div`

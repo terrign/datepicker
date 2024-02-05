@@ -1,4 +1,4 @@
-import { font } from '@css';
+import { font } from '@constants';
 import styled from 'styled-components';
 
 export const MonthYear = styled.p`

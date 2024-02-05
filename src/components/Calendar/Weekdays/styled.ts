@@ -1,4 +1,4 @@
-import { defaultBlock } from '@css';
+import { defaultBlock } from '@constants';
 import { Flex } from 'components/UI/Flex';
 import styled from 'styled-components';
 

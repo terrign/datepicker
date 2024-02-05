@@ -69,9 +69,6 @@ export const createCalendarMonthView = (firstDayOfTheMonth: string, weekStart: W
   const weekStartIndex = weekStart === 'Sunday' ? 0 : 1;
   let daysFromTheLastMonthToPrepend = firstDayOfTheMonthWeekIndex - weekStartIndex;
 
-  if (daysFromTheLastMonthToPrepend < 0) {
-    daysFromTheLastMonthToPrepend = 6;
-  }
   const result = [];
   let currentDate = firstDayOfTheMonth;
 
@@ -103,12 +100,10 @@ export const createCalendarMonthView = (firstDayOfTheMonth: string, weekStart: W
   return result;
 };
 
-const getMonths = () => {
+export const getMonths = () => {
   const months = [];
   for (let i = 1; i < 13; i++) {
     months.push(getMonthName(i));
   }
   return months;
 };
-
-export const MONTH_NAMES = getMonths();

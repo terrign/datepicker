@@ -4,8 +4,8 @@ import {
   getDateParts,
   getFirstDayOfTheMonth,
   getMonthName,
+  getMonths,
   getUTCDatefromDateString,
-  MONTH_NAMES,
   toStringDate,
   validateDateString,
 } from './date';
@@ -16,8 +16,8 @@ export {
   getDateParts,
   getFirstDayOfTheMonth,
   getMonthName,
+  getMonths,
   getUTCDatefromDateString,
-  MONTH_NAMES,
   toStringDate,
   validateDateString,
 };

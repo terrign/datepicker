@@ -33,7 +33,6 @@ module.exports = {
           ['context', './src/context'],
           ['@constants', './src/constants/index'],
           ['@utils', './src/utils/index'],
-          ['@css', './src/css/index'],
           ['@types', './src/types/index'],
         ],
         extensions: ['.tsx', '.ts'],
@@ -41,6 +40,7 @@ module.exports = {
     },
   },
   ignorePatterns: [
+    '__test__/**/*',
     '/*.css',
     '*.eslintrc.cjs',
     '*.config.cjs',
