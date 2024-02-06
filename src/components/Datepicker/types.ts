@@ -36,7 +36,6 @@ export interface DatePickerProps {
    */
   minDate?: string;
   calendarConfig?: CalendarConfig;
-  to?: boolean;
 }
 
 export type DatePickerInputProps = DatePickerProps &

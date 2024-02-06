@@ -1,13 +1,13 @@
 import { getDateParts, getMonthName } from '@utils';
 import { MonthYear } from 'components/Calendar/Controls/MonthYear/styled';
 import { useApp } from 'context/App';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { MonthPicker } from './MonthPicker';
 import { YearPicker } from './YearPicker';
 
 export const MonthYearControls = () => {
-  const { firstDayOfTheViewMonth } = useApp();
+  const { firstDayOfTheViewMonth, calendarVisible } = useApp();
   const { year, month } = getDateParts(firstDayOfTheViewMonth);
 
   const [showMonths, setShowMonths] = useState<boolean>(false);
@@ -25,6 +25,11 @@ export const MonthYearControls = () => {
     setShowMonths(false);
     setShowYears(false);
   };
+
+  useEffect(() => {
+    !calendarVisible && closeHandler();
+  }, [calendarVisible]);
+
   return (
     <MonthYear>
       <button onClick={monthClickHandler}>{getMonthName(month)}</button>{' '}
