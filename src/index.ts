@@ -1,3 +1,4 @@
-import { DatePicker } from 'components/Datepicker';
+import { DatePicker, DatePickerFrom, DatePickerTo } from 'components/Datepicker';
+import { Range } from 'context/Range/Range.provider';
 
-export { DatePicker };
+export { DatePicker, DatePickerFrom, DatePickerTo, Range };

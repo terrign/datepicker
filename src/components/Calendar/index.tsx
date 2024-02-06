@@ -1,9 +1,9 @@
-import { DayType } from 'components/Calendar/Day/types';
+import { withDayContextMenu } from 'components/Calendar/decorators/withDayContextMenu';
 import { withDefaultDays } from 'components/Calendar/decorators/withDefaultDays';
 import { withHolidays } from 'components/Calendar/decorators/withHolidays';
 import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import { Controls } from './Controls';
 import { DaysOfTheMonthData, Month } from './Month';
@@ -12,7 +12,7 @@ import { WeekDays } from './Weekdays';
 
 export interface CalendarConfig {
   /**
-   * An array of dates in yyyy-mm-dd, which should be marked as holidays
+   * An array of dates in yyyy-mm-dd format, which should be marked as holidays
    */
   holidays?: string[];
   /**
@@ -20,19 +20,21 @@ export interface CalendarConfig {
    */
   disableWeekends?: boolean;
   /**
-   * Left click modal options
+   * Day left click modal options
    * default: []
    */
+  onDateSelect?: (date: string) => void;
   modalOptions?: {
     label: string;
-    onClick: (date: string, dayType: DayType) => void;
+    onClick: (date: string) => void;
   }[];
 }
 
 export type CalendarProps = DaysOfTheMonthData & CalendarConfig;
 
-const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends }) => {
+const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect }) => {
   const { calendarVisible, dispatch } = useApp();
+  const calendarContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const body = document.body;
@@ -45,13 +47,17 @@ const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends }) => {
     return () => body.removeEventListener('keypress', escapePressHandler);
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch({ type: ActionType.SET_CALENDAR_REF, payload: calendarContainerRef });
+  }, [calendarContainerRef, dispatch]);
+
   return (
-    <Container $hidden={!calendarVisible}>
+    <Container $hidden={!calendarVisible} ref={calendarContainerRef}>
       <Controls />
       <WeekDays />
-      <Month days={days} disableWeekends={disableWeekends} />
+      <Month days={days} disableWeekends={disableWeekends} onDateSelect={onDateSelect} />
     </Container>
   );
 };
 
-export const Calendar = withDefaultDays(withHolidays(BaseCalendar));
+export const Calendar = withDefaultDays(withDayContextMenu(withHolidays(BaseCalendar)));

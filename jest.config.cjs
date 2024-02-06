@@ -8,7 +8,7 @@ module.exports = {
     '!**/node_modules/**',
     '!**/vendor/**',
     '!./src/index.tsx',
-    '!*stories.{ts,tsx,js}',
+    '!src/**/*.stories.tsx',
   ],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
@@ -20,7 +20,6 @@ module.exports = {
     '^@types$': '<rootDir>/src/types/index',
     '^@utils': '<rootDir>/src/utils/index',
     '^@constants': '<rootDir>/src/constants/index',
-    '^@css': '<rootDir>/src/css/index',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',

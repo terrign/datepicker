@@ -1,47 +1,49 @@
-import { WeekStart } from '@types';
-import { Calendar, CalendarConfig } from 'components/Calendar';
+import { Calendar } from 'components/Calendar';
 import { DateInput } from 'components/DateInput';
-import { DatepickerContainer } from 'components/Datepicker/styled';
+import { withRange } from 'components/Datepicker/decorators/withRange';
+import { ErrorBoundary } from 'components/ErrorBoundary';
 import { AppProvider } from 'context/App/App.provider';
 import { CustomThemeProvider } from 'context/Theme/Theme.provider';
-import { PredefinedTheme, ThemeObject } from 'context/Theme/types';
+import { forwardRef } from 'react';
 
-export interface DatePickerProps {
-  type?: 'default' | 'range';
-  weekStart?: WeekStart;
-  theme?: PredefinedTheme;
-  onDateSelect?: (date: string) => void;
-  defaultSelectedDate?: string;
-  customStyles?: Partial<ThemeObject>;
-  maxDate?: string;
-  minDate?: string;
-  defaultSelectionStart?: Date;
-  defaultSelectionEnd?: Date;
-  calendarConfig?: CalendarConfig;
-  locale?: string;
-}
+import { DatepickerContainer } from './styled';
+import { DatePickerInputProps, DatePickerProps } from './types';
 
-export const DatePicker = ({
-  type = 'default',
-  theme = PredefinedTheme.DARK,
-  weekStart = 'Sunday',
-  maxDate,
-  minDate,
-  customStyles,
-  calendarConfig,
-  defaultSelectedDate,
-  onDateSelect,
-}: DatePickerProps) => {
-  type;
-
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(function DatePicker(
+  {
+    theme = 'light',
+    weekStart = 'Sunday',
+    maxDate,
+    minDate,
+    customStyles,
+    calendarConfig,
+    defaultSelectedDate,
+    onDateSelect,
+    onError,
+    ...rest
+  }: DatePickerProps,
+  ref,
+) {
   return (
-    <AppProvider weekStart={weekStart} defaultSelectedDate={defaultSelectedDate} minDate={minDate} maxDate={maxDate}>
-      <CustomThemeProvider theme={theme} customStyles={customStyles}>
-        <DatepickerContainer>
-          <DateInput onDateSelect={onDateSelect} />
-          <Calendar {...calendarConfig} />
-        </DatepickerContainer>
-      </CustomThemeProvider>
-    </AppProvider>
+    <ErrorBoundary>
+      <AppProvider
+        weekStart={weekStart}
+        defaultSelectedDate={defaultSelectedDate}
+        disableWeekends={Boolean(calendarConfig?.disableWeekends)}
+        minDate={minDate}
+        maxDate={maxDate}
+        onError={onError}
+      >
+        <CustomThemeProvider theme={theme} customStyles={customStyles}>
+          <DatepickerContainer>
+            <DateInput onDateSelect={onDateSelect} {...rest} ref={ref} />
+            <Calendar {...calendarConfig} onDateSelect={onDateSelect} />
+          </DatepickerContainer>
+        </CustomThemeProvider>
+      </AppProvider>
+    </ErrorBoundary>
   );
-};
+});
+
+export const DatePickerTo = withRange('to')(DatePicker);
+export const DatePickerFrom = withRange('from')(DatePicker);

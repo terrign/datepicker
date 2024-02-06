@@ -1,6 +1,5 @@
 import { Color } from '@constants';
-
-import { ThemeObject } from './types';
+import { ThemeObject } from '@types';
 
 const defaultTheme: ThemeObject = {
   bgColor: Color.WHITE,
@@ -22,6 +21,11 @@ const defaultTheme: ThemeObject = {
 
   selectionRangeEndDayBgColor: Color.BLUE,
   selectionRangeEndDayFontColor: Color.WHITE,
+
+  modalButtonColor: Color.BLACK,
+  modalButtonHoverBgColor: Color.BLUE,
+  modalButtonHoverColor: Color.WHITE,
+  modalBg: Color.WHITE,
 };
 
 export const lightTheme: ThemeObject = {
@@ -34,4 +38,7 @@ export const darkTheme: ThemeObject = {
   fontColor: Color.WHITE,
   hoverBgColor: Color.LIGHT_GRAY_1,
   borderColor: Color.LIGHT_GRAY_3,
+
+  modalButtonColor: Color.WHITE,
+  modalBg: Color.BLACK,
 };

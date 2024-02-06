@@ -1,6 +1,7 @@
-import { defaultBlock, font } from '@css';
-import { DayType } from 'components/Calendar/Day/types';
+import { defaultBlock, font } from '@constants';
 import styled, { css } from 'styled-components';
+
+import { DayType } from './types';
 
 const defaultDay = css`
   background: none;
@@ -68,7 +69,7 @@ const typeStyleMapper = (type: DayType) => {
   }
 };
 
-export const StyledDay = styled.button<{ $type: DayType; $hidden?: boolean }>`
+export const StyledDay = styled.button<{ $type: DayType }>`
   ${defaultBlock}
   ${font}
   cursor: pointer;

@@ -1,7 +1,7 @@
-import { font } from '@css';
+import { font } from '@constants';
 import styled from 'styled-components';
 
-export const Container = styled.div<{ $hidden: boolean }>`
+export const Container = styled.section<{ $hidden: boolean }>`
   ${font}
   display: flex;
   flex-direction: column;
@@ -14,10 +14,8 @@ export const Container = styled.div<{ $hidden: boolean }>`
   display: ${({ $hidden }) => ($hidden ? 'none' : 'flex')};
   position: absolute;
   box-sizing: border-box;
-  top: 41px;
-  border-top: none;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  top: 48px;
   left: 0px;
-  min-width: 250px;
+  max-width: 250px;
+  z-index: 200;
 `;

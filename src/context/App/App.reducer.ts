@@ -9,6 +9,7 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
       return {
         ...state,
         selectedDate: payload,
+        firstDayOfTheViewMonth: payload ? getFirstDayOfTheMonth(payload) : firstDayOfTheViewMonth,
       };
     case ActionType.CHANGE_MONTH:
       return {
@@ -28,7 +29,12 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
     case ActionType.SET_VIEW_DATE:
       return {
         ...state,
-        firstDayOfTheViewMonth: getFirstDayOfTheMonth(new Date(payload)),
+        firstDayOfTheViewMonth: getFirstDayOfTheMonth(payload),
+      };
+    case ActionType.SET_CALENDAR_REF:
+      return {
+        ...state,
+        calendarContainerRef: payload,
       };
   }
 };

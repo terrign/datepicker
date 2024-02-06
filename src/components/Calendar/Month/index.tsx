@@ -1,20 +1,25 @@
-import { Day, DayProps } from 'components/Calendar/Day';
+import { Day } from 'components/Calendar/Day';
+import { UndefinedTypeDayProps } from 'components/Calendar/Day/decorators/withDefinedDayType';
+import { Week } from 'components/Calendar/Month/styled';
 import { Flex } from 'components/UI/Flex';
 
 export interface DaysOfTheMonthData {
-  days: DayProps[][];
+  days: UndefinedTypeDayProps[][];
   disableWeekends?: boolean;
+  onDateSelect?: (dateString: string) => void;
 }
 
-export const Month = ({ days, disableWeekends }: DaysOfTheMonthData) => {
+export const Month = ({ days, disableWeekends, onDateSelect }: DaysOfTheMonthData) => {
   return (
     <Flex $dir="col">
       {days.map((week) => (
-        <Flex key={week[0].date} style={{ width: '100%' }}>
-          {week.map(({ date, types }) => {
-            return <Day date={date} key={date} types={types} disableWeekends={disableWeekends} />;
+        <Week key={week[0].date}>
+          {week.map((dayProps) => {
+            return (
+              <Day key={dayProps.date} disableWeekends={disableWeekends} {...dayProps} onDateSelect={onDateSelect} />
+            );
           })}
-        </Flex>
+        </Week>
       ))}
     </Flex>
   );

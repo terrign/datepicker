@@ -1,87 +1,56 @@
+import { getUTCDatefromDateString } from '@utils';
 import { DateInputProps } from 'components/DateInput';
 import { DateInputError } from 'components/DateInput/types';
 import { useApp } from 'context/App';
-import { ChangeEventHandler, forwardRef, ForwardRefExoticComponent, RefAttributes, useCallback, useState } from 'react';
+import { forwardRef, ForwardRefExoticComponent, RefAttributes, useCallback } from 'react';
 
-export interface WithValidationHOCProps extends Omit<DateInputProps, 'removeError'> {}
+export type WithValidationProps = DateInputProps & RefAttributes<HTMLInputElement>;
 
 export interface WithValidationType {
-  (
-    Component: ForwardRefExoticComponent<DateInputProps & RefAttributes<HTMLInputElement>>,
-  ): ForwardRefExoticComponent<WithValidationHOCProps & RefAttributes<HTMLInputElement>>;
+  (Component: ForwardRefExoticComponent<WithValidationProps>): ForwardRefExoticComponent<WithValidationProps>;
 }
 
 export const withValidation: WithValidationType = (Component) => {
-  const Wrapper: ForwardRefExoticComponent<WithValidationHOCProps & RefAttributes<HTMLInputElement>> = forwardRef<
-    HTMLInputElement,
-    WithValidationHOCProps
-  >(({ onDateSelect, onChange, clearHandler, ...rest }, ref) => {
-    const [errorMessage, setErrorMessage] = useState('');
-    const { minDate, maxDate } = useApp();
+  const Wrapper: ForwardRefExoticComponent<WithValidationProps> = forwardRef<HTMLInputElement, WithValidationProps>(
+    ({ onDateSelect, ...rest }, ref) => {
+      const { minDate, maxDate, disableWeekends } = useApp();
 
-    const removeError = () => {
-      setErrorMessage('');
-    };
-    const withValidationDateSelectHandler = useCallback(
-      (value: string) => {
-        const date = new Date(value);
-
-        if (isNaN(date.valueOf())) {
-          setErrorMessage(DateInputError.INVALID);
-          throw new Error(DateInputError.INVALID);
-        }
-
-        if (value.length != 10 && value.length !== 0) {
-          setErrorMessage(DateInputError.FORMAT);
-          throw new Error(DateInputError.FORMAT);
-        }
-
-        if (minDate) {
-          if (date < new Date(minDate)) {
-            setErrorMessage(DateInputError.RANGE);
-            throw new Error(DateInputError.RANGE);
+      const withValidationDateSelectHandler = useCallback(
+        (dateString: string | null) => {
+          if (!dateString) {
+            if (onDateSelect) {
+              onDateSelect(dateString);
+            }
+            return;
           }
-        }
+          const date = getUTCDatefromDateString(dateString);
 
-        if (maxDate) {
-          if (date > new Date(maxDate)) {
-            setErrorMessage(DateInputError.RANGE);
-            throw new Error(DateInputError.RANGE);
+          if (minDate) {
+            if (date && date < getUTCDatefromDateString(minDate)) {
+              throw new Error(DateInputError.RANGE);
+            }
           }
-        }
-        removeError();
-        if (onDateSelect) {
-          onDateSelect(value);
-        }
-      },
-      [maxDate, minDate, onDateSelect],
-    );
 
-    const withValidationChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
-      removeError();
-      if (onChange) {
-        onChange(event);
-      }
-    };
+          if (maxDate) {
+            if (date > getUTCDatefromDateString(maxDate)) {
+              throw new Error(DateInputError.RANGE);
+            }
+          }
 
-    const withValidationClearHandler = () => {
-      removeError();
-      if (clearHandler) {
-        clearHandler();
-      }
-    };
+          if (disableWeekends && date && (date.getDay() === 0 || date.getDay() === 6)) {
+            throw new Error(DateInputError.WEEKEND_DISABLED);
+          }
 
-    return (
-      <Component
-        {...rest}
-        ref={ref}
-        onChange={withValidationChangeHandler}
-        errorMessage={errorMessage}
-        clearHandler={withValidationClearHandler}
-        onDateSelect={withValidationDateSelectHandler}
-      />
-    );
-  });
+          if (onDateSelect) {
+            onDateSelect(dateString);
+          }
+        },
+        [maxDate, minDate, disableWeekends, onDateSelect],
+      );
+
+      return <Component {...rest} ref={ref} onDateSelect={withValidationDateSelectHandler} />;
+    },
+  );
   Wrapper.displayName = 'DateInput';
   return Wrapper;
 };

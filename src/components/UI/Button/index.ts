@@ -1,4 +1,4 @@
-import { defaultBlock } from '@css';
+import { defaultBlock } from '@constants';
 import styled, { css } from 'styled-components';
 
 const buttonHover = css`

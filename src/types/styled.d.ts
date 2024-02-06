@@ -1,6 +1,6 @@
 import 'styled-components';
 
-import { ThemeObject } from 'context/Theme/types';
+import { ThemeObject } from '@types';
 
 declare module 'styled-components' {
   export interface DefaultTheme extends ThemeObject {}

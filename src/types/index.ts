@@ -1,37 +1,30 @@
-type DatePickerType = 'range' | 'date';
-
-enum Day {
-  MONDAY = 'Mo',
-  TUESDAY = 'Tu',
-  WEDNESDAY = 'We',
-  THURSDAY = 'Th',
-  FRIDAY = 'Fr',
-  SATURDAY = 'Sa',
-  SUNDAY = 'Su',
-}
-
 export type WeekStart = 'Sunday' | 'Monday';
+export type PredefinedTheme = 'light' | 'dark';
 
-interface HolidaysConfig {
-  weekEnds: Day[];
-  holidays: DateOrString[];
-  hideHolidays: boolean;
+export interface ThemeObject {
+  bgColor: string;
+  fontColor: string;
+  borderColor: string;
+  hoverBgColor: string;
+  hoverTextColor?: string;
+  holidayBorderColor: string;
+
+  disabledDayFontColor: string;
+
+  selectedDayBgColor: string;
+  selectedDayFontColor: string;
+
+  selectionRangeDayBgColor: string;
+  selectionRangeDayFontColor: string;
+
+  selectionRangeStartDayBgColor: string;
+  selectionRangeStartDayFontColor: string;
+
+  selectionRangeEndDayBgColor: string;
+  selectionRangeEndDayFontColor: string;
+
+  modalButtonColor: string;
+  modalButtonHoverBgColor: string;
+  modalButtonHoverColor: string;
+  modalBg: string;
 }
-
-type DatePickerTheme = 'light' | 'dark';
-
-type DatePickerCustomStyle = Record<string, string>;
-
-export interface BaseDatePickerConfig {
-  type?: DatePickerType;
-  maxDate?: DateOrString;
-  minDate?: DateOrString;
-  theme?: DatePickerTheme;
-  style?: DatePickerCustomStyle;
-  weekStart?: Day.MONDAY | Day.SUNDAY;
-  dateFormat?: 'yyyy-mm-dd' | 'mm/dd/yyyy';
-  onSelect?: () => void;
-  holidays: HolidaysConfig;
-}
-
-export type DateOrString = Date | string;

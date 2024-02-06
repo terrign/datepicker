@@ -12,7 +12,6 @@
       "context/*": ["./src/context/*"],
       "@constants": ["./src/constants/index"],
       "@utils": ["./src/utils/index"],
-      "@css": ["./src/css/index"],
       "@types": ["./src/types/index"],
     },
     "baseUrl": ".",

@@ -1,4 +1,4 @@
-import { font } from '@css';
+import { font } from '@constants';
 import styled from 'styled-components';
 
 export const Icon = styled.img`
@@ -15,4 +15,8 @@ export const TextIcon = styled.span`
   width: 16px;
   display: block;
   transform: scaleY(0.5);
+`;
+
+export const CrossIcon = styled(TextIcon)`
+  transform: scale(0.7);
 `;
