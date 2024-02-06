@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { DatePicker } from 'components/Datepicker';
+import { DatePicker, DatePickerFrom } from 'components/Datepicker';
 import { useEffect, useRef } from 'react';
 
 describe('Datepicker', () => {
@@ -50,5 +50,10 @@ describe('Datepicker', () => {
     expect(calendarItem).toBeVisible();
     fireEvent.keyDown(document.body, { key: 'Enter' });
     expect(calendarItem).toBeVisible();
+  });
+
+  it('Renders without range provider as default datepicker', async () => {
+    const { container } = render(<DatePickerFrom />);
+    expect(container).toBeInTheDocument();
   });
 });

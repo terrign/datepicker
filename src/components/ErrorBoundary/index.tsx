@@ -30,7 +30,7 @@ export class ErrorBoundary extends Component<Props, State> {
         <section>
           <h1>Something went wrong, please try to reload</h1>
           <p>Error: {errorMessage}</p>
-          <button key="console" onClick={this.refreshPage} type="button">
+          <button onClick={this.refreshPage} type="button">
             Reload
           </button>
         </section>
