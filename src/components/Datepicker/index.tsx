@@ -1,9 +1,9 @@
 import { Calendar } from 'components/Calendar';
 import { DateInput } from 'components/DateInput';
-import { withRange } from 'components/Datepicker/decorators/withRange';
 import { ErrorBoundary } from 'components/ErrorBoundary';
 import { AppProvider } from 'context/App/App.provider';
 import { CustomThemeProvider } from 'context/Theme/Theme.provider';
+import { withRange } from 'decorators/Datepicker/withRange';
 import { forwardRef } from 'react';
 
 import { DatepickerContainer } from './styled';

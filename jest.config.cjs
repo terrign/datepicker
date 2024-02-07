@@ -15,6 +15,7 @@ module.exports = {
       '<rootDir>/__test__/__mocks__/fileMock.js',
     '\\.(css|less)$': 'identity-obj-proxy',
     '^components/(.*)$': '<rootDir>/src/components/$1',
+    '^decorators/(.*)$': '<rootDir>/src/decorators/$1',
     '^assets/(.*)$': '<rootDir>/src/assets/$1',
     '^context/(.*)$': '<rootDir>/src/context/$1',
     '^@types$': '<rootDir>/src/types/index',

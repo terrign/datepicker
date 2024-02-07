@@ -1,8 +1,8 @@
-import { withDayContextMenu } from 'components/Calendar/decorators/withDayContextMenu';
-import { withDefaultDays } from 'components/Calendar/decorators/withDefaultDays';
-import { withHolidays } from 'components/Calendar/decorators/withHolidays';
 import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
+import { withDayContextMenu } from 'decorators/Calendar/withDayContextMenu';
+import { withDefaultDays } from 'decorators/Calendar/withDefaultDays';
+import { withHolidays } from 'decorators/Calendar/withHolidays';
 import { FC, useEffect, useRef } from 'react';
 
 import { Controls } from './Controls';

@@ -1,9 +1,9 @@
-import { withDefinedDayType } from 'components/Calendar/Day/decorators/withDefinedDayType';
 import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
+import { withDefinedDayType } from 'decorators/Day/withDefinedDayType';
 import { MouseEventHandler } from 'react';
 
-import { StyledDay } from './Day.styled';
+import { StyledDay } from './styled';
 import { DayType } from './types';
 
 export interface DayProps {

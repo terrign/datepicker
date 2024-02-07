@@ -31,6 +31,7 @@ module.exports = {
           ['assets', './src/assets'],
           ['components', './src/components'],
           ['context', './src/context'],
+          ['decorators', './src/decorators'],
           ['@constants', './src/constants/index'],
           ['@utils', './src/utils/index'],
           ['@types', './src/types/index'],
