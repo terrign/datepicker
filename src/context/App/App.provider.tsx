@@ -1,6 +1,6 @@
 import { WeekStart } from '@types';
 import { AppContext } from 'context/App/App.context';
-import { useApp } from 'context/App/useApp';
+import { useApp } from 'hooks/useApp';
 import { PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
 
 import { appReducer } from './App.reducer';

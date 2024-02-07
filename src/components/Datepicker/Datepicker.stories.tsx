@@ -52,7 +52,7 @@ export const ContextMenuHandlers: Story = {
     theme: 'dark',
     weekStart: 'Sunday',
     calendarConfig: {
-      modalOptions: [
+      contextMenuOptions: [
         {
           label: 'Add todo',
           onClick: (date: string) => {
@@ -79,10 +79,10 @@ export const AllProps: Story = {
       holidays: ['2024-02-02', '2024-02-05', '2024-02-14'],
     },
     onDateSelect(date) {
-      console.log(date);
+      return date;
     },
     onError(error) {
-      console.log(error);
+      return error;
     },
   },
 };
@@ -102,7 +102,7 @@ export const CustomTheme: Story = {
       borderColor: '#ff0000',
     },
     calendarConfig: {
-      modalOptions: [
+      contextMenuOptions: [
         {
           label: 'Add todo',
           onClick: (date: string) => {

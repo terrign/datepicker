@@ -1,6 +1,6 @@
 import { DatePicker } from 'components/Datepicker';
 import { DatePickerInputProps } from 'components/Datepicker/types';
-import { useRange } from 'context/Range/useRange';
+import { useRange } from 'hooks/useRange';
 import { forwardRef, ForwardRefExoticComponent } from 'react';
 
 type DatePickerInputWithRangeProps = Omit<DatePickerInputProps, 'to' | 'from'>;

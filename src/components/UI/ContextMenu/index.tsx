@@ -1,5 +1,5 @@
 import { StyledContextMenu } from 'components/UI/ContextMenu/styled';
-import { useApp } from 'context/App';
+import { useApp } from 'hooks/useApp';
 import { Dispatch, PropsWithChildren, SetStateAction, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 

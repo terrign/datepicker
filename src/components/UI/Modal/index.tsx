@@ -1,5 +1,5 @@
 import { CloseIcon } from 'components/UI/Icons';
-import { useApp } from 'context/App';
+import { useApp } from 'hooks/useApp';
 import { PropsWithChildren, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 

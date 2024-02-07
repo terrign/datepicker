@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 import { DayType } from './types';
 
 const defaultDay = css`
-  background: none;
   color: ${({ theme }) => theme.fontColor};
+  background: none;
 
   &:hover {
     background-color: ${({ theme }) => theme.hoverBgColor};
@@ -14,8 +14,9 @@ const defaultDay = css`
 
 const disabledDay = css`
   background: none;
-  color: ${({ theme }) => theme.disabledDayFontColor};
   cursor: default;
+
+  color: ${({ theme }) => theme.disabledDayFontColor};
 `;
 
 const selectedDay = css`
@@ -26,6 +27,7 @@ const selectedDay = css`
 const selectionStartDay = css`
   background-color: ${({ theme }) => theme.selectionRangeStartDayBgColor};
   color: ${({ theme }) => theme.selectionRangeStartDayFontColor};
+
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
 `;
@@ -33,6 +35,7 @@ const selectionStartDay = css`
 const selectionEndDay = css`
   background-color: ${({ theme }) => theme.selectionRangeEndDayBgColor};
   color: ${({ theme }) => theme.selectionRangeEndDayFontColor};
+
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
 `;
@@ -40,6 +43,7 @@ const selectionEndDay = css`
 const selectionInRangeDay = css`
   background-color: ${({ theme }) => theme.selectionRangeDayBgColor};
   color: ${({ theme }) => theme.selectionRangeDayFontColor};
+
   border-radius: 0px;
   border: none;
 `;
@@ -71,7 +75,9 @@ const typeStyleMapper = (type: DayType) => {
 
 export const StyledDay = styled.button<{ $type: DayType }>`
   ${defaultBlock}
+
   ${font}
+
   cursor: pointer;
   ${({ $type }) => typeStyleMapper($type)}
 `;

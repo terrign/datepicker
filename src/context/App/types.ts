@@ -22,7 +22,6 @@ export interface AppContextType {
   calendarContainerRef?: RefObject<HTMLDivElement>;
   from?: boolean;
   to?: boolean;
-  // clientOnSelectHandler?: (date: string) => void;
   dispatch: Dispatch<Action>;
 }
 

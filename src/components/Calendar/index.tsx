@@ -1,8 +1,8 @@
-import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
 import { withDayContextMenu } from 'decorators/Calendar/withDayContextMenu';
 import { withDefaultDays } from 'decorators/Calendar/withDefaultDays';
 import { withHolidays } from 'decorators/Calendar/withHolidays';
+import { useApp } from 'hooks/useApp';
 import { FC, useEffect, useRef } from 'react';
 
 import { Controls } from './Controls';
@@ -23,11 +23,11 @@ export interface CalendarConfig {
    * Day left click modal options
    * default: []
    */
-  onDateSelect?: (date: string) => void;
-  modalOptions?: {
+  contextMenuOptions?: {
     label: string;
     onClick: (date: string) => void;
   }[];
+  onDateSelect?: (date: string) => void;
 }
 
 export type CalendarProps = DaysOfTheMonthData & CalendarConfig;

@@ -1,7 +1,8 @@
+import { SATURDAY_INDEX, SUNDAY_INDEX } from '@constants';
 import { getUTCDatefromDateString } from '@utils';
 import { DateInputProps } from 'components/DateInput';
 import { DateInputError } from 'components/DateInput/types';
-import { useApp } from 'context/App';
+import { useApp } from 'hooks/useApp';
 import { forwardRef, ForwardRefExoticComponent, RefAttributes, useCallback } from 'react';
 
 export type WithValidationProps = DateInputProps & RefAttributes<HTMLInputElement>;
@@ -37,7 +38,7 @@ export const withValidation: WithValidationType = (Component) => {
             }
           }
 
-          if (disableWeekends && date && (date.getDay() === 0 || date.getDay() === 6)) {
+          if (disableWeekends && date && (date.getDay() === SUNDAY_INDEX || date.getDay() === SATURDAY_INDEX)) {
             throw new Error(DateInputError.WEEKEND_DISABLED);
           }
 

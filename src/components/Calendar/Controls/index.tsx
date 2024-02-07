@@ -1,8 +1,8 @@
 import { Button } from 'components/UI/Button';
 import { Flex } from 'components/UI/Flex';
 import { DoubleNextIcon, DoublePrevIcon, NextIcon, PrevIcon } from 'components/UI/Icons';
-import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
+import { useApp } from 'hooks/useApp';
 
 import { MonthYearControls } from './MonthYear';
 

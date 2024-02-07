@@ -4,6 +4,10 @@ import styled from 'styled-components';
 
 export const StyledModal = styled.section`
   ${font}
+  ${flex}
+
+  background: ${({ theme }) => theme.bgColor};
+
   position: absolute;
   max-width: 400px;
   width: 100%;
@@ -12,19 +16,18 @@ export const StyledModal = styled.section`
   border-radius: 8px;
   left: 0;
   top: 0;
-  ${flex}
   flex-direction: column;
-  background: ${({ theme }) => theme.bgColor};
   z-index: 202;
 `;
 
 export const ModalCloseButton = styled(Button)`
+  ${flex}
+
   position: absolute;
   background-color: transparent;
   top: 10px;
   left: calc(100% - 42px);
   outline: none;
-  ${flex}
   font-size: 5px;
   border: none;
   cursor: pointer;

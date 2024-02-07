@@ -17,6 +17,14 @@ module.exports = {
     'import/no-default-export': 'error',
     'no-console': 'error',
   },
+  overrides: [
+    {
+      files: ['*stories.tsx'],
+      rules: {
+        'import/no-default-export': 'off',
+      },
+    },
+  ],
   parserOptions: {
     project: './tsconfig.json',
     sourceType: 'module',
@@ -32,6 +40,7 @@ module.exports = {
           ['components', './src/components'],
           ['context', './src/context'],
           ['decorators', './src/decorators'],
+          ['hooks', './src/hooks'],
           ['@constants', './src/constants/index'],
           ['@utils', './src/utils/index'],
           ['@types', './src/types/index'],
@@ -40,14 +49,5 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: [
-    '__test__/**/*',
-    '/*.css',
-    '*.eslintrc.cjs',
-    '*.config.cjs',
-    '*.config.ts',
-    '*.config.js',
-    '/dist',
-    '/src/**/*.stories.tsx',
-  ],
+  ignorePatterns: ['__test__/**/*', '*.eslintrc.cjs', '*.config.cjs', '*.config.ts', '*.config.js', '/dist'],
 };

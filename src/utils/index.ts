@@ -6,6 +6,7 @@ import {
   getMonthName,
   getMonths,
   getUTCDatefromDateString,
+  getWeekDays,
   toStringDate,
   validateDateString,
 } from './date';
@@ -18,6 +19,7 @@ export {
   getMonthName,
   getMonths,
   getUTCDatefromDateString,
+  getWeekDays,
   toStringDate,
   validateDateString,
 };

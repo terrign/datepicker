@@ -1,3 +1,4 @@
+import { WEEKDAYS } from '@constants';
 import { WeekStart } from '@types';
 
 const VALID_DATE_STRING_REGEXP = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/; // yyyy-mm-dd
@@ -106,4 +107,12 @@ export const getMonths = () => {
     months.push(getMonthName(i));
   }
   return months;
+};
+
+export const getWeekDays = (weekStart: WeekStart) => {
+  const result = [...WEEKDAYS];
+  if (weekStart === 'Monday') {
+    result.push(result.shift() as string);
+  }
+  return result;
 };

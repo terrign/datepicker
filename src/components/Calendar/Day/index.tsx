@@ -1,6 +1,6 @@
-import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
 import { withDefinedDayType } from 'decorators/Day/withDefinedDayType';
+import { useApp } from 'hooks/useApp';
 import { MouseEventHandler } from 'react';
 
 import { StyledDay } from './styled';

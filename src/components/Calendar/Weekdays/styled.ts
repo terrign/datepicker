@@ -5,6 +5,7 @@ import styled from 'styled-components';
 export const StyledWeek = styled(Flex)`
   div {
     ${defaultBlock}
+
     font-weight: 700;
   }
 `;

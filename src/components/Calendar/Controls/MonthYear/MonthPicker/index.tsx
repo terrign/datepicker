@@ -4,8 +4,8 @@ import { MonthPickerGrid } from 'components/Calendar/Controls/MonthYear/MonthPic
 import { DatePartSelectButton } from 'components/Calendar/Controls/MonthYear/styled';
 import { PickerProps } from 'components/Calendar/Controls/MonthYear/types';
 import { Modal } from 'components/UI/Modal';
-import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
+import { useApp } from 'hooks/useApp';
 
 export const MonthPicker = ({ closeHandler, open }: PickerProps) => {
   const { dispatch, firstDayOfTheViewMonth } = useApp();
@@ -20,11 +20,11 @@ export const MonthPicker = ({ closeHandler, open }: PickerProps) => {
   return (
     <Modal open={open} onClose={closeHandler}>
       <MonthPickerGrid $cols={2}>
-        {MONTH_NAMES.map((a, i) => {
-          const onClick = getClickHandler(i);
+        {MONTH_NAMES.map((monthName, monthIndex) => {
+          const onClick = getClickHandler(monthIndex);
           return (
-            <DatePartSelectButton key={a} onClick={onClick} disabled={month - 1 === i}>
-              {a}
+            <DatePartSelectButton key={monthName} onClick={onClick} disabled={month - 1 === monthIndex}>
+              {monthName}
             </DatePartSelectButton>
           );
         })}

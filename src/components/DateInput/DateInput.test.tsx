@@ -24,7 +24,7 @@ describe('DateInput', () => {
         calendarConfig={{
           disableWeekends: true,
           holidays: ['2024-01-01', '2024-01-02', '2024-03-06'],
-          modalOptions: [
+          contextMenuOptions: [
             {
               label: 'TestLabel',
               onClick: onModalClick!,

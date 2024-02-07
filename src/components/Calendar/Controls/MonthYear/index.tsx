@@ -1,6 +1,6 @@
 import { getDateParts, getMonthName } from '@utils';
 import { MonthYear } from 'components/Calendar/Controls/MonthYear/styled';
-import { useApp } from 'context/App';
+import { useApp } from 'hooks/useApp';
 import { useEffect, useState } from 'react';
 
 import { MonthPicker } from './MonthPicker';
@@ -32,7 +32,7 @@ export const MonthYearControls = () => {
 
   return (
     <MonthYear>
-      <button onClick={monthClickHandler}>{getMonthName(month)}</button>{' '}
+      <button onClick={monthClickHandler}>{getMonthName(month)}</button>
       <button onClick={yearClickHandler}>{year}</button>
       <MonthPicker closeHandler={closeHandler} open={showMonths} />
       <YearPicker closeHandler={closeHandler} open={showYears} />

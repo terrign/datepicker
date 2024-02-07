@@ -1,8 +1,8 @@
 import { Button } from 'components/UI/Button';
 import { CalendarIcon, ClearIcon } from 'components/UI/Icons';
-import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
 import { withValidation } from 'decorators/DateInput/withValidation';
+import { useApp } from 'hooks/useApp';
 import {
   DetailedHTMLProps,
   FocusEvent,

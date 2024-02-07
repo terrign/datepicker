@@ -7,28 +7,32 @@ interface Props {
 }
 
 export const StyledContextMenu = styled.div<Props>`
-  position: absolute;
-  left: ${({ $x }) => $x}px;
-  top: ${({ $y }) => $y}px;
   ${flex}
 
-  gap: 5px;
+  left: ${({ $x }) => $x}px;
+  top: ${({ $y }) => $y}px;
   border: 1px solid ${({ theme }) => theme.borderColor};
-  flex-direction: column;
   background: ${({ theme }) => theme.modalBg};
+
+  position: absolute;
+  gap: 5px;
+  flex-direction: column;
   z-index: 201;
 
   button {
     ${font}
+
     border: none;
     outline: none;
     padding: 5px;
+    white-space: nowrap;
+
     background: ${({ theme }) => theme.modalBg};
     color: ${({ theme }) => theme.modalButtonColor};
-    white-space: nowrap;
 
     &:hover {
       cursor: pointer;
+
       background: ${({ theme }) => theme.modalButtonHoverBgColor};
       color: ${({ theme }) => theme.modalButtonHoverColor};
     }
