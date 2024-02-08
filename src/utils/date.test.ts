@@ -1,3 +1,5 @@
+import { DatePart } from '@types';
+
 import {
   changeDate,
   createCalendarMonthView,
@@ -36,11 +38,11 @@ describe('Date utils tests', () => {
 
   it('changeDate correctly changes date', async () => {
     const date = '2024-01-01';
-    expect(changeDate(date, 'month', -1)).toBe('2023-12-01');
+    expect(changeDate(date, DatePart.MONTH, -1)).toBe('2023-12-01');
     const date2 = '2023-01-01';
-    expect(changeDate(date2, 'year', -1)).toBe('2022-01-01');
+    expect(changeDate(date2, DatePart.YEAR, -1)).toBe('2022-01-01');
     const date3 = '2024-01-01';
-    expect(changeDate(date3, 'month', 0)).toBe('2024-01-01');
+    expect(changeDate(date3, DatePart.MONTH, 0)).toBe('2024-01-01');
   });
 });
 

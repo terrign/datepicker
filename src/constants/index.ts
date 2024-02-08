@@ -21,4 +21,22 @@ const SUNDAY_INDEX = 0;
 
 const SATURDAY_INDEX = 6;
 
-export { Color, defaultBlock, flex, font, MONTH_NAMES, SATURDAY_INDEX, SUNDAY_INDEX, WEEKDAYS };
+const MONDAY_INDEX = 1;
+
+const WEEKS_TO_DISPLAY = 6;
+
+const WEEK_LENGTH = 7;
+
+export {
+  Color,
+  defaultBlock,
+  flex,
+  font,
+  MONDAY_INDEX,
+  MONTH_NAMES,
+  SATURDAY_INDEX,
+  SUNDAY_INDEX,
+  WEEK_LENGTH,
+  WEEKDAYS,
+  WEEKS_TO_DISPLAY,
+};

@@ -1,7 +1,6 @@
 import { SATURDAY_INDEX, SUNDAY_INDEX } from '@constants';
 import { getUTCDatefromDateString } from '@utils';
 import { DateInputProps } from 'components/DateInput';
-import { DateInputError } from 'components/DateInput/types';
 import { useApp } from 'hooks/useApp';
 import { forwardRef, ForwardRefExoticComponent, RefAttributes, useCallback } from 'react';
 
@@ -9,6 +8,11 @@ export type WithValidationProps = DateInputProps & RefAttributes<HTMLInputElemen
 
 export interface WithValidationType {
   (Component: ForwardRefExoticComponent<WithValidationProps>): ForwardRefExoticComponent<WithValidationProps>;
+}
+
+const enum DateInputError {
+  WEEKEND_DISABLED = 'Weekends are disabled',
+  RANGE = 'Date is out of available range',
 }
 
 export const withValidation: WithValidationType = (Component) => {

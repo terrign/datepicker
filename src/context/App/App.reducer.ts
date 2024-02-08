@@ -1,3 +1,4 @@
+import { DatePart } from '@types';
 import { changeDate, getFirstDayOfTheMonth } from '@utils';
 
 import { ActionType, AppReducerType } from './types';
@@ -14,12 +15,12 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
     case ActionType.CHANGE_MONTH:
       return {
         ...state,
-        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, 'month', payload),
+        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, DatePart.MONTH, payload),
       };
     case ActionType.CHANGE_YEAR:
       return {
         ...state,
-        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, 'year', payload),
+        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, DatePart.YEAR, payload),
       };
     case ActionType.HIDE_SHOW_CALENDAR:
       return {
