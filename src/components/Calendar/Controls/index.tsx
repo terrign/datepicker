@@ -1,3 +1,4 @@
+import { GetDatePartChangeHandlerType } from 'components/Calendar/Controls/types';
 import { Button } from 'components/UI/Button';
 import { Flex } from 'components/UI/Flex';
 import { DoubleNextIcon, DoublePrevIcon, NextIcon, PrevIcon } from 'components/UI/Icons';
@@ -9,21 +10,14 @@ import { MonthYearControls } from './MonthYear';
 export const Controls = () => {
   const { dispatch } = useApp();
 
-  const nextYearHandler = () => {
-    dispatch({ type: ActionType.CHANGE_YEAR, payload: 1 });
+  const getDateChangeHandler: GetDatePartChangeHandlerType = (action, changeAmount) => () => {
+    dispatch({ type: action, payload: changeAmount });
   };
 
-  const prevYearHandler = () => {
-    dispatch({ type: ActionType.CHANGE_YEAR, payload: -1 });
-  };
-
-  const nextMonthHandler = () => {
-    dispatch({ type: ActionType.CHANGE_MONTH, payload: 1 });
-  };
-
-  const prevMonthHandler = () => {
-    dispatch({ type: ActionType.CHANGE_MONTH, payload: -1 });
-  };
+  const nextYearHandler = getDateChangeHandler(ActionType.CHANGE_YEAR, 1);
+  const prevYearHandler = getDateChangeHandler(ActionType.CHANGE_YEAR, -1);
+  const nextMonthHandler = getDateChangeHandler(ActionType.CHANGE_MONTH, 1);
+  const prevMonthHandler = getDateChangeHandler(ActionType.CHANGE_MONTH, -1);
 
   return (
     <Flex>

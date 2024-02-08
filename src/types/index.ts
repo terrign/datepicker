@@ -1,5 +1,10 @@
 export type WeekStart = 'Sunday' | 'Monday';
 export type PredefinedTheme = 'light' | 'dark';
+export const enum DatePart {
+  MONTH,
+  YEAR,
+  DAY,
+}
 
 export interface ThemeObject {
   bgColor: string;

@@ -1,13 +1,24 @@
-import { getMonths } from '@utils';
-
 import { Color, defaultBlock, flex, font } from './styles';
 
-export const MONTH_NAMES = getMonths();
+const MONTH_NAMES = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
-export const WEEKDAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+const WEEKDAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-export const SUNDAY_INDEX = 0;
+const SUNDAY_INDEX = 0;
 
-export const SATURDAY_INDEX = 6;
+const SATURDAY_INDEX = 6;
 
-export { Color, defaultBlock, flex, font };
+export { Color, defaultBlock, flex, font, MONTH_NAMES, SATURDAY_INDEX, SUNDAY_INDEX, WEEKDAYS };

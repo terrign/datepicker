@@ -3,6 +3,7 @@ import { CalendarIcon, ClearIcon } from 'components/UI/Icons';
 import { ActionType } from 'context/App/types';
 import { withValidation } from 'decorators/DateInput/withValidation';
 import { useApp } from 'hooks/useApp';
+import { useEventListener } from 'hooks/useEventListener';
 import {
   DetailedHTMLProps,
   FocusEvent,
@@ -39,27 +40,22 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
     }
   };
 
-  useEffect(() => {
-    const input = innerRef.current;
-    if (input) {
-      const onDateSelectHandler = (event: Event) => {
-        const dateString = (event.target as HTMLInputElement).value;
-        try {
-          if (onDateSelect) {
-            onDateSelect(dateString);
-          }
+  const onDateSelectHandler = (event: Event) => {
+    const dateString = (event.target as HTMLInputElement).value;
+    try {
+      if (onDateSelect) {
+        onDateSelect(dateString);
+      }
 
-          dispatch({ type: ActionType.SET_DATE, payload: dateString });
-        } catch (error) {
-          if (error instanceof Error && onError) {
-            onError(error);
-          }
-        }
-      };
-      input.addEventListener('change', onDateSelectHandler);
-      return () => input.removeEventListener('change', onDateSelectHandler);
+      dispatch({ type: ActionType.SET_DATE, payload: dateString });
+    } catch (error) {
+      if (error instanceof Error && onError) {
+        onError(error);
+      }
     }
-  }, [innerRef, onDateSelect, dispatch, onError]);
+  };
+
+  useEventListener(innerRef, 'change', onDateSelectHandler);
 
   useEffect(() => {
     const input = innerRef.current;

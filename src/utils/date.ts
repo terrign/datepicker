@@ -101,14 +101,6 @@ export const createCalendarMonthView = (firstDayOfTheMonth: string, weekStart: W
   return result;
 };
 
-export const getMonths = () => {
-  const months = [];
-  for (let i = 1; i < 13; i++) {
-    months.push(getMonthName(i));
-  }
-  return months;
-};
-
 export const getWeekDays = (weekStart: WeekStart) => {
   const result = [...WEEKDAYS];
   if (weekStart === 'Monday') {

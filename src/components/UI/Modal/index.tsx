@@ -1,6 +1,7 @@
 import { CloseIcon } from 'components/UI/Icons';
 import { useApp } from 'hooks/useApp';
-import { PropsWithChildren, useEffect } from 'react';
+import { useEventListener } from 'hooks/useEventListener';
+import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
 import { ModalCloseButton, StyledModal } from './styled';
@@ -17,15 +18,11 @@ export function Modal({ children, onClose, open }: ModalProps) {
     onClose();
   };
 
-  useEffect(() => {
-    const closeOnEsc = (event: KeyboardEvent) => {
-      event.key === 'Escape' && onClose();
-    };
-    document.addEventListener('keydown', closeOnEsc);
-    return () => {
-      document.removeEventListener('keydown', closeOnEsc);
-    };
-  }, [onClose]);
+  const escPressHandler = (event: KeyboardEvent) => {
+    event.key === 'Escape' && onClose();
+  };
+
+  useEventListener(document.body, 'keydown', escPressHandler);
 
   return (
     open &&

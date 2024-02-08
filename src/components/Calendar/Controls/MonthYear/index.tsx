@@ -32,7 +32,7 @@ export const MonthYearControls = () => {
 
   return (
     <MonthYear>
-      <button onClick={monthClickHandler}>{getMonthName(month)}</button>
+      <button onClick={monthClickHandler}>{getMonthName(month)}</button>{' '}
       <button onClick={yearClickHandler}>{year}</button>
       <MonthPicker closeHandler={closeHandler} open={showMonths} />
       <YearPicker closeHandler={closeHandler} open={showYears} />
