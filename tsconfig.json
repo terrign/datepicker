@@ -22,9 +22,10 @@
     "sourceMap": true,
     "outDir": "dist",
     "moduleResolution": "node",
+    "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "allowJs": true,
   },
-  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  // "include": ["./src/**/*.ts", "./src/**/*.tsx"],
 }

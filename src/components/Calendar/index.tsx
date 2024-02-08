@@ -21,7 +21,7 @@ export interface CalendarConfig {
    */
   disableWeekends?: boolean;
   /**
-   * Day left click modal options
+   * Day left click CalendarModal options
    * default: []
    */
   contextMenuOptions?: {

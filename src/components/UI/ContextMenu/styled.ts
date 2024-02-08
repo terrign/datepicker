@@ -12,7 +12,7 @@ export const StyledContextMenu = styled.div<Props>`
   left: ${({ $x }) => $x}px;
   top: ${({ $y }) => $y}px;
   border: 1px solid ${({ theme }) => theme.borderColor};
-  background: ${({ theme }) => theme.modalBg};
+  background: ${({ theme }) => theme.CalendarcontextMenuBg};
 
   position: absolute;
   gap: 5px;
@@ -27,14 +27,14 @@ export const StyledContextMenu = styled.div<Props>`
     padding: 5px;
     white-space: nowrap;
 
-    background: ${({ theme }) => theme.modalBg};
-    color: ${({ theme }) => theme.modalButtonColor};
+    background: ${({ theme }) => theme.contextMenuBg};
+    color: ${({ theme }) => theme.contextMenuButtonColor};
 
     &:hover {
       cursor: pointer;
 
-      background: ${({ theme }) => theme.modalButtonHoverBgColor};
-      color: ${({ theme }) => theme.modalButtonHoverColor};
+      background: ${({ theme }) => theme.contextMenuButtonHoverBgColor};
+      color: ${({ theme }) => theme.contextMenuButtonHoverColor};
     }
   }
 `;

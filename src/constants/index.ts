@@ -1,4 +1,12 @@
-import { Color, defaultBlock, flex, font } from './styles';
+import {
+  CLOSE_BUTTON_FONT_SIZE,
+  Color,
+  DEFAULT_FONT_SIZE,
+  defaultBlock,
+  flex,
+  font,
+  TEXT_ICON_FONT_SIZE,
+} from './styles';
 
 const MONTH_NAMES = [
   'January',
@@ -28,7 +36,9 @@ const WEEKS_TO_DISPLAY = 6;
 const WEEK_LENGTH = 7;
 
 export {
+  CLOSE_BUTTON_FONT_SIZE,
   Color,
+  DEFAULT_FONT_SIZE,
   defaultBlock,
   flex,
   font,
@@ -36,6 +46,7 @@ export {
   MONTH_NAMES,
   SATURDAY_INDEX,
   SUNDAY_INDEX,
+  TEXT_ICON_FONT_SIZE,
   WEEK_LENGTH,
   WEEKDAYS,
   WEEKS_TO_DISPLAY,

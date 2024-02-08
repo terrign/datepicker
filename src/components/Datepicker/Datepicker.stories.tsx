@@ -97,8 +97,8 @@ export const CustomTheme: Story = {
       selectedDayBgColor: '#b872e7',
       selectedDayFontColor: '#dfbfc2',
       disabledDayFontColor: '#9b9c9c',
-      modalButtonColor: '#004d99',
-      modalButtonHoverBgColor: '#eb7f13332',
+      contextMenuButtonColor: '#004d99',
+      contextMenuButtonHoverBgColor: '#eb7f13332',
       borderColor: '#ff0000',
     },
     calendarConfig: {

@@ -28,8 +28,8 @@ export interface ThemeObject {
   selectionRangeEndDayBgColor: string;
   selectionRangeEndDayFontColor: string;
 
-  modalButtonColor: string;
-  modalButtonHoverBgColor: string;
-  modalButtonHoverColor: string;
-  modalBg: string;
+  contextMenuButtonColor: string;
+  contextMenuButtonHoverBgColor: string;
+  contextMenuButtonHoverColor: string;
+  contextMenuBg: string;
 }

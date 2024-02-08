@@ -4,14 +4,14 @@ import { useEventListener } from 'hooks/useEventListener';
 import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
-import { ModalCloseButton, StyledModal } from './styled';
+import { CalendarModalCloseButton, StyledCalendarModal } from './styled';
 
-export interface ModalProps extends PropsWithChildren {
+export interface CalendarModalProps extends PropsWithChildren {
   onClose: () => void;
   open: boolean;
 }
 
-export function Modal({ children, onClose, open }: ModalProps) {
+export function CalendarModal({ children, onClose, open }: CalendarModalProps) {
   const { calendarContainerRef } = useApp();
 
   const closeButtonHandler = () => {
@@ -27,12 +27,12 @@ export function Modal({ children, onClose, open }: ModalProps) {
   return (
     open &&
     createPortal(
-      <StyledModal>
+      <StyledCalendarModal>
         {children}
-        <ModalCloseButton onClick={closeButtonHandler}>
+        <CalendarModalCloseButton onClick={closeButtonHandler}>
           <CloseIcon />
-        </ModalCloseButton>
-      </StyledModal>,
+        </CalendarModalCloseButton>
+      </StyledCalendarModal>,
       calendarContainerRef?.current ?? document.body,
     )
   );

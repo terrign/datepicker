@@ -3,11 +3,11 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort', 'import', 'react', 'react-hooks'],
   extends: [
     'prettier',
+    'plugin:storybook/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:import/recommended',
-    'plugin:storybook/recommended',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',

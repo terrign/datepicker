@@ -1,5 +1,11 @@
 import { css } from 'styled-components';
 
+export const CLOSE_BUTTON_FONT_SIZE = 5;
+
+export const DEFAULT_FONT_SIZE = 14;
+
+export const TEXT_ICON_FONT_SIZE = 20;
+
 export enum Color {
   WHITE = '#FFFFFF',
   BLACK = '#333333',
@@ -32,7 +38,7 @@ export const defaultBlock = css`
 export const font = css`
   font-family: 'Open Sans', Helvetica, sans-serif;
   color: ${({ theme }) => theme.fontColor};
-  font-size: 14px;
+  font-size: ${DEFAULT_FONT_SIZE}px;
   font-weight: 600;
 `;
 

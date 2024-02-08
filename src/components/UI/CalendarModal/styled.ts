@@ -1,8 +1,8 @@
-import { flex, font } from '@constants';
+import { CLOSE_BUTTON_FONT_SIZE, flex, font } from '@constants';
 import { Button } from 'components/UI/Button';
 import styled from 'styled-components';
 
-export const StyledModal = styled.section`
+export const StyledCalendarModal = styled.section`
   ${font}
   ${flex}
 
@@ -20,7 +20,7 @@ export const StyledModal = styled.section`
   z-index: 202;
 `;
 
-export const ModalCloseButton = styled(Button)`
+export const CalendarModalCloseButton = styled(Button)`
   ${flex}
 
   position: absolute;
@@ -28,7 +28,7 @@ export const ModalCloseButton = styled(Button)`
   top: 10px;
   left: calc(100% - 42px);
   outline: none;
-  font-size: 5px;
+  font-size: ${CLOSE_BUTTON_FONT_SIZE}px;
   border: none;
   cursor: pointer;
   box-sizing: border-box;
