@@ -36,8 +36,9 @@ Object.defineProperties(globalThis, {
   Blob: { value: Blob },
   File: { value: File },
   performance: { value: performance },
-  localStorage: new LocalStorageMock(),
 });
+
+Object.defineProperty(window, 'localStorage', { value: new LocalStorageMock() });
 
 // HTMLCanvasElement.prototype.getContext = () => {};
 

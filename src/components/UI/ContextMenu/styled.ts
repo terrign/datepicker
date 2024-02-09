@@ -1,4 +1,4 @@
-import { flex, font } from '@constants';
+import { border, flex, font } from '@constants';
 import styled from 'styled-components';
 
 interface Props {
@@ -8,11 +8,13 @@ interface Props {
 
 export const StyledContextMenu = styled.div<Props>`
   ${flex}
+  ${border}
 
   left: ${({ $x }) => $x}px;
   top: ${({ $y }) => $y}px;
   border: 1px solid ${({ theme }) => theme.borderColor};
   background: ${({ theme }) => theme.contextMenuBg};
+  border-radius: ${({ theme }) => theme.borderRadius}px;
 
   position: absolute;
   flex-direction: column;
@@ -35,6 +37,16 @@ export const StyledContextMenu = styled.div<Props>`
 
       background: ${({ theme }) => theme.contextMenuButtonHoverBgColor};
       color: ${({ theme }) => theme.contextMenuButtonHoverColor};
+    }
+
+    &:first-child {
+      border-top-right-radius: ${({ theme }) => theme.borderRadius}px;
+      border-top-left-radius: ${({ theme }) => theme.borderRadius}px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: ${({ theme }) => theme.borderRadius}px;
+      border-bottom-left-radius: ${({ theme }) => theme.borderRadius}px;
     }
   }
 `;

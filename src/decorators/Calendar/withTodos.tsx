@@ -32,18 +32,12 @@ export const withToDos = (Component: FC<CalendarProps>) => {
               setAddTodoModalOpen(true);
             },
           },
-          {
-            label: 'Remove Todo',
-            onClick(date) {
-              removeTodo(date);
-            },
-          },
           ...derivedOptions,
         ];
       }
 
       return contextMenuOptions;
-    }, [contextMenuOptions, enableTodos, removeTodo]);
+    }, [contextMenuOptions, enableTodos]);
 
     if (!composedContextMenuOptions) {
       return <Component {...rest} />;
