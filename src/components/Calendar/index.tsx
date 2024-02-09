@@ -2,9 +2,10 @@ import { ActionType } from 'context/App/types';
 import { withDayContextMenu } from 'decorators/Calendar/withDayContextMenu';
 import { withDefaultDays } from 'decorators/Calendar/withDefaultDays';
 import { withHolidays } from 'decorators/Calendar/withHolidays';
+import { withToDos } from 'decorators/Calendar/withTodos';
 import { useApp } from 'hooks/useApp';
 import { useEventListener } from 'hooks/useEventListener';
-import { FC, useEffect, useRef } from 'react';
+import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 import { Controls } from './Controls';
 import { DaysOfTheMonthData, Month } from './Month';
@@ -28,12 +29,14 @@ export interface CalendarConfig {
     label: string;
     onClick: (date: string) => void;
   }[];
+
+  enableTodos?: boolean;
   onDateSelect?: (date: string) => void;
 }
 
-export type CalendarProps = DaysOfTheMonthData & CalendarConfig;
+export type CalendarProps = DaysOfTheMonthData & CalendarConfig & PropsWithChildren;
 
-const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect }) => {
+const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect, children }) => {
   const { calendarVisible, dispatch } = useApp();
   const calendarContainerRef = useRef<HTMLDivElement>(null);
 
@@ -53,8 +56,9 @@ const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect }
       <Controls />
       <WeekDays />
       <Month days={days} disableWeekends={disableWeekends} onDateSelect={onDateSelect} />
+      {children}
     </Container>
   );
 };
 
-export const Calendar = withDefaultDays(withDayContextMenu(withHolidays(BaseCalendar)));
+export const Calendar = withDefaultDays(withToDos(withDayContextMenu(withHolidays(BaseCalendar))));

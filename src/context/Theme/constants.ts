@@ -1,4 +1,4 @@
-import { Color } from '@constants';
+import { Color, DEFAULT_BORDER_RADIUS } from '@constants';
 import { ThemeObject } from '@types';
 
 const defaultTheme: ThemeObject = {
@@ -6,6 +6,7 @@ const defaultTheme: ThemeObject = {
   fontColor: Color.BLACK,
   hoverBgColor: Color.LIGHT_GRAY_2,
   borderColor: Color.LIGHT_GRAY_4,
+  borderRadius: DEFAULT_BORDER_RADIUS,
   holidayBorderColor: Color.RED,
 
   disabledDayFontColor: Color.LIGHT_GRAY_1,

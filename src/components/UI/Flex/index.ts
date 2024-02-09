@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export interface FlexProps {
   $dir?: 'col' | 'row';
-  $gap?: number;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -11,5 +10,4 @@ export const Flex = styled.div<FlexProps>`
   align-items: center;
 
   flex-direction: ${({ $dir }) => ($dir === 'col' ? 'column' : 'row')};
-  gap: ${({ $gap }) => $gap && `${$gap}px`};
 `;

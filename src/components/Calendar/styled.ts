@@ -1,14 +1,14 @@
-import { font } from '@constants';
+import { DEFAULT_PADDING, font } from '@constants';
 import styled from 'styled-components';
 
 export const Container = styled.section<{ $hidden: boolean }>`
   ${font}
 
-  display: flex;
   flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   gap: 6px;
-  border-radius: 8px;
-  padding: 10px;
+  padding: ${DEFAULT_PADDING}px;
   width: 100%;
   max-width: 250px;
   position: absolute;
@@ -17,6 +17,7 @@ export const Container = styled.section<{ $hidden: boolean }>`
   left: 0px;
   z-index: 200;
 
+  border-radius: ${({ theme }) => theme.borderRadius}px;
   background-color: ${({ theme }) => theme.bgColor};
   border: 1px solid ${({ theme }) => theme.borderColor};
   display: ${({ $hidden }) => ($hidden ? 'none' : 'flex')};

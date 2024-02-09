@@ -6,6 +6,10 @@ export const DEFAULT_FONT_SIZE = 14;
 
 export const TEXT_ICON_FONT_SIZE = 20;
 
+export const DEFAULT_BORDER_RADIUS = 8;
+
+export const DEFAULT_PADDING = 10;
+
 export enum Color {
   WHITE = '#FFFFFF',
   BLACK = '#333333',
@@ -21,11 +25,12 @@ export enum Color {
 }
 
 export const defaultBlock = css`
+  border-radius: ${({ theme }) => theme.borderRadius}px;
+
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 8px;
-  border-radius: 8px;
   border: none;
   outline: none;
   height: 32px;
@@ -36,14 +41,42 @@ export const defaultBlock = css`
 `;
 
 export const font = css`
-  font-family: 'Open Sans', Helvetica, sans-serif;
   color: ${({ theme }) => theme.fontColor};
   font-size: ${DEFAULT_FONT_SIZE}px;
+
+  font-family: 'Open Sans', Helvetica, sans-serif;
   font-weight: 600;
 `;
 
 export const flex = css`
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
+`;
+
+export const border = css`
+  border: 1px solid ${({ theme }) => theme.borderColor};
+`;
+
+export const input = css`
+  ${font}
+
+  font-weight: 500;
+  position: relative;
+  background-color: ${({ theme }) => theme.bgColor};
+  border: none;
+  outline: none;
+  height: 16px;
+  display: inline-block;
+  -moz-appearance: textfield;
+  appearance: textfield;
+
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;

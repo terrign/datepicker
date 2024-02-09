@@ -12,10 +12,9 @@ export const StyledContextMenu = styled.div<Props>`
   left: ${({ $x }) => $x}px;
   top: ${({ $y }) => $y}px;
   border: 1px solid ${({ theme }) => theme.borderColor};
-  background: ${({ theme }) => theme.CalendarcontextMenuBg};
+  background: ${({ theme }) => theme.contextMenuBg};
 
   position: absolute;
-  gap: 5px;
   flex-direction: column;
   z-index: 201;
 
@@ -26,6 +25,7 @@ export const StyledContextMenu = styled.div<Props>`
     outline: none;
     padding: 5px;
     white-space: nowrap;
+    width: 100%;
 
     background: ${({ theme }) => theme.contextMenuBg};
     color: ${({ theme }) => theme.contextMenuButtonColor};

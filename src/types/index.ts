@@ -6,10 +6,18 @@ export const enum DatePart {
   DAY,
 }
 
+export interface Todo {
+  date: string;
+  title: string;
+  desc: string;
+  id: string;
+}
+
 export interface ThemeObject {
   bgColor: string;
   fontColor: string;
   borderColor: string;
+  borderRadius: number;
   hoverBgColor: string;
   hoverTextColor?: string;
   holidayBorderColor: string;

@@ -7,13 +7,13 @@ export const StyledCalendarModal = styled.section`
   ${flex}
 
   background: ${({ theme }) => theme.bgColor};
+  border-radius: ${({ theme }) => theme.borderRadius}px;
 
   position: absolute;
   max-width: 400px;
   width: 100%;
   height: 100%;
-  max-height: 300px;
-  border-radius: 8px;
+  max-height: 320px;
   left: 0;
   top: 0;
   flex-direction: column;

@@ -5,11 +5,12 @@ export const StyledDateInput = styled.div`
   ${flex}
 
   position: relative;
-  background-color: ${({ theme }) => theme.bgColor};
-  border: 1px solid ${({ theme }) => theme.borderColor};
   padding: 8px 7px;
   max-height: 24px;
-  border-radius: 8px;
+
+  background-color: ${({ theme }) => theme.bgColor};
+  border: 1px solid ${({ theme }) => theme.borderColor};
+  border-radius: ${({ theme }) => theme.borderRadius}px;
 
   input {
     ${font}

@@ -102,9 +102,10 @@ export const CustomTheme: Story = {
       borderColor: '#ff0000',
     },
     calendarConfig: {
+      enableTodos: true,
       contextMenuOptions: [
         {
-          label: 'Add todo',
+          label: 'Add todo custom',
           onClick: (date: string) => {
             const todo = prompt('Todo to add:', '');
             if (todo) {
@@ -113,6 +114,16 @@ export const CustomTheme: Story = {
           },
         },
       ],
+    },
+  },
+};
+
+export const Todos: Story = {
+  args: {
+    theme: 'dark',
+    weekStart: 'Sunday',
+    calendarConfig: {
+      enableTodos: true,
     },
   },
 };

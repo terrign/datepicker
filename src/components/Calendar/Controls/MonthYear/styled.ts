@@ -1,4 +1,4 @@
-import { font } from '@constants';
+import { DEFAULT_PADDING, font } from '@constants';
 import styled from 'styled-components';
 
 export const MonthYear = styled.p`
@@ -34,7 +34,7 @@ export const PickerGrid = styled.section<{ $cols: number }>`
   max-height: 220px;
   margin: 0 auto;
   height: 100%;
-  padding: 10px;
+  padding: ${DEFAULT_PADDING}px;
 `;
 
 export const DatePartSelectButton = styled.button`
@@ -45,7 +45,8 @@ export const DatePartSelectButton = styled.button`
   padding: 5px;
   cursor: pointer;
   background: none;
-  border-radius: 8px;
+
+  border-radius: ${({ theme }) => theme.borderRadius}px;
 
   &:hover {
     background: ${({ theme }) => theme.hoverBgColor};
