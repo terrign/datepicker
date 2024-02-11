@@ -1,11 +1,11 @@
 import { TODO_DESC_MAX_LENGTH, TODO_TITLE_MAX_LENGTH } from '@constants';
-import { Todo } from '@types';
+import { DateString, Todo } from '@types';
 import { getUniqueId } from '@utils';
 import { StyledTodoForm, TodoButton } from 'components/Todo/styled';
 import { ChangeEvent, FormEventHandler, useId, useState } from 'react';
 
 interface AddTodoFormProps {
-  date: string;
+  date: DateString;
   closeModal: () => void;
   addTodo: (todo: Todo) => void;
 }

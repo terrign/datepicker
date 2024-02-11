@@ -1,3 +1,4 @@
+import { DateString } from '@types';
 import { ActionType } from 'context/App/types';
 import { withDefinedDayType } from 'decorators/Day/withDefinedDayType';
 import { useApp } from 'hooks/useApp';
@@ -8,7 +9,7 @@ import { DayType } from './types';
 
 export interface DayProps {
   type: DayType;
-  date: string;
+  date: DateString;
   onDateSelect?: (date: string) => void;
   dayContextMenuHandler?: (date: string, x: number, y: number) => void;
 }

@@ -1,3 +1,4 @@
+import { MAX_YEAR, MIN_YEAR } from '@constants';
 import { getDateParts } from '@utils';
 import { useApp } from 'hooks/useApp';
 import { useEffect, useState } from 'react';
@@ -10,8 +11,16 @@ const getInitYearView = (initYear: number) => {
   const initYearView = [initYear];
 
   for (let i = 1; i <= YEARS_TO_APPEND; i++) {
-    initYearView.push(initYear + i);
-    initYearView.unshift(initYear - i);
+    const nextYear = initYear + i;
+    const prevYear = initYear - i;
+
+    if (nextYear <= MAX_YEAR) {
+      initYearView.push(initYear + i);
+    }
+
+    if (prevYear >= MIN_YEAR) {
+      initYearView.unshift(initYear - i);
+    }
   }
 
   return initYearView;
@@ -21,13 +30,17 @@ export const useYearPicker = () => {
   const { firstDayOfTheViewMonth } = useApp();
   const { year } = getDateParts(firstDayOfTheViewMonth);
   const [currentView, setCurrentView] = useState<number[]>(getInitYearView(year));
+  const [nextViewButtonDisabled, setNextViewButtonDisabled] = useState(false);
+  const [prevViewButtonDisabled, setPrevViewButtonDisabled] = useState(false);
 
   const setNextView = () => {
     setCurrentView((prevView) => {
       const newView = [];
       const currentLast = prevView[prevView.length - 1];
-      for (let i = currentLast + 1; i <= currentLast + YEARS_TO_DISPLAY; i++) {
-        newView.push(i);
+      for (let year = currentLast + 1; year <= currentLast + YEARS_TO_DISPLAY; year++) {
+        if (year <= MAX_YEAR) {
+          newView.push(year);
+        }
       }
       return newView;
     });
@@ -37,16 +50,23 @@ export const useYearPicker = () => {
     setCurrentView((prevView) => {
       const newView = [];
       const currentFirst = prevView[0];
-      for (let i = currentFirst - 1; i >= currentFirst - YEARS_TO_DISPLAY; i--) {
-        newView.unshift(i);
+      for (let year = currentFirst - 1; year >= currentFirst - YEARS_TO_DISPLAY; year--) {
+        if (year >= MIN_YEAR) {
+          newView.unshift(year);
+        }
       }
       return newView;
     });
   };
 
   useEffect(() => {
+    setPrevViewButtonDisabled(currentView.includes(MIN_YEAR));
+    setNextViewButtonDisabled(currentView.includes(MAX_YEAR));
+  }, [currentView]);
+
+  useEffect(() => {
     setCurrentView(getInitYearView(year));
   }, [year]);
 
-  return { currentView, setNextView, setPrevView };
+  return { currentView, setNextView, setPrevView, nextViewButtonDisabled, prevViewButtonDisabled };
 };

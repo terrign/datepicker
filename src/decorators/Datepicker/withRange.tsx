@@ -30,7 +30,7 @@ export const withRange: WithRangePicker = (type: RangePicker) => (Component) => 
     const onDateSelectWithRange = (selectedDate: string | null) => {
       if (type === RangePicker.FROM && setSelectionStart) {
         if (selectionEnd && selectedDate && selectedDate >= selectionEnd) {
-          throw new Error('Selection start >= selection end');
+          throw new Error('Start date must be less then end date');
         } else {
           setSelectionStart(selectedDate);
           if (onDateSelect) {
@@ -41,7 +41,7 @@ export const withRange: WithRangePicker = (type: RangePicker) => (Component) => 
 
       if (type === RangePicker.TO) {
         if (selectionStart && selectedDate && selectedDate <= selectionStart) {
-          throw new Error('Selection end <= selection start');
+          throw new Error('End date must exceed start date');
         } else {
           setSelectionEnd(selectedDate);
           if (onDateSelect) {

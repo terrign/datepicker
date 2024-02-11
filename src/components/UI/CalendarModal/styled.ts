@@ -21,6 +21,7 @@ export const StyledCalendarModal = styled.section`
 `;
 
 export const CalendarModalCloseButton = styled(Button)`
+  ${font}
   ${flex}
 
   position: absolute;

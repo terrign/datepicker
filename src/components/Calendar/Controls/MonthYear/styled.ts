@@ -30,10 +30,11 @@ export const PickerGrid = styled.section<{ $cols: number }>`
   grid-template-columns: repeat(${({ $cols }) => $cols}, 1fr);
 
   display: grid;
-  align-items: center;
+  align-items: start;
   max-height: 220px;
-  margin: 0 auto;
-  height: 100%;
+  margin: 20px auto;
+  gap: 15px 5px;
+
   padding: ${DEFAULT_PADDING}px;
 `;
 

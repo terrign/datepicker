@@ -1,37 +1,18 @@
 import { DatePart } from '@types';
 
-import {
-  changeDate,
-  createCalendarMonthView,
-  getDateParts,
-  getUTCDatefromDateString,
-  toStringDate,
-  validateDateString,
-} from './date';
+import { changeDate, createCalendarMonthView, getDateParts, getUTCDatefromDateString, toStringDate } from './date';
 
 describe('Date utils tests', () => {
-  it('Validate date func trows error on incorrect format', async () => {
-    expect(() => validateDateString('asd')).toThrow();
-    expect(() => validateDateString('11/11/2022')).toThrow();
-    expect(() => validateDateString('1/1/2022')).toThrow();
-    expect(() => validateDateString('2024-1-1')).toThrow();
-    expect(() => validateDateString('2024-01-1')).toThrow();
-    expect(() => validateDateString('1')).toThrow();
-    expect(validateDateString('2024-01-01')).toBe('2024-01-01');
-  });
-
   it('getUTCDatefromDateString returns correct values', async () => {
     const date = getUTCDatefromDateString('2024-01-01');
     const parts = [date.getFullYear(), date.getMonth(), date.getDate()];
     expect(date).toBeTruthy();
     expect(parts).toEqual([2024, 0, 1]);
-    expect(() => getUTCDatefromDateString('asdasdasd')).toThrow();
-    expect(getUTCDatefromDateString(undefined)).toBe(undefined);
   });
 
   it('toStringDate returns correct values', async () => {
-    const date = toStringDate(new Date(NaN));
-    expect(date).toBe('');
+    const date = toStringDate(new Date('2024-01-02'));
+    expect(date).toBe('2024-01-02');
     const date1 = new Date(Date.UTC(2024, 0, 1));
     expect(toStringDate(date1)).toBe('2024-01-01');
   });

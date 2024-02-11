@@ -13,7 +13,7 @@ export const DEFAULT_PADDING = 10;
 export enum Color {
   WHITE = '#FFFFFF',
   BLACK = '#333333',
-  RED = '#c92b2b',
+  RED = '#ff0000',
   LIGHT_GRAY_1 = '#AAAAAA',
   LIGHT_GRAY_2 = '#F1F1F1',
   LIGHT_GRAY_3 = '#656565',
@@ -37,7 +37,6 @@ export const defaultBlock = css`
   width: 32px;
   box-sizing: border-box;
   user-select: none;
-  transition: background 0.1s ease-in-out;
 `;
 
 export const font = css`
@@ -78,5 +77,19 @@ export const input = css`
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+`;
+
+export const apperAnimation = css`
+  animation: 0.1s ease-in-out 0s 1 alternate appear;
+
+  @keyframes appear {
+    from {
+      transform: scale(0);
+    }
+
+    to {
+      transform: scale(1);
+    }
   }
 `;

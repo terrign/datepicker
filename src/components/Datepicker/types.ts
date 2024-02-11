@@ -1,4 +1,4 @@
-import { PredefinedTheme, ThemeObject, WeekStart } from '@types';
+import { DateStringOrNull, PredefinedTheme, ThemeObject, WeekStart } from '@types';
 import { CalendarConfig } from 'components/Calendar';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
@@ -14,15 +14,11 @@ export interface DatePickerProps {
   /**
    * Callback to run on date selection, selected date in yyyy-mm-dd is provided as first argument
    */
-  onDateSelect?: (date: string | null) => void;
-  /**
-   * Callback to run on date input error;
-   */
-  onError?: (error: Error) => void;
+  onDateSelect?: (date: DateStringOrNull) => void;
   /**
    * Default selected date in yyyy-mm-dd format
    */
-  defaultSelectedDate?: string | null;
+  defaultSelectedDate?: DateStringOrNull;
   /**
    * Custom colors provided as ThemeObject
    */
@@ -30,11 +26,11 @@ export interface DatePickerProps {
   /**
    * Maximum date available for selection in yyyy-mm-dd format
    */
-  maxDate?: string;
+  maxDate?: DateStringOrNull;
   /**
    * Minimum date available for selection in yyyy-mm-dd format
    */
-  minDate?: string;
+  minDate?: DateStringOrNull;
   calendarConfig?: CalendarConfig;
 }
 

@@ -1,7 +1,6 @@
 import { MONTH_NAMES } from '@constants';
 import { getDateParts, toStringDate } from '@utils';
-import { MonthPickerGrid } from 'components/Calendar/Controls/MonthYear/MonthPicker/styled';
-import { DatePartSelectButton } from 'components/Calendar/Controls/MonthYear/styled';
+import { DatePartSelectButton, PickerGrid } from 'components/Calendar/Controls/MonthYear/styled';
 import { PickerProps } from 'components/Calendar/Controls/MonthYear/types';
 import { CalendarModal } from 'components/UI/CalendarModal';
 import { ActionType } from 'context/App/types';
@@ -19,7 +18,7 @@ export const MonthPicker = ({ closeHandler, open }: PickerProps) => {
   };
   return (
     <CalendarModal open={open} onClose={closeHandler}>
-      <MonthPickerGrid $cols={2}>
+      <PickerGrid $cols={2}>
         {MONTH_NAMES.map((monthName, monthIndex) => {
           const onClick = getClickHandler(monthIndex);
           return (
@@ -28,7 +27,7 @@ export const MonthPicker = ({ closeHandler, open }: PickerProps) => {
             </DatePartSelectButton>
           );
         })}
-      </MonthPickerGrid>
+      </PickerGrid>
     </CalendarModal>
   );
 };

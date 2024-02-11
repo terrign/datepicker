@@ -1,3 +1,5 @@
+import { MAX_YEAR, MIN_YEAR } from '@constants';
+import { getDateParts } from '@utils';
 import { GetDatePartChangeHandlerType } from 'components/Calendar/Controls/types';
 import { Button } from 'components/UI/Button';
 import { Flex } from 'components/UI/Flex';
@@ -8,7 +10,8 @@ import { useApp } from 'hooks/useApp';
 import { MonthYearControls } from './MonthYear';
 
 export const Controls = () => {
-  const { dispatch } = useApp();
+  const { dispatch, firstDayOfTheViewMonth } = useApp();
+  const { year, month } = getDateParts(firstDayOfTheViewMonth);
 
   const getDateChangeHandler: GetDatePartChangeHandlerType = (action, changeAmount) => () => {
     dispatch({ type: action, payload: changeAmount });
@@ -22,19 +25,19 @@ export const Controls = () => {
   return (
     <Flex>
       <Flex>
-        <Button onClick={prevYearHandler} $control>
+        <Button onClick={prevYearHandler} $control disabled={year === MIN_YEAR}>
           <DoublePrevIcon />
         </Button>
-        <Button onClick={prevMonthHandler} $control>
+        <Button onClick={prevMonthHandler} $control disabled={year === MIN_YEAR && month === 1}>
           <PrevIcon />
         </Button>
       </Flex>
       <MonthYearControls />
       <Flex>
-        <Button onClick={nextMonthHandler} $control>
+        <Button onClick={nextMonthHandler} $control disabled={year === MAX_YEAR && month === 12}>
           <NextIcon />
         </Button>
-        <Button onClick={nextYearHandler} $control>
+        <Button onClick={nextYearHandler} $control disabled={year === MAX_YEAR}>
           <DoubleNextIcon />
         </Button>
       </Flex>

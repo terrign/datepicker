@@ -13,11 +13,11 @@ import { StyledControls } from './styled';
 export const YearPicker = ({ closeHandler, open }: PickerProps) => {
   const { dispatch, firstDayOfTheViewMonth } = useApp();
   const { year, day, month } = getDateParts(firstDayOfTheViewMonth);
-  const { currentView, setNextView, setPrevView } = useYearPicker();
+  const { currentView, setNextView, setPrevView, prevViewButtonDisabled, nextViewButtonDisabled } = useYearPicker();
 
   const getClickHandler = (newYear: number) => {
     return () => {
-      const date = new Date(Date.UTC(newYear, month, day));
+      const date = new Date(Date.UTC(newYear, month - 1, day));
       dispatch({ type: ActionType.SET_VIEW_DATE, payload: toStringDate(date) });
       closeHandler();
     };
@@ -26,10 +26,10 @@ export const YearPicker = ({ closeHandler, open }: PickerProps) => {
   return (
     <CalendarModal open={open} onClose={closeHandler}>
       <StyledControls>
-        <Button onClick={setPrevView}>
+        <Button onClick={setPrevView} disabled={prevViewButtonDisabled}>
           <PrevIcon />
         </Button>
-        <Button onClick={setNextView}>
+        <Button onClick={setNextView} disabled={nextViewButtonDisabled}>
           <NextIcon />
         </Button>
       </StyledControls>

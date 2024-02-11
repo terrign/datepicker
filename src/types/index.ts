@@ -41,3 +41,7 @@ export interface ThemeObject {
   contextMenuButtonHoverColor: string;
   contextMenuBg: string;
 }
+
+export type DateString = string;
+
+export type DateStringOrNull = string | null;

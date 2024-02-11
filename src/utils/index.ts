@@ -6,8 +6,10 @@ import {
   getMonthName,
   getUTCDatefromDateString,
   getWeekDays,
+  isNullDate,
+  isValidDate,
+  isValidDateStringFormat,
   toStringDate,
-  validateDateString,
 } from './date';
 
 function* uniqueIdGenerator() {
@@ -27,6 +29,8 @@ export {
   getUniqueId,
   getUTCDatefromDateString,
   getWeekDays,
+  isNullDate,
+  isValidDate,
+  isValidDateStringFormat,
   toStringDate,
-  validateDateString,
 };

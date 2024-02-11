@@ -1,3 +1,4 @@
+import { DateString } from '@types';
 import { ActionType } from 'context/App/types';
 import { withDayContextMenu } from 'decorators/Calendar/withDayContextMenu';
 import { withDefaultDays } from 'decorators/Calendar/withDefaultDays';
@@ -31,7 +32,7 @@ export interface CalendarConfig {
   }[];
 
   enableTodos?: boolean;
-  onDateSelect?: (date: string) => void;
+  onDateSelect?: (date: DateString) => void;
 }
 
 export type CalendarProps = DaysOfTheMonthData & CalendarConfig & PropsWithChildren;

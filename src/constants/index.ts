@@ -1,4 +1,5 @@
 import {
+  apperAnimation,
   border,
   CLOSE_BUTTON_FONT_SIZE,
   Color,
@@ -45,7 +46,12 @@ const TODO_TITLE_MAX_LENGTH = 30;
 
 const TODO_DESC_MAX_LENGTH = 70;
 
+const MIN_YEAR = 1000;
+
+const MAX_YEAR = 9999;
+
 export {
+  apperAnimation,
   border,
   CLOSE_BUTTON_FONT_SIZE,
   Color,
@@ -56,6 +62,8 @@ export {
   flex,
   font,
   input,
+  MAX_YEAR,
+  MIN_YEAR,
   MONDAY_INDEX,
   MONTH_NAMES,
   SATURDAY_INDEX,

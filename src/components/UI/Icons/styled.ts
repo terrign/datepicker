@@ -8,8 +8,9 @@ export const Icon = styled.img`
 `;
 
 export const TextIcon = styled.span`
-  ${font}
+  ${font};
 
+  color: inherit;
   font-size: ${TEXT_ICON_FONT_SIZE}px;
   line-height: 16px;
   height: 16px;

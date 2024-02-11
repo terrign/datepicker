@@ -1,16 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { DateStringOrNull } from '@types';
 import { DatePicker } from 'components/Datepicker';
 import { DatePickerInputProps } from 'components/Datepicker/types';
 import { FocusEvent, FocusEventHandler } from 'react';
 
 type RenderWithPropsArgs = Partial<
-  Pick<DatePickerInputProps, 'onDateSelect' | 'onError'> & {
+  Pick<DatePickerInputProps, 'onDateSelect'> & {
     onModalClick: (date: string) => void;
   }
 >;
 
 describe('DateInput', () => {
-  const renderWithProps = ({ onModalClick, onDateSelect, onError }: RenderWithPropsArgs) => {
+  const renderWithProps = ({ onModalClick, onDateSelect }: RenderWithPropsArgs) => {
     return render(
       <DatePicker
         theme="dark"
@@ -20,7 +21,6 @@ describe('DateInput', () => {
         maxDate="2025-04-04"
         onDateSelect={onDateSelect}
         defaultSelectedDate="2024-01-04"
-        onError={onError}
         calendarConfig={{
           disableWeekends: true,
           holidays: ['2024-01-01', '2024-01-02', '2024-03-06'],
@@ -36,8 +36,8 @@ describe('DateInput', () => {
   };
 
   it('onDateSelect works', async () => {
-    let value: string | null = 'test';
-    const onDateSelect = (date: string | null) => (value = date);
+    let value: DateStringOrNull = 'test';
+    const onDateSelect = (date: DateStringOrNull) => (value = date);
     renderWithProps({ onDateSelect });
     const input = screen.getByPlaceholderText(/Choose Date/i);
 
@@ -57,41 +57,35 @@ describe('DateInput', () => {
     expect(value).toBe('2024-01-01');
 
     fireEvent.change(input, { target: { value: '' } });
-    expect(value).toBe('');
-  });
-
-  it('onError works', async () => {
-    let err: Error | null = null;
-    const onError = (error: Error) => (err = error);
-    renderWithProps({ onError });
-    const input = screen.getByPlaceholderText(/Choose Date/i);
-
-    fireEvent.change(input, { target: { value: 'asdaasd' } });
-    expect(err).toBeInstanceOf(Error);
+    expect(value).toBe(null);
   });
 
   it('Can not set date less then minDate or higher then maxDate', async () => {
-    let err: Error | null = null;
-    const onError = (error: Error) => (err = error);
-    renderWithProps({ onError });
+    let value: DateStringOrNull = null;
+    const onDateSelect = (date: DateStringOrNull) => (value = date);
+
+    renderWithProps({ onDateSelect });
     const input = screen.getByPlaceholderText(/Choose Date/i);
 
     fireEvent.change(input, { target: { value: '2050-01-01' } });
-    expect(err).toBeInstanceOf(Error);
+    expect(value).toBe(null);
 
-    err = null;
     fireEvent.change(input, { target: { value: '1950-01-01' } });
-    expect(err).toBeInstanceOf(Error);
+    expect(value).toBe(null);
+
+    fireEvent.change(input, { target: { value: '2024-01-01' } });
+    expect(value).toBe('2024-01-01');
   });
 
   it('Can not set weekend if it is disabled', async () => {
-    let err: Error | null = null;
-    const onError = (error: Error) => (err = error);
-    renderWithProps({ onError });
+    let value: DateStringOrNull = null;
+    const onDateSelect = (date: DateStringOrNull) => (value = date);
+
+    renderWithProps({ onDateSelect });
     const input = screen.getByPlaceholderText(/Choose Date/i);
 
     fireEvent.change(input, { target: { value: '2024-02-04' } });
-    expect(err).toBeInstanceOf(Error);
+    expect(value).toBe(null);
   });
 
   it('Clears date on clear button click', async () => {

@@ -13,13 +13,12 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(fun
   {
     theme = 'light',
     weekStart = 'Sunday',
-    maxDate,
-    minDate,
+    maxDate = null,
+    minDate = null,
     customStyles,
     calendarConfig,
-    defaultSelectedDate,
+    defaultSelectedDate = null,
     onDateSelect,
-    onError,
     ...rest
   }: DatePickerProps,
   ref,
@@ -32,7 +31,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(fun
         disableWeekends={Boolean(calendarConfig?.disableWeekends)}
         minDate={minDate}
         maxDate={maxDate}
-        onError={onError}
       >
         <CustomThemeProvider theme={theme} customStyles={customStyles}>
           <DatepickerContainer>

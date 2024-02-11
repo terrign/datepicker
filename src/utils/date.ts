@@ -1,48 +1,62 @@
 import { MONDAY_INDEX, SUNDAY_INDEX, WEEK_LENGTH, WEEKDAYS, WEEKS_TO_DISPLAY } from '@constants';
-import { DatePart, WeekStart } from '@types';
+import { DatePart, DateString, DateStringOrNull, WeekStart } from '@types';
 
-const VALID_DATE_STRING_REGEXP = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/; // yyyy-mm-dd
+const VALID_DATE_STRING_REGEXP = /^[123456789]\d{3}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/; // yyyy-mm-dd
 
-export const validateDateString = (dateString: string): string => {
-  const str = dateString.match(VALID_DATE_STRING_REGEXP);
-  if (str) {
-    return str[0];
-  } else {
-    throw new TypeError(`Incorrect date string format: "${dateString}". Date string must be yyyy-mm-dd`);
-  }
+export const isNullDate = (dateString: DateStringOrNull): dateString is null => {
+  return dateString === null;
 };
 
-export const getDateParts = (date: string) => {
+export const isValidDateStringFormat = (dateString: DateStringOrNull): dateString is DateString => {
+  if (isNullDate(dateString)) {
+    return true;
+  }
+  return Boolean(dateString.match(VALID_DATE_STRING_REGEXP));
+};
+
+export const isValidDate = (dateString: DateString) => {
+  if (isNaN(Date.parse(dateString))) {
+    return false;
+  }
+
+  try {
+    new Date(dateString).toISOString();
+  } catch {
+    return false;
+  }
+
+  const dateObject = getUTCDatefromDateString(dateString);
+  const { month } = getDateParts(dateString);
+
+  if (month && month - dateObject.getMonth() !== 1) {
+    return false;
+  }
+
+  return true;
+};
+
+export const getDateParts = (date: DateString) => {
   const [year, month, day] = date.split('-').map((part) => Number(part));
   return { year, month, day };
 };
 
-export function getUTCDatefromDateString(date: undefined): undefined;
-export function getUTCDatefromDateString(date: string): Date;
-export function getUTCDatefromDateString(date?: string) {
-  if (!date) {
-    return;
-  }
-  const { year, month, day } = getDateParts(validateDateString(date));
-  return new Date(Date.UTC(year, month - 1, day));
+export function getUTCDatefromDateString(dateString: DateString) {
+  const { year, month, day } = getDateParts(dateString);
+  const UTCDate = new Date(Date.UTC(year, month - 1, day));
+  return UTCDate;
 }
 
-export const toStringDate = (date: Date): string => {
-  try {
-    date.toISOString();
-  } catch (e) {
-    return '';
-  }
-  return date.toISOString().split('T')[0];
+export const toStringDate = (date: Date): DateString => {
+  return date.toISOString().split('T')[0] as DateString;
 };
 
-export const getFirstDayOfTheMonth = (dateString: string) => {
-  const newDate = getUTCDatefromDateString(validateDateString(dateString));
+export const getFirstDayOfTheMonth = (dateString: DateString) => {
+  const newDate = getUTCDatefromDateString(dateString);
   newDate.setDate(1);
   return toStringDate(newDate);
 };
 
-export const changeDate = (dateString: string, datePartType: DatePart, changeAmount: number) => {
+export const changeDate = (dateString: DateString, datePartType: DatePart, changeAmount: number) => {
   const dateToChangeObject = getUTCDatefromDateString(dateString);
 
   switch (datePartType) {
