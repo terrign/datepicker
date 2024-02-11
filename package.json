@@ -104,8 +104,7 @@
   },
   "peerDependencies": {
     "react": "^18.0.2",
-    "react-dom": "^18.2.0",
-    "styled-components": "^6.1.8"
+    "react-dom": "^18.2.0"
   },
   "bugs": {
     "url": "https://github.com/terrign/datepicker/issues"
