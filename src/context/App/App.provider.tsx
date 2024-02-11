@@ -1,6 +1,6 @@
-import { WeekStart } from '@types';
+import { DateStringOrNull, WeekStart } from '@types';
 import { AppContext } from 'context/App/App.context';
-import { useApp } from 'context/App/useApp';
+import { useApp } from 'hooks/useApp';
 import { PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
 
 import { appReducer } from './App.reducer';
@@ -8,11 +8,11 @@ import { ActionType, AppReducerType } from './types';
 
 interface AppProviderProps extends PropsWithChildren {
   weekStart: WeekStart;
-  defaultSelectedDate?: string | null;
+  defaultSelectedDate?: DateStringOrNull;
   onError?: (error: Error) => void;
   disableWeekends: boolean;
-  minDate?: string;
-  maxDate?: string;
+  minDate?: DateStringOrNull;
+  maxDate?: DateStringOrNull;
 }
 
 export const AppProvider = ({

@@ -1,4 +1,5 @@
-import { changeDate, getFirstDayOfTheMonth } from '@utils';
+import { DatePart } from '@types';
+import { changeDate, getFirstDayOfTheMonth, isNullDate, isValidDate } from '@utils';
 
 import { ActionType, AppReducerType } from './types';
 
@@ -9,17 +10,18 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
       return {
         ...state,
         selectedDate: payload,
-        firstDayOfTheViewMonth: payload ? getFirstDayOfTheMonth(payload) : firstDayOfTheViewMonth,
+        firstDayOfTheViewMonth:
+          !isNullDate(payload) && isValidDate(payload) ? getFirstDayOfTheMonth(payload) : firstDayOfTheViewMonth,
       };
     case ActionType.CHANGE_MONTH:
       return {
         ...state,
-        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, 'month', payload),
+        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, DatePart.MONTH, payload),
       };
     case ActionType.CHANGE_YEAR:
       return {
         ...state,
-        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, 'year', payload),
+        firstDayOfTheViewMonth: changeDate(firstDayOfTheViewMonth, DatePart.YEAR, payload),
       };
     case ActionType.HIDE_SHOW_CALENDAR:
       return {
@@ -35,6 +37,11 @@ export const appReducer: AppReducerType = (state, { type, payload }) => {
       return {
         ...state,
         calendarContainerRef: payload,
+      };
+    case ActionType.SET_VALIDATION_ERROR:
+      return {
+        ...state,
+        validationError: payload,
       };
   }
 };

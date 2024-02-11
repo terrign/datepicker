@@ -1,12 +1,13 @@
+import { DateString } from '@types';
 import { Day } from 'components/Calendar/Day';
-import { UndefinedTypeDayProps } from 'components/Calendar/Day/decorators/withDefinedDayType';
 import { Week } from 'components/Calendar/Month/styled';
 import { Flex } from 'components/UI/Flex';
+import { UndefinedTypeDayProps } from 'decorators/Day/withDefinedDayType';
 
 export interface DaysOfTheMonthData {
   days: UndefinedTypeDayProps[][];
   disableWeekends?: boolean;
-  onDateSelect?: (dateString: string) => void;
+  onDateSelect?: (dateString: DateString) => void;
 }
 
 export const Month = ({ days, disableWeekends, onDateSelect }: DaysOfTheMonthData) => {

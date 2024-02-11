@@ -1,10 +1,23 @@
 export type WeekStart = 'Sunday' | 'Monday';
 export type PredefinedTheme = 'light' | 'dark';
+export const enum DatePart {
+  MONTH,
+  YEAR,
+  DAY,
+}
+
+export interface Todo {
+  date: string;
+  title: string;
+  desc: string;
+  id: string;
+}
 
 export interface ThemeObject {
   bgColor: string;
   fontColor: string;
   borderColor: string;
+  borderRadius: number;
   hoverBgColor: string;
   hoverTextColor?: string;
   holidayBorderColor: string;
@@ -23,8 +36,12 @@ export interface ThemeObject {
   selectionRangeEndDayBgColor: string;
   selectionRangeEndDayFontColor: string;
 
-  modalButtonColor: string;
-  modalButtonHoverBgColor: string;
-  modalButtonHoverColor: string;
-  modalBg: string;
+  contextMenuButtonColor: string;
+  contextMenuButtonHoverBgColor: string;
+  contextMenuButtonHoverColor: string;
+  contextMenuBg: string;
 }
+
+export type DateString = string;
+
+export type DateStringOrNull = string | null;

@@ -4,11 +4,21 @@ import {
   getDateParts,
   getFirstDayOfTheMonth,
   getMonthName,
-  getMonths,
   getUTCDatefromDateString,
+  getWeekDays,
+  isNullDate,
+  isValidDate,
+  isValidDateStringFormat,
   toStringDate,
-  validateDateString,
 } from './date';
+
+function* uniqueIdGenerator() {
+  while (true) {
+    yield Date.now().toString(36) + Math.random().toString(36);
+  }
+}
+
+const getUniqueId = () => uniqueIdGenerator().next().value as string;
 
 export {
   changeDate,
@@ -16,8 +26,11 @@ export {
   getDateParts,
   getFirstDayOfTheMonth,
   getMonthName,
-  getMonths,
+  getUniqueId,
   getUTCDatefromDateString,
+  getWeekDays,
+  isNullDate,
+  isValidDate,
+  isValidDateStringFormat,
   toStringDate,
-  validateDateString,
 };

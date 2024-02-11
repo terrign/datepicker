@@ -1,35 +1,35 @@
 import { getDateParts, toStringDate } from '@utils';
 import { DatePartSelectButton, PickerGrid } from 'components/Calendar/Controls/MonthYear/styled';
 import { PickerProps } from 'components/Calendar/Controls/MonthYear/types';
-import { useYearPicker } from 'components/Calendar/Controls/MonthYear/YearPicker/useYearPicker';
 import { Button } from 'components/UI/Button';
+import { CalendarModal } from 'components/UI/CalendarModal';
 import { NextIcon, PrevIcon } from 'components/UI/Icons';
-import { Modal } from 'components/UI/Modal';
-import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
+import { useApp } from 'hooks/useApp';
+import { useYearPicker } from 'hooks/useYearPicker';
 
 import { StyledControls } from './styled';
 
 export const YearPicker = ({ closeHandler, open }: PickerProps) => {
   const { dispatch, firstDayOfTheViewMonth } = useApp();
   const { year, day, month } = getDateParts(firstDayOfTheViewMonth);
-  const { currentView, next, prev } = useYearPicker();
+  const { currentView, setNextView, setPrevView, prevViewButtonDisabled, nextViewButtonDisabled } = useYearPicker();
 
   const getClickHandler = (newYear: number) => {
     return () => {
-      const date = new Date(Date.UTC(newYear, month, day));
+      const date = new Date(Date.UTC(newYear, month - 1, day));
       dispatch({ type: ActionType.SET_VIEW_DATE, payload: toStringDate(date) });
       closeHandler();
     };
   };
 
   return (
-    <Modal open={open} onClose={closeHandler}>
+    <CalendarModal open={open} onClose={closeHandler}>
       <StyledControls>
-        <Button onClick={prev}>
+        <Button onClick={setPrevView} disabled={prevViewButtonDisabled}>
           <PrevIcon />
         </Button>
-        <Button onClick={next}>
+        <Button onClick={setNextView} disabled={nextViewButtonDisabled}>
           <NextIcon />
         </Button>
       </StyledControls>
@@ -43,6 +43,6 @@ export const YearPicker = ({ closeHandler, open }: PickerProps) => {
           );
         })}
       </PickerGrid>
-    </Modal>
+    </CalendarModal>
   );
 };

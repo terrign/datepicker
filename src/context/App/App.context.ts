@@ -6,9 +6,10 @@ import { AppContextType } from './types';
 export const initialValues: AppContextType = {
   weekStart: 'Sunday',
   selectedDate: null,
-  firstDayOfTheViewMonth: getFirstDayOfTheMonth(toStringDate(new Date(Date.now()))),
+  firstDayOfTheViewMonth: getFirstDayOfTheMonth(toStringDate(new Date())),
   calendarVisible: false,
   disableWeekends: false,
+  validationError: null,
   dispatch: () => {},
 };
 

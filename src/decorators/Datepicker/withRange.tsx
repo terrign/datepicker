@@ -1,20 +1,23 @@
 import { DatePicker } from 'components/Datepicker';
 import { DatePickerInputProps } from 'components/Datepicker/types';
-import { useRange } from 'context/Range/useRange';
+import { useRange } from 'hooks/useRange';
 import { forwardRef, ForwardRefExoticComponent } from 'react';
 
-type DatePickerInputWithRangeProps = Omit<DatePickerInputProps, 'to' | 'from'>;
+export const enum RangePicker {
+  FROM,
+  TO,
+}
 
 export interface WithRangePicker {
   (
-    type: 'from' | 'to',
+    type: RangePicker,
   ): (
-    Component: ForwardRefExoticComponent<Omit<DatePickerInputProps, 'ref'> & React.RefAttributes<HTMLInputElement>>,
+    Component: ForwardRefExoticComponent<DatePickerInputProps & React.RefAttributes<HTMLInputElement>>,
   ) => typeof DatePicker;
 }
 
-export const withRange: WithRangePicker = (type: 'from' | 'to') => (Component) => {
-  const Wrapper = forwardRef<HTMLInputElement, DatePickerInputWithRangeProps>(function DatePicker(
+export const withRange: WithRangePicker = (type: RangePicker) => (Component) => {
+  const Wrapper = forwardRef<HTMLInputElement, DatePickerInputProps>(function DatePicker(
     { onDateSelect, ...rest },
     ref,
   ) {
@@ -25,9 +28,9 @@ export const withRange: WithRangePicker = (type: 'from' | 'to') => (Component) =
     }
 
     const onDateSelectWithRange = (selectedDate: string | null) => {
-      if (type === 'from' && setSelectionStart) {
+      if (type === RangePicker.FROM && setSelectionStart) {
         if (selectionEnd && selectedDate && selectedDate >= selectionEnd) {
-          throw new Error('Selection start >= selection end');
+          throw new Error('Start date must be less then end date');
         } else {
           setSelectionStart(selectedDate);
           if (onDateSelect) {
@@ -36,9 +39,9 @@ export const withRange: WithRangePicker = (type: 'from' | 'to') => (Component) =
         }
       }
 
-      if (type === 'to') {
+      if (type === RangePicker.TO) {
         if (selectionStart && selectedDate && selectedDate <= selectionStart) {
-          throw new Error('Selection end <= selection start');
+          throw new Error('End date must exceed start date');
         } else {
           setSelectionEnd(selectedDate);
           if (onDateSelect) {
@@ -48,7 +51,7 @@ export const withRange: WithRangePicker = (type: 'from' | 'to') => (Component) =
       }
     };
 
-    const defaultDate = type === 'from' ? selectionStart : selectionEnd;
+    const defaultDate = type === RangePicker.FROM ? selectionStart : selectionEnd;
 
     return <Component {...rest} ref={ref} onDateSelect={onDateSelectWithRange} defaultSelectedDate={defaultDate} />;
   });

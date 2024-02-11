@@ -1,8 +1,9 @@
+import { SATURDAY_INDEX, SUNDAY_INDEX } from '@constants';
 import { getDateParts, getUTCDatefromDateString } from '@utils';
 import { DayProps } from 'components/Calendar/Day';
 import { DayType } from 'components/Calendar/Day/types';
-import { useApp } from 'context/App';
-import { useRange } from 'context/Range/useRange';
+import { useApp } from 'hooks/useApp';
+import { useRange } from 'hooks/useRange';
 import { FC } from 'react';
 
 export interface UndefinedTypeDayProps extends Omit<DayProps, 'type'> {
@@ -19,7 +20,7 @@ export const withDefinedDayType = (Component: FC<DayProps>) => {
 
     const dayWeekIndex = dateObj.getDay();
     const isDisabled = () => {
-      if (disableWeekends && (dayWeekIndex === 0 || dayWeekIndex === 6)) {
+      if (disableWeekends && (dayWeekIndex === SUNDAY_INDEX || dayWeekIndex === SATURDAY_INDEX)) {
         return true;
       }
 

@@ -3,11 +3,11 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort', 'import', 'react', 'react-hooks'],
   extends: [
     'prettier',
+    'plugin:storybook/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:import/recommended',
-    'plugin:storybook/recommended',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
@@ -17,6 +17,14 @@ module.exports = {
     'import/no-default-export': 'error',
     'no-console': 'error',
   },
+  overrides: [
+    {
+      files: ['*stories.tsx'],
+      rules: {
+        'import/no-default-export': 'off',
+      },
+    },
+  ],
   parserOptions: {
     project: './tsconfig.json',
     sourceType: 'module',
@@ -31,6 +39,8 @@ module.exports = {
           ['assets', './src/assets'],
           ['components', './src/components'],
           ['context', './src/context'],
+          ['decorators', './src/decorators'],
+          ['hooks', './src/hooks'],
           ['@constants', './src/constants/index'],
           ['@utils', './src/utils/index'],
           ['@types', './src/types/index'],
@@ -39,14 +49,5 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: [
-    '__test__/**/*',
-    '/*.css',
-    '*.eslintrc.cjs',
-    '*.config.cjs',
-    '*.config.ts',
-    '*.config.js',
-    '/dist',
-    '/src/**/*.stories.tsx',
-  ],
+  ignorePatterns: ['__test__/**/*', '*.eslintrc.cjs', '*.config.cjs', '*.config.ts', '*.config.js', '/dist'],
 };

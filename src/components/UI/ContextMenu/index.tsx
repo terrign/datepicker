@@ -1,6 +1,7 @@
 import { StyledContextMenu } from 'components/UI/ContextMenu/styled';
-import { useApp } from 'context/App';
-import { Dispatch, PropsWithChildren, SetStateAction, useEffect, useRef } from 'react';
+import { useApp } from 'hooks/useApp';
+import { useEventListener } from 'hooks/useEventListener';
+import { Dispatch, PropsWithChildren, SetStateAction, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 export interface ContextMenu extends PropsWithChildren {
@@ -14,25 +15,28 @@ export const ContextMenu = ({ visible, position, children, setVisible }: Context
   const ref = useRef<HTMLDivElement>(null);
   const { calendarContainerRef } = useApp();
 
-  useEffect(() => {
-    const outerClickHandler = (event: MouseEvent) => {
-      if (event.target !== ref.current) {
-        setVisible(false);
-      }
-    };
-    document.body.addEventListener('click', outerClickHandler);
+  const outerClickHandler = (event: MouseEvent) => {
+    if (event.target !== ref.current) {
+      setVisible(false);
+    }
+  };
 
-    return () => {
-      document.body.removeEventListener('click', outerClickHandler);
-    };
-  }, [setVisible]);
+  useEventListener(document.body, 'click', outerClickHandler);
+
+  const container = (() => {
+    if (calendarContainerRef && calendarContainerRef.current) {
+      return calendarContainerRef.current;
+    }
+    return document.body;
+  })();
+
   return (
     visible &&
     createPortal(
       <StyledContextMenu $x={x} $y={y} ref={ref}>
         {children}
       </StyledContextMenu>,
-      calendarContainerRef?.current ?? document.body,
+      container,
     )
   );
 };

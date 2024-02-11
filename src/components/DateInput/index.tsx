@@ -1,8 +1,10 @@
-import { withValidation } from 'components/DateInput/decorators/withValidation';
+import { DateStringOrNull } from '@types';
 import { Button } from 'components/UI/Button';
 import { CalendarIcon, ClearIcon } from 'components/UI/Icons';
-import { useApp } from 'context/App';
 import { ActionType } from 'context/App/types';
+import { withValidation } from 'decorators/DateInput/withValidation';
+import { useApp } from 'hooks/useApp';
+import { useEventListener } from 'hooks/useEventListener';
 import {
   DetailedHTMLProps,
   FocusEvent,
@@ -15,51 +17,36 @@ import {
 
 import { StyledDateInput } from './styled';
 
-export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  onDateSelect?: (value: string | null) => void;
+export interface BaseDateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+  onDateSelect: (value: DateStringOrNull) => void;
 }
 
-export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(function DateInput(
+export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(function DateInput(
   { onDateSelect, style, className, onBlur, ...rest },
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
-  const { calendarVisible, dispatch, selectedDate, onError } = useApp();
+  const { calendarVisible, dispatch, selectedDate, validationError } = useApp();
 
   useImperativeHandle(ref, () => innerRef.current as HTMLInputElement);
 
   const handleClear = () => {
     const input = innerRef.current;
     if (input) {
+      onDateSelect(null);
       input.value = '';
-      if (onDateSelect) {
-        onDateSelect(null);
-        dispatch({ type: ActionType.SET_DATE, payload: null });
-      }
     }
   };
 
-  useEffect(() => {
-    const input = innerRef.current;
-    if (input) {
-      const onDateSelectHandler = (event: Event) => {
-        const dateString = (event.target as HTMLInputElement).value;
-        try {
-          if (onDateSelect) {
-            onDateSelect(dateString);
-          }
+  const onDateSelectHandler = (event: Event) => {
+    const dateString = (event.target as HTMLInputElement).value;
 
-          dispatch({ type: ActionType.SET_DATE, payload: dateString });
-        } catch (error) {
-          if (error instanceof Error && onError) {
-            onError(error);
-          }
-        }
-      };
-      input.addEventListener('change', onDateSelectHandler);
-      return () => input.removeEventListener('change', onDateSelectHandler);
+    if (!validationError) {
+      onDateSelect(dateString);
     }
-  }, [innerRef, onDateSelect, dispatch, onError]);
+  };
+
+  useEventListener(innerRef, 'change', onDateSelectHandler);
 
   useEffect(() => {
     const input = innerRef.current;
@@ -76,11 +63,12 @@ export const BaseDateInput = forwardRef<HTMLInputElement, DateInputProps>(functi
     if (onBlur) {
       onBlur(event);
     }
+    dispatch({ type: ActionType.SET_VALIDATION_ERROR, payload: null });
     event.currentTarget.value = selectedDate ?? '';
   };
 
   return (
-    <StyledDateInput style={style} className={className}>
+    <StyledDateInput style={style} className={className} $errorMessage={validationError ?? ''}>
       <Button $nohover type="button" onClick={handleCalendar} data-testid="calendarButton">
         <CalendarIcon />
       </Button>

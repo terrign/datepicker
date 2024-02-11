@@ -1,4 +1,4 @@
-import { Color } from '@constants';
+import { Color, DEFAULT_BORDER_RADIUS } from '@constants';
 import { ThemeObject } from '@types';
 
 const defaultTheme: ThemeObject = {
@@ -6,6 +6,7 @@ const defaultTheme: ThemeObject = {
   fontColor: Color.BLACK,
   hoverBgColor: Color.LIGHT_GRAY_2,
   borderColor: Color.LIGHT_GRAY_4,
+  borderRadius: DEFAULT_BORDER_RADIUS,
   holidayBorderColor: Color.RED,
 
   disabledDayFontColor: Color.LIGHT_GRAY_1,
@@ -22,10 +23,10 @@ const defaultTheme: ThemeObject = {
   selectionRangeEndDayBgColor: Color.BLUE,
   selectionRangeEndDayFontColor: Color.WHITE,
 
-  modalButtonColor: Color.BLACK,
-  modalButtonHoverBgColor: Color.BLUE,
-  modalButtonHoverColor: Color.WHITE,
-  modalBg: Color.WHITE,
+  contextMenuButtonColor: Color.BLACK,
+  contextMenuButtonHoverBgColor: Color.BLUE,
+  contextMenuButtonHoverColor: Color.WHITE,
+  contextMenuBg: Color.WHITE,
 };
 
 export const lightTheme: ThemeObject = {
@@ -39,6 +40,6 @@ export const darkTheme: ThemeObject = {
   hoverBgColor: Color.LIGHT_GRAY_1,
   borderColor: Color.LIGHT_GRAY_3,
 
-  modalButtonColor: Color.WHITE,
-  modalBg: Color.BLACK,
+  contextMenuButtonColor: Color.WHITE,
+  contextMenuBg: Color.BLACK,
 };

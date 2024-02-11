@@ -1,14 +1,14 @@
 import { CalendarProps } from 'components/Calendar';
 import { ContextMenu } from 'components/UI/ContextMenu';
-import { useContextMenu } from 'components/UI/ContextMenu/useContextMenu';
+import { useContextMenu } from 'hooks/useContextMenu';
 import { FC, useState } from 'react';
 
 export const withDayContextMenu = (Component: FC<CalendarProps>) => {
-  const Wrapper = ({ modalOptions, days, ...rest }: CalendarProps) => {
+  const Wrapper = ({ contextMenuOptions, days, ...rest }: CalendarProps) => {
     const { x, y, setPosition, setVisible, visible } = useContextMenu();
     const [actionDate, setActionDate] = useState('');
 
-    if (!modalOptions) {
+    if (!contextMenuOptions) {
       return <Component {...rest} days={days} />;
     }
 
@@ -29,7 +29,7 @@ export const withDayContextMenu = (Component: FC<CalendarProps>) => {
       <>
         <Component {...rest} days={newDays} />
         <ContextMenu visible={visible} position={[x, y]} setVisible={setVisible}>
-          {modalOptions.map(({ label, onClick }) => (
+          {contextMenuOptions.map(({ label, onClick }) => (
             <button key={label} onClick={() => onClick(actionDate)}>
               {label}
             </button>

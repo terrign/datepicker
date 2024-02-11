@@ -1,9 +1,12 @@
-import { withDayContextMenu } from 'components/Calendar/decorators/withDayContextMenu';
-import { withDefaultDays } from 'components/Calendar/decorators/withDefaultDays';
-import { withHolidays } from 'components/Calendar/decorators/withHolidays';
-import { useApp } from 'context/App';
+import { DateString } from '@types';
 import { ActionType } from 'context/App/types';
-import { FC, useEffect, useRef } from 'react';
+import { withDayContextMenu } from 'decorators/Calendar/withDayContextMenu';
+import { withDefaultDays } from 'decorators/Calendar/withDefaultDays';
+import { withHolidays } from 'decorators/Calendar/withHolidays';
+import { withToDos } from 'decorators/Calendar/withTodos';
+import { useApp } from 'hooks/useApp';
+import { useEventListener } from 'hooks/useEventListener';
+import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 import { Controls } from './Controls';
 import { DaysOfTheMonthData, Month } from './Month';
@@ -20,32 +23,31 @@ export interface CalendarConfig {
    */
   disableWeekends?: boolean;
   /**
-   * Day left click modal options
+   * Day left click CalendarModal options
    * default: []
    */
-  onDateSelect?: (date: string) => void;
-  modalOptions?: {
+  contextMenuOptions?: {
     label: string;
     onClick: (date: string) => void;
   }[];
+
+  enableTodos?: boolean;
 }
 
-export type CalendarProps = DaysOfTheMonthData & CalendarConfig;
+export type CalendarProps = DaysOfTheMonthData &
+  CalendarConfig &
+  PropsWithChildren & { onDateSelect?: (date: DateString) => void };
 
-const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect }) => {
+const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect, children }) => {
   const { calendarVisible, dispatch } = useApp();
   const calendarContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const body = document.body;
-    const escapePressHandler = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        dispatch({ type: ActionType.HIDE_SHOW_CALENDAR, payload: false });
-      }
-    };
-    body.addEventListener('keydown', escapePressHandler);
-    return () => body.removeEventListener('keypress', escapePressHandler);
-  }, [dispatch]);
+  const escapePressHandler = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      dispatch({ type: ActionType.HIDE_SHOW_CALENDAR, payload: false });
+    }
+  };
+  useEventListener(document.body, 'keydown', escapePressHandler);
 
   useEffect(() => {
     dispatch({ type: ActionType.SET_CALENDAR_REF, payload: calendarContainerRef });
@@ -56,8 +58,9 @@ const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect }
       <Controls />
       <WeekDays />
       <Month days={days} disableWeekends={disableWeekends} onDateSelect={onDateSelect} />
+      {children}
     </Container>
   );
 };
 
-export const Calendar = withDefaultDays(withDayContextMenu(withHolidays(BaseCalendar)));
+export const Calendar = withDefaultDays(withToDos(withDayContextMenu(withHolidays(BaseCalendar))));

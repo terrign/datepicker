@@ -1,4 +1,4 @@
-import { WeekStart } from '@types';
+import { DateStringOrNull, WeekStart } from '@types';
 import { Dispatch, RefObject } from 'react';
 
 export enum ActionType {
@@ -8,21 +8,22 @@ export enum ActionType {
   SET_VIEW_DATE,
   HIDE_SHOW_CALENDAR,
   SET_CALENDAR_REF,
+  SET_VALIDATION_ERROR,
 }
 
 export interface AppContextType {
   weekStart: WeekStart;
   disableWeekends: boolean;
-  selectedDate: string | null;
+  selectedDate: DateStringOrNull;
   firstDayOfTheViewMonth: string;
   calendarVisible: boolean;
-  minDate?: string;
-  maxDate?: string;
+  minDate?: DateStringOrNull;
+  maxDate?: DateStringOrNull;
   onError?: (error: Error) => void;
   calendarContainerRef?: RefObject<HTMLDivElement>;
   from?: boolean;
   to?: boolean;
-  // clientOnSelectHandler?: (date: string) => void;
+  validationError: string | null;
   dispatch: Dispatch<Action>;
 }
 
@@ -54,13 +55,19 @@ export type SetCalendarRef = {
   payload: RefObject<HTMLDivElement>;
 };
 
+export type SetError = {
+  type: ActionType.SET_VALIDATION_ERROR;
+  payload: string | null;
+};
+
 export type Action =
   | ChangeYearAction
   | ChangeMonthAction
   | SetDateAction
   | HideShowCalendarAction
   | ChangeViewDateAction
-  | SetCalendarRef;
+  | SetCalendarRef
+  | SetError;
 
 export type ReducerState = Omit<AppContextType, 'dispatch'>;
 

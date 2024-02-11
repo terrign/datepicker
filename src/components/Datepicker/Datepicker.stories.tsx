@@ -34,6 +34,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Light: Story = {
+  parameters: {
+    backgrounds: {
+      default: 'light',
+    },
+  },
   args: {
     theme: 'light',
     weekStart: 'Monday',
@@ -41,6 +46,11 @@ export const Light: Story = {
 };
 
 export const Dark: Story = {
+  parameters: {
+    backgrounds: {
+      default: 'dark',
+    },
+  },
   args: {
     theme: 'dark',
     weekStart: 'Sunday',
@@ -52,14 +62,11 @@ export const ContextMenuHandlers: Story = {
     theme: 'dark',
     weekStart: 'Sunday',
     calendarConfig: {
-      modalOptions: [
+      contextMenuOptions: [
         {
-          label: 'Add todo',
+          label: 'Custom label',
           onClick: (date: string) => {
-            const todo = prompt('Todo to add:', '');
-            if (todo) {
-              localStorage.setItem(date, todo);
-            }
+            alert(date);
           },
         },
       ],
@@ -77,12 +84,15 @@ export const AllProps: Story = {
     calendarConfig: {
       disableWeekends: true,
       holidays: ['2024-02-02', '2024-02-05', '2024-02-14'],
-    },
-    onDateSelect(date) {
-      console.log(date);
-    },
-    onError(error) {
-      console.log(error);
+      enableTodos: true,
+      contextMenuOptions: [
+        {
+          label: 'Custom label',
+          onClick: (date: string) => {
+            alert(date);
+          },
+        },
+      ],
     },
   },
 };
@@ -97,22 +107,22 @@ export const CustomTheme: Story = {
       selectedDayBgColor: '#b872e7',
       selectedDayFontColor: '#dfbfc2',
       disabledDayFontColor: '#9b9c9c',
-      modalButtonColor: '#004d99',
-      modalButtonHoverBgColor: '#eb7f13332',
+      contextMenuButtonColor: '#004d99',
+      contextMenuButtonHoverBgColor: '#eb7f13332',
       borderColor: '#ff0000',
     },
     calendarConfig: {
-      modalOptions: [
-        {
-          label: 'Add todo',
-          onClick: (date: string) => {
-            const todo = prompt('Todo to add:', '');
-            if (todo) {
-              localStorage.setItem(date, todo);
-            }
-          },
-        },
-      ],
+      enableTodos: true,
+    },
+  },
+};
+
+export const Todos: Story = {
+  args: {
+    theme: 'dark',
+    weekStart: 'Sunday',
+    calendarConfig: {
+      enableTodos: true,
     },
   },
 };

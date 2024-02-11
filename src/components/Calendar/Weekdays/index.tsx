@@ -1,7 +1,6 @@
+import { getWeekDays } from '@utils';
 import { StyledWeek } from 'components/Calendar/Weekdays/styled';
-import { useApp } from 'context/App';
-
-import { getWeekDays } from './constants';
+import { useApp } from 'hooks/useApp';
 
 export const WeekDays = () => {
   const { weekStart } = useApp();

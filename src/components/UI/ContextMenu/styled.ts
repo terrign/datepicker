@@ -1,4 +1,4 @@
-import { flex, font } from '@constants';
+import { border, flex, font } from '@constants';
 import styled from 'styled-components';
 
 interface Props {
@@ -7,30 +7,46 @@ interface Props {
 }
 
 export const StyledContextMenu = styled.div<Props>`
-  position: absolute;
+  ${flex}
+  ${border}
+
   left: ${({ $x }) => $x}px;
   top: ${({ $y }) => $y}px;
-  ${flex}
-
-  gap: 5px;
   border: 1px solid ${({ theme }) => theme.borderColor};
+  background: ${({ theme }) => theme.contextMenuBg};
+  border-radius: ${({ theme }) => theme.borderRadius}px;
+
+  position: absolute;
   flex-direction: column;
-  background: ${({ theme }) => theme.modalBg};
   z-index: 201;
 
   button {
     ${font}
+
     border: none;
     outline: none;
     padding: 5px;
-    background: ${({ theme }) => theme.modalBg};
-    color: ${({ theme }) => theme.modalButtonColor};
     white-space: nowrap;
+    width: 100%;
+
+    background: ${({ theme }) => theme.contextMenuBg};
+    color: ${({ theme }) => theme.contextMenuButtonColor};
 
     &:hover {
       cursor: pointer;
-      background: ${({ theme }) => theme.modalButtonHoverBgColor};
-      color: ${({ theme }) => theme.modalButtonHoverColor};
+
+      background: ${({ theme }) => theme.contextMenuButtonHoverBgColor};
+      color: ${({ theme }) => theme.contextMenuButtonHoverColor};
+    }
+
+    &:first-child {
+      border-top-right-radius: ${({ theme }) => theme.borderRadius}px;
+      border-top-left-radius: ${({ theme }) => theme.borderRadius}px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: ${({ theme }) => theme.borderRadius}px;
+      border-bottom-left-radius: ${({ theme }) => theme.borderRadius}px;
     }
   }
 `;

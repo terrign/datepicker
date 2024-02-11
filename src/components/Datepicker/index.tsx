@@ -1,9 +1,9 @@
 import { Calendar } from 'components/Calendar';
 import { DateInput } from 'components/DateInput';
-import { withRange } from 'components/Datepicker/decorators/withRange';
 import { ErrorBoundary } from 'components/ErrorBoundary';
 import { AppProvider } from 'context/App/App.provider';
 import { CustomThemeProvider } from 'context/Theme/Theme.provider';
+import { RangePicker, withRange } from 'decorators/Datepicker/withRange';
 import { forwardRef } from 'react';
 
 import { DatepickerContainer } from './styled';
@@ -13,13 +13,12 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(fun
   {
     theme = 'light',
     weekStart = 'Sunday',
-    maxDate,
-    minDate,
+    maxDate = null,
+    minDate = null,
     customStyles,
     calendarConfig,
-    defaultSelectedDate,
+    defaultSelectedDate = null,
     onDateSelect,
-    onError,
     ...rest
   }: DatePickerProps,
   ref,
@@ -32,7 +31,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(fun
         disableWeekends={Boolean(calendarConfig?.disableWeekends)}
         minDate={minDate}
         maxDate={maxDate}
-        onError={onError}
       >
         <CustomThemeProvider theme={theme} customStyles={customStyles}>
           <DatepickerContainer>
@@ -45,5 +43,5 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(fun
   );
 });
 
-export const DatePickerTo = withRange('to')(DatePicker);
-export const DatePickerFrom = withRange('from')(DatePicker);
+export const DatePickerTo = withRange(RangePicker.TO)(DatePicker);
+export const DatePickerFrom = withRange(RangePicker.FROM)(DatePicker);
