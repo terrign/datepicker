@@ -20,7 +20,8 @@
     "rollup": "rollup -c",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "jest --coverage.enabled --coverage.all --passWithNoTests"
+    "test": "jest --coverage.enabled --coverage.all --passWithNoTests",
+    "build-example": "(cd example; yarn build)"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
