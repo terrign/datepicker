@@ -28,5 +28,5 @@
     "allowJs": true,
   },
   "exclude": ["./example/**/*"],
-  // "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
 }
