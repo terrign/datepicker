@@ -34,6 +34,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Light: Story = {
+  parameters: {
+    backgrounds: {
+      default: 'light',
+    },
+  },
   args: {
     theme: 'light',
     weekStart: 'Monday',
@@ -41,6 +46,11 @@ export const Light: Story = {
 };
 
 export const Dark: Story = {
+  parameters: {
+    backgrounds: {
+      default: 'dark',
+    },
+  },
   args: {
     theme: 'dark',
     weekStart: 'Sunday',
@@ -54,12 +64,9 @@ export const ContextMenuHandlers: Story = {
     calendarConfig: {
       contextMenuOptions: [
         {
-          label: 'Add todo',
+          label: 'Custom label',
           onClick: (date: string) => {
-            const todo = prompt('Todo to add:', '');
-            if (todo) {
-              localStorage.setItem(date, todo);
-            }
+            alert(date);
           },
         },
       ],
@@ -77,12 +84,15 @@ export const AllProps: Story = {
     calendarConfig: {
       disableWeekends: true,
       holidays: ['2024-02-02', '2024-02-05', '2024-02-14'],
-    },
-    onDateSelect(date) {
-      return date;
-    },
-    onError(error) {
-      return error;
+      enableTodos: true,
+      contextMenuOptions: [
+        {
+          label: 'Custom label',
+          onClick: (date: string) => {
+            alert(date);
+          },
+        },
+      ],
     },
   },
 };
@@ -103,17 +113,6 @@ export const CustomTheme: Story = {
     },
     calendarConfig: {
       enableTodos: true,
-      contextMenuOptions: [
-        {
-          label: 'Add todo custom',
-          onClick: (date: string) => {
-            const todo = prompt('Todo to add:', '');
-            if (todo) {
-              localStorage.setItem(date, todo);
-            }
-          },
-        },
-      ],
     },
   },
 };

@@ -78,6 +78,8 @@ export const StyledDay = styled.button<{ $type: DayType }>`
 
   ${font}
 
+  flex-grow: 1;
+
   cursor: pointer;
   ${({ $type }) => typeStyleMapper($type)}
 `;

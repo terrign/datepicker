@@ -32,10 +32,11 @@ export interface CalendarConfig {
   }[];
 
   enableTodos?: boolean;
-  onDateSelect?: (date: DateString) => void;
 }
 
-export type CalendarProps = DaysOfTheMonthData & CalendarConfig & PropsWithChildren;
+export type CalendarProps = DaysOfTheMonthData &
+  CalendarConfig &
+  PropsWithChildren & { onDateSelect?: (date: DateString) => void };
 
 const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect, children }) => {
   const { calendarVisible, dispatch } = useApp();

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 export const StyledWeek = styled(Flex)`
   margin-top: 6px;
+
   div {
     ${defaultBlock}
 

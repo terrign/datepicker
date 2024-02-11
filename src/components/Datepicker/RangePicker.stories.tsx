@@ -1,31 +1,83 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { DatePickerFrom, DatePickerTo } from 'components/Datepicker';
-import { Range } from 'context/Range/Range.provider';
+import { DatePickerInputProps } from 'components/Datepicker/types';
+import { Range, RangeProviderProps } from 'context/Range/Range.provider';
+
+export type RangePickerProps = Omit<DatePickerInputProps, 'defaultSelectedDate' | 'ref'> & RangeProviderProps;
+
+export const RangePickerComponent = ({ defaultSelectionEnd, defaultSelectionStart, ...rest }: RangePickerProps) => {
+  return (
+    <div style={{ display: 'flex', gap: 20 }}>
+      <Range defaultSelectionStart={defaultSelectionStart} defaultSelectionEnd={defaultSelectionEnd}>
+        <label style={{ color: 'gray' }}>
+          From
+          <DatePickerFrom {...rest} />
+        </label>
+        <label style={{ color: 'gray' }}>
+          To
+          <DatePickerTo {...rest} />
+        </label>
+      </Range>
+    </div>
+  );
+};
 
 const meta = {
   title: 'RangeDatePicker',
-  component: () => {
-    return (
-      <div style={{ display: 'flex', gap: 20 }}>
-        <Range defaultSelectionEnd="2024-02-10" defaultSelectionStart="2024-01-01">
-          <label>
-            From
-            <DatePickerFrom />
-          </label>
-          <label>
-            To
-            <DatePickerTo />
-          </label>
-        </Range>
-      </div>
-    );
-  },
-
+  component: RangePickerComponent,
   tags: ['autodocs'],
-} satisfies Meta<typeof Range>;
+  args: {
+    defaultSelectionStart: '2024-01-01',
+    defaultSelectionEnd: '2024-01-15',
+    theme: 'dark',
+    weekStart: 'Sunday',
+    calendarConfig: {
+      disableWeekends: true,
+      holidays: ['2024-01-01', '2024-01-02', '2024-01-17'],
+    },
+    minDate: '2024-01-01',
+    maxDate: '2024-05-10',
+  },
+  argTypes: {
+    weekStart: {
+      options: ['Sunday', 'Monday'],
+      control: { type: 'radio' },
+    },
+    theme: {
+      options: ['light', 'dark'],
+      control: { type: 'radio' },
+    },
+    maxDate: {
+      control: { type: 'text' },
+    },
+    minDate: {
+      control: { type: 'text' },
+    },
+  },
+} satisfies Meta<typeof RangePickerComponent>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const RangePicker: Story = {};
+export const Light: Story = {
+  parameters: {
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  args: {
+    theme: 'light',
+  },
+};
+
+export const Dark: Story = {
+  parameters: {
+    backgrounds: {
+      default: 'dark',
+    },
+  },
+  args: {
+    theme: 'dark',
+  },
+};

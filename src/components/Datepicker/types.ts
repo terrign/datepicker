@@ -35,4 +35,4 @@ export interface DatePickerProps {
 }
 
 export type DatePickerInputProps = DatePickerProps &
-  Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onError'>;
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;

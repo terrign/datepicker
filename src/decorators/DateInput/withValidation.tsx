@@ -20,12 +20,14 @@ const enum DateInputError {
   INVALID_FORMAT = 'Acceptable format: yyyy-mm-dd',
 }
 
-interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   onDateSelect?: (date: DateStringOrNull) => void;
 }
-type BaseDateInputType = typeof BaseDateInput;
+export type BaseDateInputType = typeof BaseDateInput;
 
-type DateInputType = ForwardRefExoticComponent<Omit<DateInputProps, 'ref'> & React.RefAttributes<HTMLInputElement>>;
+export type DateInputType = ForwardRefExoticComponent<
+  Omit<DateInputProps, 'ref'> & React.RefAttributes<HTMLInputElement>
+>;
 
 export const withValidation = (Component: BaseDateInputType) => {
   const Wrapper: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
