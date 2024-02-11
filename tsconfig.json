@@ -27,5 +27,6 @@
     "noImplicitAny": true,
     "allowJs": true,
   },
-  // "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "exclude": ["./example/**/*"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
 }

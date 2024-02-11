@@ -73,7 +73,12 @@ const typeStyleMapper = (type: DayType) => {
   }
 };
 
-export const StyledDay = styled.button<{ $type: DayType }>`
+export const StyledDay = styled.button.attrs<{ $type: DayType }>((props) => {
+  return {
+    ...props,
+    type: 'button',
+  };
+})`
   ${defaultBlock}
 
   ${font}

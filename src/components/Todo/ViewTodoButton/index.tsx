@@ -7,5 +7,9 @@ interface ViewTodoButtonProps {
 
 export const ViewTodoButton = ({ onClick, todosCount }: ViewTodoButtonProps) => {
   const buttonLabel = `You have ${todosCount > 1 ? todosCount + ' todos' : todosCount + ' todo'}`;
-  return <TodoButton onClick={onClick}>{buttonLabel}</TodoButton>;
+  return (
+    <TodoButton onClick={onClick} type="button">
+      {buttonLabel}
+    </TodoButton>
+  );
 };
