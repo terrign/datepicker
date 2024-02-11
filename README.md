@@ -22,7 +22,7 @@ And:
 
 All three components can be used together to create a date range picker without losing the customization flexibility and styling of each component separately.
 
-### [Example]
+### [Example](https://datepicker-demo.netlify.app/)
 
 ### [Storybook](https://develop--65b39056d863915c37e6299e.chromatic.com/)
 

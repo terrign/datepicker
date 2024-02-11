@@ -707,14 +707,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@terrign/datepicker@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@terrign/datepicker@npm:1.1.0"
+"@terrign/datepicker@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@terrign/datepicker@npm:1.1.2"
   peerDependencies:
     react: ^18.0.2
     react-dom: ^18.2.0
-    styled-components: ^6.1.8
-  checksum: 10c0/c05fe176175fd77f1b28c918d7834e6b62abf16983d7a5b6f648f637852f8faf579491f7f4baf1b463be1489c510c190aedd70141c15321341a66ac1a83e102d
+  checksum: 10c0/dc908b412ab370124e6927f260476cfab13b2edfb7468c97fe387da43044170a91f8c6b6062884f9897f4f7e2a538f8510900abfd30c3be2377ed0122f6bf838
   languageName: node
   linkType: hard
 
@@ -1569,7 +1568,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example@workspace:."
   dependencies:
-    "@terrign/datepicker": "npm:^1.1.0"
+    "@terrign/datepicker": "npm:^1.1.2"
     "@types/react": "npm:^18.2.55"
     "@types/react-dom": "npm:^18.2.19"
     "@typescript-eslint/eslint-plugin": "npm:^6.21.0"
