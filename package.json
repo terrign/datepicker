@@ -21,7 +21,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest --coverage.enabled --coverage.all --passWithNoTests",
-    "build-example": "(cd example; yarn build)"
+    "build-example": "(cd example; yarn install; yarn build)"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
