@@ -126,3 +126,22 @@ export const Todos: Story = {
     },
   },
 };
+
+export const DD: Story = {
+  parameters: {
+    backgrounds: {
+      default: 'dark',
+    },
+  },
+  args: {
+    theme: 'dark',
+    calendarConfig: {
+      enableTodos: true,
+    },
+  },
+  decorators: (Story) => (
+    <form onSubmit={(e) => e.preventDefault()}>
+      <Story />
+    </form>
+  ),
+};

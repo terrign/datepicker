@@ -12,7 +12,12 @@ const controlButton = css`
   width: 24px;
 `;
 
-export const Button = styled.button<{ $nohover?: boolean; $control?: boolean }>`
+export const Button = styled.button.attrs<{ $nohover?: boolean; $control?: boolean }>((props) => {
+  return {
+    ...props,
+    type: 'button',
+  };
+})`
   ${font}
   ${defaultBlock}
 
