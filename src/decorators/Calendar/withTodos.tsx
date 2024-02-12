@@ -9,8 +9,11 @@ import { FC, useMemo, useState } from 'react';
 export const withToDos = (Component: FC<CalendarProps>) => {
   const Wrapper = ({ contextMenuOptions, enableTodos, ...rest }: CalendarProps) => {
     const [addTodoModalOpen, setAddTodoModalOpen] = useState<boolean>(false);
+
     const [viewTodoModalOpen, setViewTodoModalOpen] = useState<boolean>(false);
+
     const [actionDate, setActionDate] = useState('');
+
     const { todos, removeTodo, addTodo } = useTodoStore();
 
     const closeAddTodoModal = () => {
@@ -23,12 +26,14 @@ export const withToDos = (Component: FC<CalendarProps>) => {
 
     const composedContextMenuOptions = useMemo(() => {
       const derivedOptions = contextMenuOptions ?? [];
+
       if (enableTodos) {
         return [
           {
             label: 'Add Todo',
             onClick(date) {
               setActionDate(date);
+
               setAddTodoModalOpen(true);
             },
           },
@@ -57,6 +62,8 @@ export const withToDos = (Component: FC<CalendarProps>) => {
       </>
     );
   };
+
   Wrapper.displayName = Component.name;
+
   return Wrapper;
 };

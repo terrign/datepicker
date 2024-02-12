@@ -8,9 +8,11 @@ import { YearPicker } from './YearPicker';
 
 export const MonthYearControls = () => {
   const { firstDayOfTheViewMonth, calendarVisible } = useApp();
+
   const { year, month } = getDateParts(firstDayOfTheViewMonth);
 
   const [showMonths, setShowMonths] = useState<boolean>(false);
+
   const [showYears, setShowYears] = useState<boolean>(false);
 
   const monthClickHandler = () => {
@@ -23,6 +25,7 @@ export const MonthYearControls = () => {
 
   const closeHandler = () => {
     setShowMonths(false);
+
     setShowYears(false);
   };
 

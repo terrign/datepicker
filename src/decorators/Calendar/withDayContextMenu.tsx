@@ -6,6 +6,7 @@ import { FC, useState } from 'react';
 export const withDayContextMenu = (Component: FC<CalendarProps>) => {
   const Wrapper = ({ contextMenuOptions, days, ...rest }: CalendarProps) => {
     const { x, y, setPosition, setVisible, visible } = useContextMenu();
+
     const [actionDate, setActionDate] = useState('');
 
     if (!contextMenuOptions) {
@@ -16,15 +17,19 @@ export const withDayContextMenu = (Component: FC<CalendarProps>) => {
       week.map((day) => {
         const dayContextMenuHandler = (date: string, x: number, y: number) => {
           setPosition([x, y]);
+
           setActionDate(date);
+
           setVisible(true);
         };
+
         return {
           ...day,
           dayContextMenuHandler,
         };
       }),
     );
+
     return (
       <>
         <Component {...rest} days={newDays} />
@@ -38,6 +43,8 @@ export const withDayContextMenu = (Component: FC<CalendarProps>) => {
       </>
     );
   };
+
   Wrapper.displayName = Component.name;
+
   return Wrapper;
 };

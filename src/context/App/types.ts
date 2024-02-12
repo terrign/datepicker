@@ -37,6 +37,7 @@ export type ChangeYearAction = {
   type: ActionType.CHANGE_YEAR;
   payload: number;
 };
+
 export type ChangeMonthAction = {
   type: ActionType.CHANGE_MONTH;
   payload: number;
@@ -51,6 +52,7 @@ export type ChangeViewDateAction = {
   type: ActionType.SET_VIEW_DATE;
   payload: string;
 };
+
 export type SetCalendarRef = {
   type: ActionType.SET_CALENDAR_REF;
   payload: RefObject<HTMLDivElement>;

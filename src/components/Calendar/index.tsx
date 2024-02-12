@@ -40,6 +40,7 @@ export type CalendarProps = DaysOfTheMonthData &
 
 const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect, children }) => {
   const { calendarVisible, dispatch } = useApp();
+
   const calendarContainerRef = useRef<HTMLDivElement>(null);
 
   const escapePressHandler = (event: KeyboardEvent) => {
@@ -47,6 +48,7 @@ const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect, 
       dispatch({ type: ActionType.HIDE_SHOW_CALENDAR, payload: false });
     }
   };
+
   useEventListener(document.body, 'keydown', escapePressHandler);
 
   useEffect(() => {

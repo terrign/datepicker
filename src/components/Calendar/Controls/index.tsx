@@ -10,11 +10,15 @@ import { MonthYearControls } from './MonthYear';
 
 export const Controls = () => {
   const { firstDayOfTheViewMonth, getDateChangeHandler } = useApp();
+
   const { year, month } = getDateParts(firstDayOfTheViewMonth);
 
   const nextYearHandler = getDateChangeHandler(ActionType.CHANGE_YEAR, 1);
+
   const prevYearHandler = getDateChangeHandler(ActionType.CHANGE_YEAR, -1);
+
   const nextMonthHandler = getDateChangeHandler(ActionType.CHANGE_MONTH, 1);
+
   const prevMonthHandler = getDateChangeHandler(ActionType.CHANGE_MONTH, -1);
 
   return (

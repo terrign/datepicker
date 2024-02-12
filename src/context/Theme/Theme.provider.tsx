@@ -14,7 +14,9 @@ export const CustomThemeProvider = ({ children, theme, customStyles }: ThemeProp
     if (theme === 'dark') {
       return { ...darkTheme, ...customStyles };
     }
+
     return { ...lightTheme, ...customStyles };
   };
+
   return <ThemeProvider theme={defineTheme()}>{children}</ThemeProvider>;
 };

@@ -9,6 +9,7 @@ export interface RangeProviderProps extends PropsWithChildren {
 
 export const Range = ({ children, defaultSelectionStart = null, defaultSelectionEnd = null }: RangeProviderProps) => {
   const [selectionStart, setSelectionStart] = useState<DateStringOrNull>(defaultSelectionStart);
+
   const [selectionEnd, setSelectionEnd] = useState<DateStringOrNull>(defaultSelectionEnd);
 
   const value = useMemo(

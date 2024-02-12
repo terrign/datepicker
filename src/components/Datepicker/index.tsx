@@ -44,4 +44,5 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(fun
 });
 
 export const DatePickerTo = withRange(RangePicker.TO)(DatePicker);
+
 export const DatePickerFrom = withRange(RangePicker.FROM)(DatePicker);

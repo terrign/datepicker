@@ -13,8 +13,11 @@ interface AddTodoFormProps {
 
 export const AddTodoForm = ({ date, closeModal, addTodo }: AddTodoFormProps) => {
   const [title, setTitle] = useState('');
+
   const [desc, setDesc] = useState('');
+
   const titleId = useId();
+
   const descId = useId();
 
   const titleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +30,9 @@ export const AddTodoForm = ({ date, closeModal, addTodo }: AddTodoFormProps) => 
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
     addTodo({ date, desc, title, id: getUniqueId() });
+
     closeModal();
   };
 

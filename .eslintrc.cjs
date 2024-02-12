@@ -1,13 +1,7 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort', 'import', 'react'],
-  extends: [
-    'prettier',
-    'plugin:storybook/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:import/recommended',
-  ],
+  plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort', 'import', 'react', '@stylistic'],
+  extends: ['prettier', 'plugin:storybook/recommended', 'plugin:react/recommended', 'plugin:import/recommended'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'simple-import-sort/imports': 'error',
@@ -15,6 +9,12 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-default-export': 'error',
     'no-console': 'error',
+    '@stylistic/padding-line-between-statements': [
+      'error',
+
+      { blankLine: 'always', prev: '*', next: '*' },
+      { blankLine: 'any', prev: 'import', next: 'import' },
+    ],
   },
   overrides: [
     {

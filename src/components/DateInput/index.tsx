@@ -26,14 +26,17 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(fu
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
+
   const { calendarVisible, dispatch, selectedDate, validationError } = useApp();
 
   useImperativeHandle(ref, () => innerRef.current as HTMLInputElement);
 
   const handleClear = () => {
     const input = innerRef.current;
+
     if (input) {
       onDateSelect(null);
+
       input.value = '';
     }
   };
@@ -42,13 +45,17 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(fu
     if (onChange) {
       onChange(event);
     }
+
     const dateString = (event.target as HTMLInputElement).value;
+
     onDateSelect(dateString);
   };
 
   useEffect(() => {
     const input = innerRef.current;
+
     const selectedDateChanged = input && selectedDate && input.value !== selectedDate;
+
     if (selectedDateChanged) {
       input.value = selectedDate;
     }
@@ -62,7 +69,9 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(fu
     if (onBlur) {
       onBlur(event);
     }
+
     dispatch({ type: ActionType.SET_VALIDATION_ERROR, payload: null });
+
     event.currentTarget.value = selectedDate ?? '';
   };
 

@@ -15,6 +15,7 @@ const enum DateInputError {
 export interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   onDateSelect?: (date: DateStringOrNull) => void;
 }
+
 export type BaseDateInputType = typeof BaseDateInput;
 
 export type DateInputType = ForwardRefExoticComponent<
@@ -37,20 +38,25 @@ export const withValidation = (Component: BaseDateInputType) => {
 
         if (isNullDate(dateString) || dateString === '') {
           setError(null);
+
           setDate(null);
+
           if (onDateSelect) {
             onDateSelect(null);
           }
+
           return;
         }
 
         if (!isValidDate(dateString)) {
           setError(DateInputError.INVALID_FORMAT);
+
           return;
         }
 
         if (!isValidDateStringFormat(dateString)) {
           setError(DateInputError.INVALID_FORMAT);
+
           return;
         }
 
@@ -59,6 +65,7 @@ export const withValidation = (Component: BaseDateInputType) => {
         if (minDate) {
           if (inputDateObject < getUTCDatefromDateString(minDate)) {
             setError(DateInputError.RANGE);
+
             return;
           }
         }
@@ -66,6 +73,7 @@ export const withValidation = (Component: BaseDateInputType) => {
         if (maxDate) {
           if (inputDateObject > getUTCDatefromDateString(maxDate)) {
             setError(DateInputError.RANGE);
+
             return;
           }
         }
@@ -75,6 +83,7 @@ export const withValidation = (Component: BaseDateInputType) => {
 
         if (disableWeekends && inputDateIsWeekend) {
           setError(DateInputError.WEEKEND_DISABLED);
+
           return;
         }
 
@@ -83,10 +92,12 @@ export const withValidation = (Component: BaseDateInputType) => {
         if (onDateSelect) {
           try {
             onDateSelect(dateString);
+
             setDate(dateString);
           } catch (error) {
             if (error instanceof Error) {
               setError(error.message);
+
               return;
             }
           }
@@ -97,6 +108,8 @@ export const withValidation = (Component: BaseDateInputType) => {
 
     return <Component {...rest} ref={ref} onDateSelect={withValidationDateSelectHandler} />;
   });
+
   Wrapper.displayName = 'DateInput';
+
   return Wrapper;
 };

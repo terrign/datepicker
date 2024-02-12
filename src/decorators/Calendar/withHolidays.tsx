@@ -10,20 +10,26 @@ export const withHolidays = (Component: FC<CalendarProps>) => {
     if (!holidays || holidays.length === 0) {
       return <Component days={days} {...rest} />;
     }
+
     const newDays = days.map((week) =>
       week.map((day) => {
         const { date, types } = day;
+
         if (holidays.includes(date)) {
           return {
             ...day,
             types: [...types, DayType.HOLIDAY],
           };
         }
+
         return day;
       }),
     );
+
     return <Component days={newDays} {...rest} />;
   };
+
   Wrapper.displayName = Component.name;
+
   return Wrapper;
 };

@@ -23,6 +23,7 @@ export const AppProvider = ({
   maxDate,
 }: AppProviderProps) => {
   const initialValues = useApp();
+
   const [state, dispatch] = useReducer<AppReducerType>(appReducer, initialValues);
 
   useEffect(() => {

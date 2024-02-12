@@ -12,6 +12,7 @@ const getInitYearView = (initYear: number) => {
 
   for (let i = 1; i <= YEARS_TO_APPEND; i++) {
     const nextYear = initYear + i;
+
     const prevYear = initYear - i;
 
     if (nextYear <= MAX_YEAR) {
@@ -28,20 +29,27 @@ const getInitYearView = (initYear: number) => {
 
 export const useYearPicker = () => {
   const { firstDayOfTheViewMonth } = useApp();
+
   const { year } = getDateParts(firstDayOfTheViewMonth);
+
   const [currentView, setCurrentView] = useState<number[]>(getInitYearView(year));
+
   const [nextViewButtonDisabled, setNextViewButtonDisabled] = useState(false);
+
   const [prevViewButtonDisabled, setPrevViewButtonDisabled] = useState(false);
 
   const setNextView = () => {
     setCurrentView((prevView) => {
       const newView = [];
+
       const currentLast = prevView[prevView.length - 1];
+
       for (let year = currentLast + 1; year <= currentLast + YEARS_TO_DISPLAY; year++) {
         if (year <= MAX_YEAR) {
           newView.push(year);
         }
       }
+
       return newView;
     });
   };
@@ -49,18 +57,22 @@ export const useYearPicker = () => {
   const setPrevView = () => {
     setCurrentView((prevView) => {
       const newView = [];
+
       const currentFirst = prevView[0];
+
       for (let year = currentFirst - 1; year >= currentFirst - YEARS_TO_DISPLAY; year--) {
         if (year >= MIN_YEAR) {
           newView.unshift(year);
         }
       }
+
       return newView;
     });
   };
 
   useEffect(() => {
     setPrevViewButtonDisabled(currentView.includes(MIN_YEAR));
+
     setNextViewButtonDisabled(currentView.includes(MAX_YEAR));
   }, [currentView]);
 

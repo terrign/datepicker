@@ -12,7 +12,9 @@ export interface ContextMenu extends PropsWithChildren {
 
 export const ContextMenu = ({ visible, position, children, setVisible }: ContextMenu) => {
   const [x, y] = position;
+
   const ref = useRef<HTMLDivElement>(null);
+
   const { calendarContainerRef } = useApp();
 
   const outerClickHandler = (event: MouseEvent) => {
@@ -27,6 +29,7 @@ export const ContextMenu = ({ visible, position, children, setVisible }: Context
     if (calendarContainerRef && calendarContainerRef.current) {
       return calendarContainerRef.current;
     }
+
     return document.body;
   })();
 

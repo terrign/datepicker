@@ -4,6 +4,7 @@ import { getWeekDays } from '@utils';
 
 export const WeekDays = () => {
   const { weekStart } = useApp();
+
   const days = getWeekDays(weekStart);
 
   return (
