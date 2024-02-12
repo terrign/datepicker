@@ -15,7 +15,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,jsx,tsx}\" --fix",
-    "prettier": "prettier ./src --write",
+    "prettier": "prettier ./src --write --editorconfig",
     "prepare": "husky install",
     "rollup": "rollup -c",
     "storybook": "storybook dev -p 6006",
@@ -81,7 +81,6 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-storybook": "^0.6.15",
     "husky": "^8.0.3",

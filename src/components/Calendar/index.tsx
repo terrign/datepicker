@@ -1,11 +1,11 @@
+import { ActionType } from '@context/App/types';
+import { withDayContextMenu } from '@decorators/Calendar/withDayContextMenu';
+import { withDefaultDays } from '@decorators/Calendar/withDefaultDays';
+import { withHolidays } from '@decorators/Calendar/withHolidays';
+import { withToDos } from '@decorators/Calendar/withTodos';
+import { useApp } from '@hooks/useApp';
+import { useEventListener } from '@hooks/useEventListener';
 import { DateString } from '@types';
-import { ActionType } from 'context/App/types';
-import { withDayContextMenu } from 'decorators/Calendar/withDayContextMenu';
-import { withDefaultDays } from 'decorators/Calendar/withDefaultDays';
-import { withHolidays } from 'decorators/Calendar/withHolidays';
-import { withToDos } from 'decorators/Calendar/withTodos';
-import { useApp } from 'hooks/useApp';
-import { useEventListener } from 'hooks/useEventListener';
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 import { Controls } from './Controls';
@@ -51,7 +51,7 @@ const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect, 
 
   useEffect(() => {
     dispatch({ type: ActionType.SET_CALENDAR_REF, payload: calendarContainerRef });
-  }, [calendarContainerRef, dispatch]);
+  }, [calendarContainerRef]);
 
   return (
     <Container $hidden={!calendarVisible} ref={calendarContainerRef}>

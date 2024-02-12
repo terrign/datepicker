@@ -1,11 +1,11 @@
+import { Button } from '@components/UI/Button';
+import { CalendarIcon, ClearIcon } from '@components/UI/Icons';
+import { ActionType } from '@context/App/types';
+import { withValidation } from '@decorators/DateInput/withValidation';
+import { useApp } from '@hooks/useApp';
 import { DateStringOrNull } from '@types';
-import { Button } from 'components/UI/Button';
-import { CalendarIcon, ClearIcon } from 'components/UI/Icons';
-import { ActionType } from 'context/App/types';
-import { withValidation } from 'decorators/DateInput/withValidation';
-import { useApp } from 'hooks/useApp';
-import { useEventListener } from 'hooks/useEventListener';
 import {
+  ChangeEvent,
   DetailedHTMLProps,
   FocusEvent,
   forwardRef,
@@ -22,7 +22,7 @@ export interface BaseDateInputProps extends DetailedHTMLProps<InputHTMLAttribute
 }
 
 export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(function DateInput(
-  { onDateSelect, style, className, onBlur, ...rest },
+  { onDateSelect, style, className, onBlur, onChange, ...rest },
   ref,
 ) {
   const innerRef = useRef<HTMLInputElement>(null);
@@ -38,19 +38,18 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(fu
     }
   };
 
-  const onDateSelectHandler = (event: Event) => {
-    const dateString = (event.target as HTMLInputElement).value;
-
-    if (!validationError) {
-      onDateSelect(dateString);
+  const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(event);
     }
+    const dateString = (event.target as HTMLInputElement).value;
+    onDateSelect(dateString);
   };
-
-  useEventListener(innerRef, 'change', onDateSelectHandler);
 
   useEffect(() => {
     const input = innerRef.current;
-    if (input && selectedDate && input.value !== selectedDate) {
+    const selectedDateChanged = input && selectedDate && input.value !== selectedDate;
+    if (selectedDateChanged) {
       input.value = selectedDate;
     }
   }, [selectedDate]);
@@ -72,7 +71,7 @@ export const BaseDateInput = forwardRef<HTMLInputElement, BaseDateInputProps>(fu
       <Button $nohover type="button" onClick={handleCalendar} data-testid="calendarButton">
         <CalendarIcon />
       </Button>
-      <input placeholder="Choose Date" ref={innerRef} {...rest} onBlur={blurHandler} />
+      <input placeholder="Choose Date" ref={innerRef} {...rest} onBlur={blurHandler} onChange={changeHandler} />
       <Button $nohover type="button" onClick={handleClear} data-testid="clearButton">
         <ClearIcon />
       </Button>

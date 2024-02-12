@@ -1,5 +1,5 @@
+import { RangeContext } from '@context/Range/Range.context';
 import { DateStringOrNull } from '@types';
-import { RangeContext } from 'context/Range/Range.context';
 import { PropsWithChildren, useMemo, useState } from 'react';
 
 export interface RangeProviderProps extends PropsWithChildren {

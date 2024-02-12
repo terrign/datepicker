@@ -1,15 +1,5 @@
 import { css } from 'styled-components';
 
-export const CLOSE_BUTTON_FONT_SIZE = 5;
-
-export const DEFAULT_FONT_SIZE = 14;
-
-export const TEXT_ICON_FONT_SIZE = 20;
-
-export const DEFAULT_BORDER_RADIUS = 8;
-
-export const DEFAULT_PADDING = 10;
-
 export enum Color {
   WHITE = '#FFFFFF',
   BLACK = '#333333',
@@ -41,7 +31,7 @@ export const defaultBlock = css`
 
 export const font = css`
   color: ${({ theme }) => theme.fontColor};
-  font-size: ${DEFAULT_FONT_SIZE}px;
+  font-size: ${({ theme }) => theme.fontM}px;
 
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-weight: 600;
@@ -80,7 +70,7 @@ export const input = css`
   }
 `;
 
-export const apperAnimation = css`
+export const appearAnimation = css`
   animation: 0.1s ease-in-out 0s 1 alternate appear;
 
   @keyframes appear {

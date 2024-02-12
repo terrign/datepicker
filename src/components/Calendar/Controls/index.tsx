@@ -1,21 +1,16 @@
+import { Button } from '@components/UI/Button';
+import { Flex } from '@components/UI/Flex';
+import { DoubleNextIcon, DoublePrevIcon, NextIcon, PrevIcon } from '@components/UI/Icons';
 import { MAX_YEAR, MIN_YEAR } from '@constants';
+import { ActionType } from '@context/App/types';
+import { useApp } from '@hooks/useApp';
 import { getDateParts } from '@utils';
-import { GetDatePartChangeHandlerType } from 'components/Calendar/Controls/types';
-import { Button } from 'components/UI/Button';
-import { Flex } from 'components/UI/Flex';
-import { DoubleNextIcon, DoublePrevIcon, NextIcon, PrevIcon } from 'components/UI/Icons';
-import { ActionType } from 'context/App/types';
-import { useApp } from 'hooks/useApp';
 
 import { MonthYearControls } from './MonthYear';
 
 export const Controls = () => {
-  const { dispatch, firstDayOfTheViewMonth } = useApp();
+  const { firstDayOfTheViewMonth, getDateChangeHandler } = useApp();
   const { year, month } = getDateParts(firstDayOfTheViewMonth);
-
-  const getDateChangeHandler: GetDatePartChangeHandlerType = (action, changeAmount) => () => {
-    dispatch({ type: action, payload: changeAmount });
-  };
 
   const nextYearHandler = getDateChangeHandler(ActionType.CHANGE_YEAR, 1);
   const prevYearHandler = getDateChangeHandler(ActionType.CHANGE_YEAR, -1);

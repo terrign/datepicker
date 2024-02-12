@@ -1,6 +1,6 @@
+import { DatePicker } from '@components/Datepicker';
+import { DatePickerInputProps } from '@components/Datepicker/types';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { DatePicker } from 'components/Datepicker';
-import { DatePickerInputProps } from 'components/Datepicker/types';
 
 type RenderWithPropsArgs = Partial<
   Pick<DatePickerInputProps, 'onDateSelect' | 'onError'> & {

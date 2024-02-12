@@ -1,17 +1,4 @@
-import {
-  apperAnimation,
-  border,
-  CLOSE_BUTTON_FONT_SIZE,
-  Color,
-  DEFAULT_BORDER_RADIUS,
-  DEFAULT_FONT_SIZE,
-  DEFAULT_PADDING,
-  defaultBlock,
-  flex,
-  font,
-  input,
-  TEXT_ICON_FONT_SIZE,
-} from './styles';
+import { appearAnimation, border, Color, defaultBlock, flex, font, input } from './styles';
 
 const MONTH_NAMES = [
   'January',
@@ -51,13 +38,9 @@ const MIN_YEAR = 1000;
 const MAX_YEAR = 9999;
 
 export {
-  apperAnimation,
+  appearAnimation,
   border,
-  CLOSE_BUTTON_FONT_SIZE,
   Color,
-  DEFAULT_BORDER_RADIUS,
-  DEFAULT_FONT_SIZE,
-  DEFAULT_PADDING,
   defaultBlock,
   flex,
   font,
@@ -68,7 +51,6 @@ export {
   MONTH_NAMES,
   SATURDAY_INDEX,
   SUNDAY_INDEX,
-  TEXT_ICON_FONT_SIZE,
   TODO_DESC_MAX_LENGTH,
   TODO_STORAGE_KEY,
   TODO_TITLE_MAX_LENGTH,

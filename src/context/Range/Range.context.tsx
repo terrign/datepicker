@@ -1,4 +1,4 @@
-import { RangeContextType } from 'context/Range/types';
+import { RangeContextType } from '@context/Range/types';
 import { createContext } from 'react';
 
 export const initialValues: RangeContextType = {

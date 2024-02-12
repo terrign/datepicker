@@ -35,11 +35,11 @@ export default [
     plugins: [
       alias({
         entries: [
-          { find: 'components', replacement: path.resolve(__dirname, './src/components') },
-          { find: 'context', replacement: path.resolve(__dirname, './src/context') },
-          { find: 'assets', replacement: path.resolve(__dirname, './src/assets') },
-          { find: 'decorators', replacement: path.resolve(__dirname, './src/decorators') },
-          { find: 'hooks', replacement: path.resolve(__dirname, './src/hooks') },
+          { find: '@components', replacement: path.resolve(__dirname, './src/components') },
+          { find: '@context', replacement: path.resolve(__dirname, './src/context') },
+          { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
+          { find: '@decorators', replacement: path.resolve(__dirname, './src/decorators') },
+          { find: '@hooks', replacement: path.resolve(__dirname, './src/hooks') },
           { find: '@constants', replacement: path.resolve(__dirname, './src/constants/index') },
           { find: '@utils', replacement: path.resolve(__dirname, './src/utils/index') },
           { find: '@types', replacement: path.resolve(__dirname, './src/types/index') },
@@ -72,11 +72,11 @@ export default [
     plugins: [
       alias({
         entries: [
-          { find: 'components', replacement: path.resolve(__dirname, './dist/esm/types/components') },
-          { find: 'context', replacement: path.resolve(__dirname, './dist/esm/types/context') },
-          { find: 'assets', replacement: path.resolve(__dirname, './dist/esm/types/assets') },
-          { find: 'decorators', replacement: path.resolve(__dirname, './dist/esm/types/decorators') },
-          { find: 'hooks', replacement: path.resolve(__dirname, './dist/esm/types/hooks') },
+          { find: '@components', replacement: path.resolve(__dirname, './dist/esm/types/components') },
+          { find: '@context', replacement: path.resolve(__dirname, './dist/esm/types/context') },
+          { find: '@assets', replacement: path.resolve(__dirname, './dist/esm/types/assets') },
+          { find: '@decorators', replacement: path.resolve(__dirname, './dist/esm/types/decorators') },
+          { find: '@hooks', replacement: path.resolve(__dirname, './dist/esm/types/hooks') },
           { find: '@constants', replacement: path.resolve(__dirname, './dist/esm/types/constants/index') },
           { find: '@utils', replacement: path.resolve(__dirname, './dist/esm/types/utils/index') },
           { find: '@types', replacement: path.resolve(__dirname, './dist/esm/types/types/index') },

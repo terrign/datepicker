@@ -1,10 +1,10 @@
+import { DatePartSelectButton, PickerGrid } from '@components/Calendar/Controls/MonthYear/styled';
+import { PickerProps } from '@components/Calendar/Controls/MonthYear/types';
+import { CalendarModal } from '@components/UI/CalendarModal';
 import { MONTH_NAMES } from '@constants';
+import { ActionType } from '@context/App/types';
+import { useApp } from '@hooks/useApp';
 import { getDateParts, toStringDate } from '@utils';
-import { DatePartSelectButton, PickerGrid } from 'components/Calendar/Controls/MonthYear/styled';
-import { PickerProps } from 'components/Calendar/Controls/MonthYear/types';
-import { CalendarModal } from 'components/UI/CalendarModal';
-import { ActionType } from 'context/App/types';
-import { useApp } from 'hooks/useApp';
 
 export const MonthPicker = ({ closeHandler, open }: PickerProps) => {
   const { dispatch, firstDayOfTheViewMonth } = useApp();

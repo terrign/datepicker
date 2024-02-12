@@ -1,6 +1,6 @@
-import { CalendarProps } from 'components/Calendar';
-import { ContextMenu } from 'components/UI/ContextMenu';
-import { useContextMenu } from 'hooks/useContextMenu';
+import { CalendarProps } from '@components/Calendar';
+import { ContextMenu } from '@components/UI/ContextMenu';
+import { useContextMenu } from '@hooks/useContextMenu';
 import { FC, useState } from 'react';
 
 export const withDayContextMenu = (Component: FC<CalendarProps>) => {

@@ -1,6 +1,6 @@
+import { CalendarConfig, CalendarProps } from '@components/Calendar';
+import { useApp } from '@hooks/useApp';
 import { createCalendarMonthView } from '@utils';
-import { CalendarConfig, CalendarProps } from 'components/Calendar';
-import { useApp } from 'hooks/useApp';
 import { FC } from 'react';
 
 export const withDefaultDays = (Component: FC<CalendarProps>) => {

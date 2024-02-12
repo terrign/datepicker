@@ -1,7 +1,8 @@
 import { getFirstDayOfTheMonth, toStringDate } from '@utils';
-import { initialValues } from 'context/App/App.context';
-import { appReducer } from 'context/App/App.reducer';
-import { ActionType, ReducerState } from 'context/App/types';
+
+import { initialValues } from './App.context';
+import { appReducer } from './App.reducer';
+import { ActionType, ReducerState } from './types';
 
 describe('App.reducer', () => {
   const date = getFirstDayOfTheMonth(toStringDate(new Date(Date.UTC(2024, 1, 1))));

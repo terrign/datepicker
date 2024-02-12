@@ -1,4 +1,4 @@
-import { DEFAULT_PADDING, font } from '@constants';
+import { font } from '@constants';
 import styled from 'styled-components';
 
 export const MonthYear = styled.p`
@@ -35,7 +35,7 @@ export const PickerGrid = styled.section<{ $cols: number }>`
   margin: 20px auto;
   gap: 15px 5px;
 
-  padding: ${DEFAULT_PADDING}px;
+  padding: ${({ theme }) => theme.defaultPadding}px;
 `;
 
 export const DatePartSelectButton = styled.button`

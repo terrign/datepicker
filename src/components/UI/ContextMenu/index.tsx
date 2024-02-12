@@ -1,6 +1,6 @@
-import { StyledContextMenu } from 'components/UI/ContextMenu/styled';
-import { useApp } from 'hooks/useApp';
-import { useEventListener } from 'hooks/useEventListener';
+import { StyledContextMenu } from '@components/UI/ContextMenu/styled';
+import { useApp } from '@hooks/useApp';
+import { useEventListener } from '@hooks/useEventListener';
 import { Dispatch, PropsWithChildren, SetStateAction, useRef } from 'react';
 import { createPortal } from 'react-dom';
 

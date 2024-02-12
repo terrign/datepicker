@@ -1,4 +1,4 @@
-import { apperAnimation, Color, DEFAULT_FONT_SIZE, flex, font } from '@constants';
+import { appearAnimation as appearAnimation, Color, flex, font } from '@constants';
 import styled from 'styled-components';
 
 export const StyledDateInput = styled.div<{ $errorMessage: string }>`
@@ -15,7 +15,7 @@ export const StyledDateInput = styled.div<{ $errorMessage: string }>`
 
   &::after {
     ${font}
-    ${apperAnimation}
+    ${appearAnimation}
 
     ${({ $errorMessage }) => `content: '${$errorMessage}'`};
     ${({ $errorMessage }) => Boolean($errorMessage) && 'padding: 5px'};
@@ -25,7 +25,6 @@ export const StyledDateInput = styled.div<{ $errorMessage: string }>`
     display: ${({ $errorMessage }) => (Boolean($errorMessage) ? 'block' : 'none')};
 
     border: 1px solid ${Color.RED};
-    font-size: ${DEFAULT_FONT_SIZE};
     font-weight: 500;
     position: absolute;
     box-sizing: border-box;
@@ -45,6 +44,7 @@ export const StyledDateInput = styled.div<{ $errorMessage: string }>`
     border: none;
     outline: none;
     height: 16px;
+    width: 100%;
     display: inline-block;
     -moz-appearance: textfield;
     appearance: textfield;

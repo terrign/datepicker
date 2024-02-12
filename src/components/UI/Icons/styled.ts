@@ -1,4 +1,4 @@
-import { font, TEXT_ICON_FONT_SIZE } from '@constants';
+import { font } from '@constants';
 import styled from 'styled-components';
 
 export const Icon = styled.img`
@@ -11,7 +11,7 @@ export const TextIcon = styled.span`
   ${font};
 
   color: inherit;
-  font-size: ${TEXT_ICON_FONT_SIZE}px;
+  font-size: ${({ theme }) => theme.fontL}px;
   line-height: 16px;
   height: 16px;
   width: 16px;

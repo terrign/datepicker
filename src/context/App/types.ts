@@ -25,6 +25,7 @@ export interface AppContextType {
   to?: boolean;
   validationError: string | null;
   dispatch: Dispatch<Action>;
+  getDateChangeHandler: GetDatePartChangeHandlerType;
 }
 
 export type SetDateAction = {
@@ -74,3 +75,8 @@ export type ReducerState = Omit<AppContextType, 'dispatch'>;
 export interface AppReducerType {
   (state: ReducerState, action: Action): typeof state;
 }
+
+export type GetDatePartChangeHandlerType = (
+  datePart: Extract<ActionType, ActionType.CHANGE_MONTH | ActionType.CHANGE_YEAR>,
+  changeAmount: 1 | -1,
+) => () => void;

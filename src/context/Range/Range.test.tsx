@@ -1,6 +1,6 @@
+import { DatePickerFrom, DatePickerTo } from '@components/Datepicker';
+import { Range } from '@context/Range/Range.provider';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { DatePickerFrom, DatePickerTo } from 'components/Datepicker';
-import { Range } from 'context/Range/Range.provider';
 
 describe('DateInput', () => {
   let startDate: string | null = '2024-01-24';

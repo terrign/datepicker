@@ -1,9 +1,9 @@
-import { CalendarProps } from 'components/Calendar';
-import { AddTodoForm } from 'components/Todo/AddTodoForm';
-import { TodoList } from 'components/Todo/TodoList';
-import { ViewTodoButton } from 'components/Todo/ViewTodoButton';
-import { CalendarModal } from 'components/UI/CalendarModal';
-import { useTodoStore } from 'hooks/useTodoStore';
+import { CalendarProps } from '@components/Calendar';
+import { AddTodoForm } from '@components/Todo/AddTodoForm';
+import { TodoList } from '@components/Todo/TodoList';
+import { ViewTodoButton } from '@components/Todo/ViewTodoButton';
+import { CalendarModal } from '@components/UI/CalendarModal';
+import { useTodoStore } from '@hooks/useTodoStore';
 import { FC, useMemo, useState } from 'react';
 
 export const withToDos = (Component: FC<CalendarProps>) => {
@@ -46,9 +46,7 @@ export const withToDos = (Component: FC<CalendarProps>) => {
     return (
       <>
         <Component {...rest} contextMenuOptions={composedContextMenuOptions}>
-          {todos.length !== 0 && !viewTodoModalOpen && !addTodoModalOpen && (
-            <ViewTodoButton onClick={() => setViewTodoModalOpen(true)} todosCount={todos.length} />
-          )}
+          <ViewTodoButton onClick={() => setViewTodoModalOpen(true)} todosCount={todos.length} />
         </Component>
         <CalendarModal open={addTodoModalOpen} onClose={closeAddTodoModal}>
           <AddTodoForm date={actionDate} closeModal={closeAddTodoModal} addTodo={addTodo} />

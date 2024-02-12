@@ -1,8 +1,9 @@
 import { TODO_DESC_MAX_LENGTH, TODO_TITLE_MAX_LENGTH } from '@constants';
 import { DateString, Todo } from '@types';
 import { getUniqueId } from '@utils';
-import { StyledTodoForm, TodoButton } from 'components/Todo/styled';
 import { ChangeEvent, FormEventHandler, useId, useState } from 'react';
+
+import { StyledTodoForm, TodoButton } from '../styled';
 
 interface AddTodoFormProps {
   date: DateString;

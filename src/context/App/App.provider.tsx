@@ -1,15 +1,14 @@
+import { useApp } from '@hooks/useApp';
 import { DateStringOrNull, WeekStart } from '@types';
-import { AppContext } from 'context/App/App.context';
-import { useApp } from 'hooks/useApp';
 import { PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
 
+import { AppContext } from './App.context';
 import { appReducer } from './App.reducer';
-import { ActionType, AppReducerType } from './types';
+import { ActionType, AppReducerType, GetDatePartChangeHandlerType } from './types';
 
 interface AppProviderProps extends PropsWithChildren {
   weekStart: WeekStart;
   defaultSelectedDate?: DateStringOrNull;
-  onError?: (error: Error) => void;
   disableWeekends: boolean;
   minDate?: DateStringOrNull;
   maxDate?: DateStringOrNull;
@@ -22,7 +21,6 @@ export const AppProvider = ({
   defaultSelectedDate,
   minDate,
   maxDate,
-  onError,
 }: AppProviderProps) => {
   const initialValues = useApp();
   const [state, dispatch] = useReducer<AppReducerType>(appReducer, initialValues);
@@ -33,6 +31,10 @@ export const AppProvider = ({
     }
   }, [defaultSelectedDate]);
 
+  const getDateChangeHandler: GetDatePartChangeHandlerType = (action, changeAmount) => () => {
+    dispatch({ type: action, payload: changeAmount });
+  };
+
   const value = useMemo(() => {
     return {
       ...state,
@@ -40,10 +42,10 @@ export const AppProvider = ({
       disableWeekends,
       minDate,
       maxDate,
-      onError,
       dispatch,
+      getDateChangeHandler,
     };
-  }, [state, weekStart, minDate, maxDate, disableWeekends, onError]);
+  }, [state, weekStart, minDate, maxDate, disableWeekends]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

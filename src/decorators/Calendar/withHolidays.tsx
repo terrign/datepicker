@@ -1,6 +1,6 @@
-import { CalendarConfig, CalendarProps } from 'components/Calendar';
-import { DayType } from 'components/Calendar/Day/types';
-import { DaysOfTheMonthData } from 'components/Calendar/Month';
+import { CalendarConfig, CalendarProps } from '@components/Calendar';
+import { DayType } from '@components/Calendar/Day/types';
+import { DaysOfTheMonthData } from '@components/Calendar/Month';
 import { FC } from 'react';
 
 export interface WithHolidaysProps extends DaysOfTheMonthData, Pick<CalendarConfig, 'holidays'> {}

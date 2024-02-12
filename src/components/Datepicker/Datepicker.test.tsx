@@ -1,5 +1,5 @@
+import { DatePicker, DatePickerFrom } from '@components/Datepicker';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { DatePicker, DatePickerFrom } from 'components/Datepicker';
 import { useEffect, useRef } from 'react';
 
 describe('Datepicker', () => {

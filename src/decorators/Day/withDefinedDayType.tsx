@@ -1,9 +1,9 @@
+import { DayProps } from '@components/Calendar/Day';
+import { DayType } from '@components/Calendar/Day/types';
 import { SATURDAY_INDEX, SUNDAY_INDEX } from '@constants';
+import { useApp } from '@hooks/useApp';
+import { useRange } from '@hooks/useRange';
 import { getDateParts, getUTCDatefromDateString } from '@utils';
-import { DayProps } from 'components/Calendar/Day';
-import { DayType } from 'components/Calendar/Day/types';
-import { useApp } from 'hooks/useApp';
-import { useRange } from 'hooks/useRange';
 import { FC } from 'react';
 
 export interface UndefinedTypeDayProps extends Omit<DayProps, 'type'> {

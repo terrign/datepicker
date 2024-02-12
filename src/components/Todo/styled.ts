@@ -1,4 +1,4 @@
-import { border, DEFAULT_PADDING, input } from '@constants';
+import { border, input } from '@constants';
 import styled from 'styled-components';
 
 export const StyledTodoForm = styled.form`
@@ -7,7 +7,7 @@ export const StyledTodoForm = styled.form`
   width: 100%;
   max-width: 230px;
   flex-grow: 1;
-  padding: ${DEFAULT_PADDING}px;
+  padding: ${({ theme }) => theme.defaultPadding}px;
 
   label {
     cursor: pointer;

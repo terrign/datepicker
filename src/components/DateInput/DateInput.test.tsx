@@ -1,7 +1,7 @@
+import { DatePicker } from '@components/Datepicker';
+import { DatePickerInputProps } from '@components/Datepicker/types';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { DateStringOrNull } from '@types';
-import { DatePicker } from 'components/Datepicker';
-import { DatePickerInputProps } from 'components/Datepicker/types';
 import { FocusEvent, FocusEventHandler } from 'react';
 
 type RenderWithPropsArgs = Partial<

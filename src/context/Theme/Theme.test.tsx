@@ -1,6 +1,6 @@
+import { DatePicker } from '@components/Datepicker';
+import { darkTheme, lightTheme } from '@context/Theme/constants';
 import { render, screen } from '@testing-library/react';
-import { DatePicker } from 'components/Datepicker';
-import { darkTheme, lightTheme } from 'context/Theme/constants';
 
 describe('Theme provider', () => {
   it('Provides custom theme', async () => {

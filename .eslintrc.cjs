@@ -1,12 +1,11 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort', 'import', 'react', 'react-hooks'],
+  plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort', 'import', 'react'],
   extends: [
     'prettier',
     'plugin:storybook/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
     'plugin:import/recommended',
   ],
   rules: {
@@ -36,11 +35,11 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [
-          ['assets', './src/assets'],
-          ['components', './src/components'],
-          ['context', './src/context'],
-          ['decorators', './src/decorators'],
-          ['hooks', './src/hooks'],
+          ['@assets', './src/assets'],
+          ['@components', './src/components'],
+          ['@context', './src/context'],
+          ['@decorators', './src/decorators'],
+          ['@hooks', './src/hooks'],
           ['@constants', './src/constants/index'],
           ['@utils', './src/utils/index'],
           ['@types', './src/types/index'],

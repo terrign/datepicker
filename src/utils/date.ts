@@ -28,7 +28,9 @@ export const isValidDate = (dateString: DateString) => {
   const dateObject = getUTCDatefromDateString(dateString);
   const { month } = getDateParts(dateString);
 
-  if (month && month - dateObject.getMonth() !== 1) {
+  const monthDidNotChange = month && month - dateObject.getMonth() !== 1;
+
+  if (monthDidNotChange) {
     return false;
   }
 

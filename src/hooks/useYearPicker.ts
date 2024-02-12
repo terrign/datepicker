@@ -1,6 +1,6 @@
 import { MAX_YEAR, MIN_YEAR } from '@constants';
+import { useApp } from '@hooks/useApp';
 import { getDateParts } from '@utils';
-import { useApp } from 'hooks/useApp';
 import { useEffect, useState } from 'react';
 
 const YEARS_TO_DISPLAY = 25;
