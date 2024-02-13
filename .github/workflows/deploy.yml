@@ -1,0 +1,34 @@
+name: 'Chromatic Deployment'
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  deploy:
+    name: Deploy chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      - name: Install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Deploy
+        id: chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Summary
+        run: echo -e "| Results |  |\n| --- | --- |\n| Build Results | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Preview | ${{steps.chromatic.outputs.storybookUrl}} |\n| Component Count | ${{steps.chromatic.outputs.componentCount}} |" >> $GITHUB_STEP_SUMMARY
