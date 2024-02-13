@@ -1,9 +1,9 @@
-import { Calendar } from 'components/Calendar';
-import { DateInput } from 'components/DateInput';
-import { ErrorBoundary } from 'components/ErrorBoundary';
-import { AppProvider } from 'context/App/App.provider';
-import { CustomThemeProvider } from 'context/Theme/Theme.provider';
-import { RangePicker, withRange } from 'decorators/Datepicker/withRange';
+import { Calendar } from '@components/Calendar';
+import { DateInput } from '@components/DateInput';
+import { ErrorBoundary } from '@components/ErrorBoundary';
+import { AppProvider } from '@context/App/App.provider';
+import { CustomThemeProvider } from '@context/Theme/Theme.provider';
+import { RangePicker, withRange } from '@decorators/Datepicker/withRange';
 import { forwardRef } from 'react';
 
 import { DatepickerContainer } from './styled';
@@ -44,4 +44,5 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerInputProps>(fun
 });
 
 export const DatePickerTo = withRange(RangePicker.TO)(DatePicker);
+
 export const DatePickerFrom = withRange(RangePicker.FROM)(DatePicker);

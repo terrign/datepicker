@@ -7,9 +7,11 @@ export const useTodoStore = () => {
 
   function getTodosFromLocal() {
     const todos = localStorage.getItem(TODO_STORAGE_KEY);
+
     if (todos) {
       return JSON.parse(todos) as Todo[];
     }
+
     return [];
   }
 

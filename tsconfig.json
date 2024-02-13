@@ -7,14 +7,14 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "paths": {
-      "assets/*": ["./src/assets/*"],
-      "components/*": ["./src/components/*"],
-      "context/*": ["./src/context/*"],
-      "decorators/*": ["./src/decorators/*"],
-      "hooks/*": ["./src/hooks/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@context/*": ["./src/context/*"],
+      "@decorators/*": ["./src/decorators/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@constants": ["./src/constants/index"],
       "@utils": ["./src/utils/index"],
-      "@types": ["./src/types/index"],
+      "@types": ["./src/types/index"]
     },
     "baseUrl": ".",
     "jsx": "react-jsx",
@@ -25,8 +25,8 @@
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "allowJs": true,
+    "allowJs": true
   },
   "exclude": ["./example/**/*"],
-  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

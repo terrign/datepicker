@@ -1,8 +1,9 @@
 import { TODO_DESC_MAX_LENGTH, TODO_TITLE_MAX_LENGTH } from '@constants';
 import { DateString, Todo } from '@types';
 import { getUniqueId } from '@utils';
-import { StyledTodoForm, TodoButton } from 'components/Todo/styled';
 import { ChangeEvent, FormEventHandler, useId, useState } from 'react';
+
+import { StyledTodoForm, TodoButton } from '../styled';
 
 interface AddTodoFormProps {
   date: DateString;
@@ -12,8 +13,11 @@ interface AddTodoFormProps {
 
 export const AddTodoForm = ({ date, closeModal, addTodo }: AddTodoFormProps) => {
   const [title, setTitle] = useState('');
+
   const [desc, setDesc] = useState('');
+
   const titleId = useId();
+
   const descId = useId();
 
   const titleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +30,9 @@ export const AddTodoForm = ({ date, closeModal, addTodo }: AddTodoFormProps) => 
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
     addTodo({ date, desc, title, id: getUniqueId() });
+
     closeModal();
   };
 

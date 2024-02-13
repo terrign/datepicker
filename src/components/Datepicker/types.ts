@@ -1,5 +1,5 @@
+import { CalendarConfig } from '@components/Calendar';
 import { DateStringOrNull, PredefinedTheme, ThemeObject, WeekStart } from '@types';
-import { CalendarConfig } from 'components/Calendar';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
 export interface DatePickerProps {

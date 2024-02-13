@@ -1,7 +1,7 @@
+import { ActionType } from '@context/App/types';
+import { withDefinedDayType } from '@decorators/Day/withDefinedDayType';
+import { useApp } from '@hooks/useApp';
 import { DateString } from '@types';
-import { ActionType } from 'context/App/types';
-import { withDefinedDayType } from 'decorators/Day/withDefinedDayType';
-import { useApp } from 'hooks/useApp';
 import { MouseEventHandler } from 'react';
 
 import { StyledDay } from './styled';
@@ -16,12 +16,14 @@ export interface DayProps {
 
 export const BaseDay = ({ date, type, onDateSelect, dayContextMenuHandler }: DayProps) => {
   const [, , day] = date.split('-').map((datePart) => Number(datePart));
+
   const { dispatch, onError } = useApp();
 
   const clickHandler = () => {
     try {
       if (onDateSelect && type !== DayType.DISABLED) {
         onDateSelect(date);
+
         dispatch({ type: ActionType.SET_DATE, payload: date });
       }
     } catch (error) {
@@ -34,6 +36,7 @@ export const BaseDay = ({ date, type, onDateSelect, dayContextMenuHandler }: Day
   const contextMenuHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
     if (dayContextMenuHandler && type !== DayType.DISABLED) {
       event.preventDefault();
+
       const { offsetLeft, offsetTop, offsetHeight, offsetWidth } = event.currentTarget as HTMLElement;
 
       dayContextMenuHandler(date, offsetLeft + offsetWidth, offsetTop + offsetHeight);

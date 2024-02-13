@@ -1,4 +1,4 @@
-import { border, DEFAULT_PADDING } from '@constants';
+import { border } from '@constants';
 import styled from 'styled-components';
 
 export const TodoItem = styled.article`
@@ -27,7 +27,7 @@ export const StyledTodoList = styled.section`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 20px;
-  padding: ${DEFAULT_PADDING}px;
+  padding: ${({ theme }) => theme.defaultPadding}px;
   margin-bottom: 10px;
   box-sizing: border-box;
 

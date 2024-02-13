@@ -1,11 +1,11 @@
+import { ActionType } from '@context/App/types';
+import { withDayContextMenu } from '@decorators/Calendar/withDayContextMenu';
+import { withDefaultDays } from '@decorators/Calendar/withDefaultDays';
+import { withHolidays } from '@decorators/Calendar/withHolidays';
+import { withToDos } from '@decorators/Calendar/withTodos';
+import { useApp } from '@hooks/useApp';
+import { useEventListener } from '@hooks/useEventListener';
 import { DateString } from '@types';
-import { ActionType } from 'context/App/types';
-import { withDayContextMenu } from 'decorators/Calendar/withDayContextMenu';
-import { withDefaultDays } from 'decorators/Calendar/withDefaultDays';
-import { withHolidays } from 'decorators/Calendar/withHolidays';
-import { withToDos } from 'decorators/Calendar/withTodos';
-import { useApp } from 'hooks/useApp';
-import { useEventListener } from 'hooks/useEventListener';
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
 import { Controls } from './Controls';
@@ -40,6 +40,7 @@ export type CalendarProps = DaysOfTheMonthData &
 
 const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect, children }) => {
   const { calendarVisible, dispatch } = useApp();
+
   const calendarContainerRef = useRef<HTMLDivElement>(null);
 
   const escapePressHandler = (event: KeyboardEvent) => {
@@ -47,11 +48,12 @@ const BaseCalendar: FC<CalendarProps> = ({ days, disableWeekends, onDateSelect, 
       dispatch({ type: ActionType.HIDE_SHOW_CALENDAR, payload: false });
     }
   };
+
   useEventListener(document.body, 'keydown', escapePressHandler);
 
   useEffect(() => {
     dispatch({ type: ActionType.SET_CALENDAR_REF, payload: calendarContainerRef });
-  }, [calendarContainerRef, dispatch]);
+  }, [calendarContainerRef]);
 
   return (
     <Container $hidden={!calendarVisible} ref={calendarContainerRef}>

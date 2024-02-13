@@ -1,5 +1,5 @@
-import { CLOSE_BUTTON_FONT_SIZE, flex, font } from '@constants';
-import { Button } from 'components/UI/Button';
+import { Button } from '@components/UI/Button';
+import { flex, font } from '@constants';
 import styled from 'styled-components';
 
 export const StyledCalendarModal = styled.section`
@@ -29,7 +29,7 @@ export const CalendarModalCloseButton = styled(Button)`
   top: 10px;
   left: calc(100% - 42px);
   outline: none;
-  font-size: ${CLOSE_BUTTON_FONT_SIZE}px;
+  font-size: ${({ theme }) => theme.fontS}px;
   border: none;
   cursor: pointer;
   box-sizing: border-box;

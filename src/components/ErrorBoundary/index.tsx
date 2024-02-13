@@ -4,6 +4,7 @@ interface State {
   hasError: boolean;
   errorMessage: string | null;
 }
+
 interface Props {
   children?: JSX.Element;
 }
@@ -11,6 +12,7 @@ interface Props {
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props | Readonly<Props>) {
     super(props);
+
     this.state = { hasError: false, errorMessage: null };
   }
 
@@ -20,11 +22,13 @@ export class ErrorBoundary extends Component<Props, State> {
 
   refreshPage = () => {
     this.setState({ hasError: false });
+
     this.forceUpdate();
   };
 
   render() {
     const { hasError, errorMessage } = this.state;
+
     if (hasError) {
       return (
         <section>

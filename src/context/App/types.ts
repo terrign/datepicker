@@ -25,6 +25,7 @@ export interface AppContextType {
   to?: boolean;
   validationError: string | null;
   dispatch: Dispatch<Action>;
+  getDateChangeHandler: GetDatePartChangeHandlerType;
 }
 
 export type SetDateAction = {
@@ -36,6 +37,7 @@ export type ChangeYearAction = {
   type: ActionType.CHANGE_YEAR;
   payload: number;
 };
+
 export type ChangeMonthAction = {
   type: ActionType.CHANGE_MONTH;
   payload: number;
@@ -50,6 +52,7 @@ export type ChangeViewDateAction = {
   type: ActionType.SET_VIEW_DATE;
   payload: string;
 };
+
 export type SetCalendarRef = {
   type: ActionType.SET_CALENDAR_REF;
   payload: RefObject<HTMLDivElement>;
@@ -74,3 +77,8 @@ export type ReducerState = Omit<AppContextType, 'dispatch'>;
 export interface AppReducerType {
   (state: ReducerState, action: Action): typeof state;
 }
+
+export type GetDatePartChangeHandlerType = (
+  datePart: Extract<ActionType, ActionType.CHANGE_MONTH | ActionType.CHANGE_YEAR>,
+  changeAmount: 1 | -1,
+) => () => void;

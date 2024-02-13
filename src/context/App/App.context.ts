@@ -11,6 +11,7 @@ export const initialValues: AppContextType = {
   disableWeekends: false,
   validationError: null,
   dispatch: () => {},
+  getDateChangeHandler: () => () => {},
 };
 
 export const AppContext = createContext(initialValues);

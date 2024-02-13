@@ -1,6 +1,6 @@
-import { DatePicker } from 'components/Datepicker';
-import { DatePickerInputProps } from 'components/Datepicker/types';
-import { useRange } from 'hooks/useRange';
+import { DatePicker } from '@components/Datepicker';
+import { DatePickerInputProps } from '@components/Datepicker/types';
+import { useRange } from '@hooks/useRange';
 import { forwardRef, ForwardRefExoticComponent } from 'react';
 
 export const enum RangePicker {
@@ -28,11 +28,14 @@ export const withRange: WithRangePicker = (type: RangePicker) => (Component) => 
     }
 
     const onDateSelectWithRange = (selectedDate: string | null) => {
-      if (type === RangePicker.FROM && setSelectionStart) {
-        if (selectionEnd && selectedDate && selectedDate >= selectionEnd) {
+      if (type === RangePicker.FROM) {
+        const startDateHigherThenEnd = selectionEnd && selectedDate && selectedDate >= selectionEnd;
+
+        if (startDateHigherThenEnd) {
           throw new Error('Start date must be less then end date');
         } else {
           setSelectionStart(selectedDate);
+
           if (onDateSelect) {
             onDateSelect(selectedDate);
           }
@@ -40,10 +43,13 @@ export const withRange: WithRangePicker = (type: RangePicker) => (Component) => 
       }
 
       if (type === RangePicker.TO) {
-        if (selectionStart && selectedDate && selectedDate <= selectionStart) {
+        const endDateLessThenStart = selectionStart && selectedDate && selectedDate <= selectionStart;
+
+        if (endDateLessThenStart) {
           throw new Error('End date must exceed start date');
         } else {
           setSelectionEnd(selectedDate);
+
           if (onDateSelect) {
             onDateSelect(selectedDate);
           }
@@ -55,6 +61,8 @@ export const withRange: WithRangePicker = (type: RangePicker) => (Component) => 
 
     return <Component {...rest} ref={ref} onDateSelect={onDateSelectWithRange} defaultSelectedDate={defaultDate} />;
   });
+
   Wrapper.displayName = `DatePicker.${type}`;
+
   return Wrapper;
 };

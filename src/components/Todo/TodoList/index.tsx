@@ -1,5 +1,5 @@
+import { TodoButton } from '@components/Todo/styled';
 import { Todo } from '@types';
-import { TodoButton } from 'components/Todo/styled';
 
 import { StyledTodoList, TodoItem } from './styled';
 

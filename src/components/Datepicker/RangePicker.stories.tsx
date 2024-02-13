@@ -1,7 +1,7 @@
+import { DatePickerFrom, DatePickerTo } from '@components/Datepicker';
+import { DatePickerInputProps } from '@components/Datepicker/types';
+import { Range, RangeProviderProps } from '@context/Range/Range.provider';
 import type { Meta, StoryObj } from '@storybook/react';
-import { DatePickerFrom, DatePickerTo } from 'components/Datepicker';
-import { DatePickerInputProps } from 'components/Datepicker/types';
-import { Range, RangeProviderProps } from 'context/Range/Range.provider';
 
 export type RangePickerProps = Omit<DatePickerInputProps, 'defaultSelectedDate' | 'ref'> & RangeProviderProps;
 

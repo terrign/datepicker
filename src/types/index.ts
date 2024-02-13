@@ -1,5 +1,7 @@
 export type WeekStart = 'Sunday' | 'Monday';
+
 export type PredefinedTheme = 'light' | 'dark';
+
 export const enum DatePart {
   MONTH,
   YEAR,
@@ -40,6 +42,12 @@ export interface ThemeObject {
   contextMenuButtonHoverBgColor: string;
   contextMenuButtonHoverColor: string;
   contextMenuBg: string;
+
+  fontS: number;
+  fontM: number;
+  fontL: number;
+
+  defaultPadding: number;
 }
 
 export type DateString = string;

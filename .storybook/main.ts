@@ -16,11 +16,11 @@ const config: StorybookConfig = {
     return mergeConfig(config, {
       resolve: {
         alias: [
-          { find: 'assets', replacement: path.resolve(__dirname, '../src/assets') },
-          { find: 'components', replacement: path.resolve(__dirname, '../src/components') },
-          { find: 'context', replacement: path.resolve(__dirname, '../src/context') },
-          { find: 'decorators', replacement: path.resolve(__dirname, '../src/decorators') },
-          { find: 'hooks', replacement: path.resolve(__dirname, '../src/hooks') },
+          { find: '@assets', replacement: path.resolve(__dirname, '../src/assets') },
+          { find: '@components', replacement: path.resolve(__dirname, '../src/components') },
+          { find: '@context', replacement: path.resolve(__dirname, '../src/context') },
+          { find: '@decorators', replacement: path.resolve(__dirname, '../src/decorators') },
+          { find: '@hooks', replacement: path.resolve(__dirname, '../src/hooks') },
           { find: '@constants', replacement: path.resolve(__dirname, '../src/constants/index') },
           { find: '@utils', replacement: path.resolve(__dirname, '../src/utils/index') },
           { find: '@types', replacement: path.resolve(__dirname, '../src/types/index') },

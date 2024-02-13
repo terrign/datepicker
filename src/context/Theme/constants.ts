@@ -1,4 +1,4 @@
-import { Color, DEFAULT_BORDER_RADIUS } from '@constants';
+import { Color } from '@constants';
 import { ThemeObject } from '@types';
 
 const defaultTheme: ThemeObject = {
@@ -6,7 +6,7 @@ const defaultTheme: ThemeObject = {
   fontColor: Color.BLACK,
   hoverBgColor: Color.LIGHT_GRAY_2,
   borderColor: Color.LIGHT_GRAY_4,
-  borderRadius: DEFAULT_BORDER_RADIUS,
+  borderRadius: 8,
   holidayBorderColor: Color.RED,
 
   disabledDayFontColor: Color.LIGHT_GRAY_1,
@@ -27,6 +27,12 @@ const defaultTheme: ThemeObject = {
   contextMenuButtonHoverBgColor: Color.BLUE,
   contextMenuButtonHoverColor: Color.WHITE,
   contextMenuBg: Color.WHITE,
+
+  fontS: 5,
+  fontM: 14,
+  fontL: 20,
+
+  defaultPadding: 10,
 };
 
 export const lightTheme: ThemeObject = {

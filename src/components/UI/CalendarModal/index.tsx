@@ -1,6 +1,6 @@
-import { CloseIcon } from 'components/UI/Icons';
-import { useApp } from 'hooks/useApp';
-import { useEventListener } from 'hooks/useEventListener';
+import { CloseIcon } from '@components/UI/Icons';
+import { useApp } from '@hooks/useApp';
+import { useEventListener } from '@hooks/useEventListener';
 import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 

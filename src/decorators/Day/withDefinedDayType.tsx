@@ -1,9 +1,9 @@
+import { DayProps } from '@components/Calendar/Day';
+import { DayType } from '@components/Calendar/Day/types';
 import { SATURDAY_INDEX, SUNDAY_INDEX } from '@constants';
+import { useApp } from '@hooks/useApp';
+import { useRange } from '@hooks/useRange';
 import { getDateParts, getUTCDatefromDateString } from '@utils';
-import { DayProps } from 'components/Calendar/Day';
-import { DayType } from 'components/Calendar/Day/types';
-import { useApp } from 'hooks/useApp';
-import { useRange } from 'hooks/useRange';
 import { FC } from 'react';
 
 export interface UndefinedTypeDayProps extends Omit<DayProps, 'type'> {
@@ -14,11 +14,13 @@ export interface UndefinedTypeDayProps extends Omit<DayProps, 'type'> {
 export const withDefinedDayType = (Component: FC<DayProps>) => {
   const Wrapper = ({ types, disableWeekends, date, ...rest }: UndefinedTypeDayProps) => {
     const { firstDayOfTheViewMonth, selectedDate, maxDate, minDate } = useApp();
+
     const { selectionStart, selectionEnd } = useRange();
 
     const dateObj = getUTCDatefromDateString(date);
 
     const dayWeekIndex = dateObj.getDay();
+
     const isDisabled = () => {
       if (disableWeekends && (dayWeekIndex === SUNDAY_INDEX || dayWeekIndex === SATURDAY_INDEX)) {
         return true;
@@ -32,11 +34,13 @@ export const withDefinedDayType = (Component: FC<DayProps>) => {
 
       if (maxDate) {
         const maxDateObj = getUTCDatefromDateString(maxDate);
+
         disabled = dateObj > maxDateObj;
       }
 
       if (minDate && !disabled) {
         const minDateObj = getUTCDatefromDateString(minDate);
+
         disabled = dateObj < minDateObj;
       }
 
@@ -51,6 +55,7 @@ export const withDefinedDayType = (Component: FC<DayProps>) => {
       if (selectionStart === date) {
         return DayType.SELECTION_START;
       }
+
       if (selectionEnd === date) {
         return DayType.SELECTION_END;
       }
@@ -61,7 +66,9 @@ export const withDefinedDayType = (Component: FC<DayProps>) => {
 
       if (selectionStart && selectionEnd) {
         const start = getUTCDatefromDateString(selectionStart);
+
         const end = getUTCDatefromDateString(selectionEnd);
+
         if (dateObj > start && dateObj < end) {
           return DayType.SELECTION_IN_RANGE;
         }
@@ -73,8 +80,11 @@ export const withDefinedDayType = (Component: FC<DayProps>) => {
 
       return DayType.DEFAULT;
     };
+
     return <Component {...rest} type={defineType()} date={date} />;
   };
+
   Wrapper.displayName = 'Day';
+
   return Wrapper;
 };
